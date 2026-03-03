@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odiville / The World of Odious</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav>
+  <a class="nav-logo" onclick="navigateTo('home')">Odiville</a>
+
+  <div id="nav-home" class="nav-context active">
+    <ul class="nav-links">
+      <li><a data-section="artist" onclick="navigateTo('artist')">The Artist</a></li>
+      <li><a data-section="projects" onclick="scrollToSection('projects')">Projects</a></li>
+    </ul>
+  </div>
+
+  <div id="nav-artist" class="nav-context">
+    <ul class="nav-links">
+      <li><a class="nav-back" onclick="navigateTo('home')"><span class="nav-back-arrow">&larr;</span> Return</a></li>
+    </ul>
+  </div>
+
+  <div id="nav-duu" class="nav-context">
+    <ul class="nav-links">
+      <li><a class="nav-back" onclick="navigateTo('home')"><span class="nav-back-arrow">&larr;</span> Return</a></li>
+      <li><a data-section="echoes" onclick="scrollToSection('echoes')">Echoes</a></li>
+      <li><a data-section="shade" onclick="scrollToSection('shade')">Shade</a></li>
+      <li><a data-section="capture" onclick="scrollToSection('capture')">Capture &amp; Sacrifice</a></li>
+      <li><a data-section="events" onclick="scrollToSection('events')">Events</a></li>
+      <li><a data-section="story" onclick="scrollToSection('story')">Story</a></li>
+    </ul>
+  </div>
+
+  <div id="nav-owt" class="nav-context">
+    <ul class="nav-links">
+      <li><a class="nav-back" onclick="navigateTo('home')"><span class="nav-back-arrow">&larr;</span> Return</a></li>
+      <li><a data-section="concept" onclick="scrollToSection('concept')">The Concept</a></li>
+      <li><a data-section="theburn" onclick="scrollToSection('theburn')">The Burn</a></li>
+      <li><a data-section="rebirth" onclick="scrollToSection('rebirth')">Rebirth</a></li>
+      <li><a data-section="collect" onclick="scrollToSection('collect')">Collect</a></li>
+    </ul>
+  </div>
+
+  <div id="nav-whispers" class="nav-context">
+    <ul class="nav-links">
+      <li><a class="nav-back" onclick="navigateTo('home')"><span class="nav-back-arrow">&larr;</span> Return</a></li>
+      <li><a data-section="lots" onclick="scrollToSection('lots')">Lots</a></li>
+      <li><a data-section="sacrifice" onclick="scrollToSection('sacrifice')">The Sacrifice</a></li>
+      <li><a data-section="residents" onclick="scrollToSection('residents')">Residents</a></li>
+      <li><a data-section="launch" onclick="scrollToSection('launch')">Launch</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- =============================================================
+     PAGE: HOME
+     ============================================================= -->
+<div id="page-home" class="page active">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-void"></div>
+    <div class="hero-glow"></div>
+    <div class="particles" id="particles"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">The World of Odious</p>
+      <h1 class="hero-title">Welcome to<br><em>Odiville</em></h1>
+      <p class="hero-subtitle">An evolving creative village. A world built from art, sacrifice, and the unknown.</p>
+    </div>
+    <div class="hero-scroll"><span>Descend</span><div class="scroll-line"></div></div>
+  </section>
+
+  <!-- Projects — Torch Reveal Cards -->
+  <section class="projects-section" id="projects">
+    <div class="section-inner">
+      <div class="section-label reveal">Body of Work</div>
+      <h2 class="section-heading reveal reveal-delay-1">Projects built across<br>the <em>years</em></h2>
+      <div class="section-body reveal reveal-delay-2">
+        <p>A timeline of work spanning five years, from early experiments to fully realised worlds. Each project marks a chapter in the evolution of Odiville and my practice as an artist.</p>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- Card 1: Whispers -->
+        <div class="project-card reveal reveal-delay-2" onclick="navigateTo('whispers')">
+          <div class="card-ghost">
+            <div class="project-year">2025</div>
+            <div class="project-name">Whispers of Odiville</div>
+            <div class="project-desc">The auction house of Odiville. Six 1/1 artworks paired with bound Resident portraits. The culmination of a three-year journey.</div>
+            <span class="project-tag">Auction &middot; Ethereum</span>
+          </div>
+          <div class="card-reveal">
+            <div class="project-year">2025</div>
+            <div class="project-name">Whispers of Odiville</div>
+            <div class="project-desc">The auction house of Odiville. Six 1/1 artworks paired with bound Resident portraits. The culmination of a three-year journey.</div>
+            <span class="project-tag">Auction &middot; Ethereum</span>
+            <div class="project-arrow"></div>
+          </div>
+          <canvas class="card-fx"></canvas>
+        </div>
+
+        <!-- Card 2: DUU -->
+        <div class="project-card reveal reveal-delay-3" onclick="navigateTo('duu')">
+          <div class="card-ghost">
+            <div class="project-year">2023 &ndash; 2025</div>
+            <div class="project-name">Decisions, Upsets and Unknowns</div>
+            <div class="project-desc">A ten-chapter interactive narrative and art collecting journey. Over 50 artworks, told through audio, text, and on-chain mechanics.</div>
+            <span class="project-tag">Interactive Book &middot; Shape</span>
+          </div>
+          <div class="card-reveal">
+            <div class="project-year">2023 &ndash; 2025</div>
+            <div class="project-name">Decisions, Upsets and Unknowns</div>
+            <div class="project-desc">A ten-chapter interactive narrative and art collecting journey. Over 50 artworks, told through audio, text, and on-chain mechanics.</div>
+            <span class="project-tag">Interactive Book &middot; Shape</span>
+            <div class="project-arrow"></div>
+          </div>
+          <canvas class="card-fx"></canvas>
+        </div>
+
+        <!-- Card 3: OWT -->
+        <div class="project-card reveal" onclick="navigateTo('owt')">
+          <div class="card-ghost">
+            <div class="project-year">2024</div>
+            <div class="project-name">One-Way Ticket</div>
+            <div class="project-desc">A study in sacrifice. Physical artworks from the Odiville Book were printed, framed, and burned in New York. Their ashes reborn as new work.</div>
+            <span class="project-tag">Physical &middot; Performance</span>
+          </div>
+          <div class="card-reveal">
+            <div class="project-year">2024</div>
+            <div class="project-name">One-Way Ticket</div>
+            <div class="project-desc">A study in sacrifice. Physical artworks from the Odiville Book were printed, framed, and burned in New York. Their ashes reborn as new work.</div>
+            <span class="project-tag">Physical &middot; Performance</span>
+            <div class="project-arrow"></div>
+          </div>
+          <canvas class="card-fx"></canvas>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Home CTA -->
+  <section class="cta-section">
+    <div class="hero-glow" style="animation-duration:11s;"></div>
+    <div class="particles" id="particles-home-cta"></div>
+    <div class="section-inner" style="position:relative;z-index:2;">
+      <h2 class="cta-heading reveal">Descend <em>Further</em></h2>
+      <div class="cta-buttons reveal reveal-delay-1">
+        <a href="https://echoes.odiville.com" class="btn btn-primary" target="_blank">Read the Book <span class="btn-arrow">&rarr;</span></a>
+        <a href="https://www.x.com/todayodious" class="btn btn-ghost" target="_blank">Follow on X <span class="btn-arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-left">&copy; Odious, 2025</div>
+    <ul class="footer-links">
+      <li><a href="https://whispers.odiville.com" target="_blank">Whispers</a></li>
+      <li><a href="https://echoes.odiville.com" target="_blank">Echoes</a></li>
+      <li><a href="https://www.x.com/todayodious" target="_blank">X</a></li>
+      <li><a href="mailto:contact@odiville.com">Contact</a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- =============================================================
+     PAGE: THE ARTIST
+     ============================================================= -->
+<div id="page-artist" class="page">
+
+  <div class="sub-hero">
+    <div class="hero-void"></div>
+    <div class="hero-glow"></div>
+    <div class="particles" id="particles-artist"></div>
+    <div class="sub-hero-content">
+      <p class="sub-hero-eyebrow">The World of Odious</p>
+      <h1 class="sub-hero-title">The <em>Artist</em></h1>
+    </div>
+  </div>
+
+  <section class="intro" id="about">
+    <div class="section-inner">
+      <div class="intro-grid">
+        <div>
+          <div class="section-label reveal">The Artist</div>
+          <h2 class="section-heading reveal reveal-delay-1">I found art in the<br>same year I <em>lost myself</em></h2>
+          <div class="section-body reveal reveal-delay-2">
+            <p>I'm Odious, a British artist who first minted on Ethereum in 2020. My work explores unsettling atmospheres and restrained psychological tension rooted in the unknown, expressed through shifting visual styles and recurring motifs.</p>
+            <p>My practice has been documented online from my very first painting. Every experiment, every evolution, now spread across thousands of wallets and championing collectors. Odiville is the world that emerged from that journey: an evolving creative village that serves as both armature and anchor for everything I create.</p>
+          </div>
+        </div>
+        <div>
+          <div class="intro-stat-row reveal reveal-delay-2">
+            <div class="intro-stat">
+              <div class="stat-value">2020</div>
+              <div class="stat-label">First Mint</div>
+            </div>
+            <div class="intro-stat">
+              <div class="stat-value">3,000+</div>
+              <div class="stat-label">Wallets Reached</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="hero-glow" style="animation-duration:11s;"></div>
+    <div class="particles" id="particles-artist-cta"></div>
+    <div class="section-inner" style="position:relative;z-index:2;">
+      <div class="cta-buttons reveal">
+        <a class="btn btn-primary" onclick="navigateTo('home')"><span class="btn-arrow" style="transform:rotate(180deg);">&rarr;</span> Back to Odiville</a>
+        <a href="https://www.x.com/todayodious" class="btn btn-ghost" target="_blank">Follow on X <span class="btn-arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-left">&copy; Odious, 2025</div>
+    <ul class="footer-links">
+      <li><a href="https://whispers.odiville.com" target="_blank">Whispers</a></li>
+      <li><a href="https://echoes.odiville.com" target="_blank">Echoes</a></li>
+      <li><a href="https://www.x.com/todayodious" target="_blank">X</a></li>
+      <li><a href="mailto:contact@odiville.com">Contact</a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- =============================================================
+     PAGE: DECISIONS, UPSETS AND UNKNOWNS
+     ============================================================= -->
+<div id="page-duu" class="page">
+
+  <div class="sub-hero">
+    <div class="hero-void"></div>
+    <div class="hero-glow"></div>
+    <div class="particles" id="particles-duu"></div>
+    <div class="sub-hero-content">
+      <p class="sub-hero-eyebrow" style="color:var(--accent-duu);">The Interactive Book of Odiville</p>
+      <h1 class="sub-hero-title"><em>Decisions, Upsets</em><br>and Unknowns</h1>
+      <p class="sub-hero-subtitle">A ten-chapter interactive narrative and art collecting journey. Over 50 artworks told through audio, text, and on-chain mechanics.</p>
+      <a href="https://echoes.odiville.com" class="btn btn-primary btn-sm" target="_blank">Read the Book <span class="btn-arrow">&rarr;</span></a>
+    </div>
+  </div>
+
+  <!-- Echoes -->
+  <section class="duu-section" id="echoes">
+    <div class="section-inner">
+      <div class="section-label reveal">The Artworks</div>
+      <h2 class="section-heading reveal reveal-delay-1">Not every Echo can<br>be <em>captured</em></h2>
+      <div class="duu-feature">
+        <div>
+          <div class="section-body reveal reveal-delay-2">
+            <p>Echoes are the artworks of Odiville. Impressions of what was, is, or will be. They drift through the book, each one carrying a distinct mark. Some can be collected. All can be destroyed.</p>
+            <p>Their behaviour is unpredictable. Some hold still long enough to be taken. Others shift and deteriorate without warning. Over fifty have been found so far, scattered across ten chapters.</p>
+          </div>
+          <ul class="mechanic-list reveal reveal-delay-2">
+            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>Over 50 Echoes hidden across the ten-chapter narrative</li>
+            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>Each one carries a Shade cost to collect and a Shade value within</li>
+            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>Availability varies. Some are timed, some permanent, some auctioned</li>
+          </ul>
+        </div>
+        <div>
+          <div class="duu-image-placeholder reveal reveal-delay-3">
+            <span>Artwork Markings</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Shade -->
+  <section class="duu-section" id="shade">
+    <div class="section-inner">
+      <div class="section-label reveal">The Currency</div>
+      <h2 class="section-heading reveal reveal-delay-1">Everything runs<br>on <em>Shade</em></h2>
+      <div class="duu-feature">
+        <div>
+          <div class="section-body reveal reveal-delay-2">
+            <p>Shade is the underlying resource of Odiville. It lives inside your tickets and inside every Echo you collect. It is both the price of entry and the reward for letting go.</p>
+            <p>Each Echo has two values: a <span style="color:var(--white);font-style:italic;">cost</span> to capture it, and the <span style="color:var(--white);font-style:italic;">Shade stored within</span> once held. Some return more than they take. Others give back less. The difference is never revealed until after the act.</p>
+          </div>
+        </div>
+        <div>
+          <div class="duu-image-placeholder reveal reveal-delay-3">
+            <span>Shade Conversion</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Capture & Sacrifice -->
+  <section class="duu-section" id="capture">
+    <div class="section-inner">
+      <div class="section-label reveal">The Mechanics</div>
+      <h2 class="section-heading reveal reveal-delay-1">To collect is to hold.<br>To sacrifice is to <em>become.</em></h2>
+      <div class="duu-feature">
+        <div>
+          <div class="section-body reveal reveal-delay-2">
+            <p><span style="color:var(--white);font-style:italic;">Capture</span>. Echoes surface without warning. When one appears, you can mint it, pulling it from the ether into your wallet. Once captured, it is yours to hold, trade, or destroy.</p>
+            <p><span style="color:var(--white);font-style:italic;">Sacrifice</span>. Every Echo contains Shade beneath the surface. To access it, the artwork must be burned. The act is permanent. What remains is the resource to pursue something else. Ashes exchanged for new possibilities.</p>
+          </div>
+          <ul class="mechanic-list reveal reveal-delay-2">
+            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>Captured Echoes appear in your inventory and wallet immediately</li>
+            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>Every Echo is connected, bound by the Shade that flows between them</li>
+            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>The collection is always shifting, shaped by the choices of those within it</li>
+            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>What the community preserves and what it burns tells its own story</li>
+          </ul>
+        </div>
+        <div>
+          <div class="duu-image-placeholder reveal reveal-delay-3">
+            <span>Capture Preview</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Events -->
+  <section class="duu-section" id="events">
+    <div class="section-inner">
+      <div class="section-label reveal">Throughout the Book</div>
+      <h2 class="section-heading reveal reveal-delay-1">The story does not<br>wait for <em>you</em></h2>
+      <div class="section-body reveal reveal-delay-2" style="margin-bottom:3rem;">
+        <p>As chapters unfold, windows open and close. Some moments pass quickly. Others demand participation. The book rewards those who are present.</p>
+      </div>
+
+      <div class="events-grid">
+        <div class="event-card reveal reveal-delay-2">
+          <div class="event-icon">&#9719;</div>
+          <div class="event-name">Limited Time Artworks</div>
+          <div class="event-desc">A window opens. For a brief period, certain Echoes become available to capture. Their Shade value stays hidden until the window closes. Avoiding gamification.</div>
+        </div>
+
+        <div class="event-card reveal reveal-delay-3">
+          <div class="event-icon">&#10022;</div>
+          <div class="event-name">Interactive Challenges</div>
+          <div class="event-desc">Open to all. Those who solve them are rewarded.</div>
+        </div>
+
+        <div class="event-card reveal">
+          <div class="event-icon">&#9879;</div>
+          <div class="event-name">Timed Auctions</div>
+          <div class="event-desc">Singular Echoes marking pivotal moments in the narrative. Listed at Whispers, the auction house within Odiville's borders.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Story -->
+  <section class="duu-section" id="story">
+    <div class="section-inner" style="text-align:center;">
+      <div class="section-label reveal" style="text-align:left;">The Arrival</div>
+      <h2 class="section-heading reveal reveal-delay-1" style="max-width:700px;">Something has arrived<br>at the edge of <em>town</em></h2>
+      <div class="section-body reveal reveal-delay-2" style="margin:0 auto;max-width:600px;text-align:left;">
+        <p>A circus appears at the edge of town. No announcement. No invitation. Just a gate where the road used to end and a queue of people who can't explain why they joined it.</p>
+        <p>You hand over your coins before reading the ticket. Through the entrance, the noise thins and the light shifts. A sign stands alone at the threshold, painted by hand.</p>
+        <p style="color:var(--white);font-style:italic;text-align:center;font-size:1.15rem;margin-top:2rem;">"Welcome to Odiville"</p>
+        <p style="text-align:center;margin-top:1.5rem;">Ten chapters. Over fifty artworks. A world that remembers every decision you make, and every one you don't.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DUU CTA -->
+  <section class="cta-section">
+    <div class="hero-glow" style="animation-duration:11s;"></div>
+    <div class="particles" id="particles-duu-cta"></div>
+    <div class="section-inner" style="position:relative;z-index:2;">
+      <h2 class="cta-heading reveal">Enter the <em>Book</em></h2>
+      <div class="cta-buttons reveal reveal-delay-1">
+        <a href="https://echoes.odiville.com" class="btn btn-primary" target="_blank">Read the Book <span class="btn-arrow">&rarr;</span></a>
+        <a class="btn btn-ghost" onclick="navigateTo('home')"><span class="btn-arrow" style="transform:rotate(180deg);">&rarr;</span> Back to Odiville</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-left">&copy; Odious, 2025</div>
+    <ul class="footer-links">
+      <li><a href="https://whispers.odiville.com" target="_blank">Whispers</a></li>
+      <li><a href="https://echoes.odiville.com" target="_blank">Echoes</a></li>
+      <li><a href="https://www.x.com/todayodious" target="_blank">X</a></li>
+      <li><a href="mailto:contact@odiville.com">Contact</a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- =============================================================
+     PAGE: ONE-WAY TICKET
+     ============================================================= -->
+<div id="page-owt" class="page">
+
+  <div class="sub-hero">
+    <div class="hero-void"></div>
+    <div class="hero-glow"></div>
+    <div class="particles" id="particles-owt"></div>
+    <div class="sub-hero-content">
+      <p class="sub-hero-eyebrow" style="color:var(--accent-owt);">A Study in Sacrifice</p>
+      <h1 class="sub-hero-title"><em>One-Way</em> Ticket</h1>
+      <p class="sub-hero-subtitle">Fifty artworks printed, framed, and burned. 275 remnants collected from the ash. A body of work built from what remained.</p>
+      <a href="https://opensea.io/collection/one-way-ticket" class="btn btn-primary btn-sm" target="_blank">View Collection <span class="btn-arrow">&rarr;</span></a>
+    </div>
+  </div>
+
+  <!-- The Concept -->
+  <section class="owt-section" id="concept">
+    <div class="section-inner">
+      <div class="section-label reveal">The Concept</div>
+      <h2 class="section-heading reveal reveal-delay-1">The book was never meant<br>to stay <em>digital</em></h2>
+      <div class="owt-feature">
+        <div>
+          <div class="section-body reveal reveal-delay-2">
+            <p>The Odiville Book is built on a cycle of creation and destruction. Artworks discovered, collected, and sacrificed to create new ones. One-Way Ticket takes that same principle and strips it bare. No screens. No wallets. Just fire.</p>
+            <p>Every artwork from the book was printed and framed. Then, during a single night in New York, all of them were fed to a fire. The fragments that survived were photographed, curated, and digitally refined into a final collection of 275 pieces, each one carrying the residue of what came before.</p>
+          </div>
+          <div class="owt-stat-row reveal reveal-delay-2">
+            <div class="owt-stat">
+              <div class="stat-value">50+</div>
+              <div class="stat-label">Works Burned</div>
+            </div>
+            <div class="owt-stat">
+              <div class="stat-value">500+</div>
+              <div class="stat-label">Fragments Shot</div>
+            </div>
+            <div class="owt-stat">
+              <div class="stat-value">275</div>
+              <div class="stat-label">Final Pieces</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="owt-image-placeholder reveal reveal-delay-3" style="background:none;border:none;">
+            <img src="images/owt_odiville_book.png" alt="The Odiville Book" style="width:100%;display:block;border:1px solid var(--border);">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- The Burn -->
+  <section class="owt-section" id="theburn">
+    <div class="section-inner">
+      <div class="section-label reveal">The Burn</div>
+      <h2 class="section-heading reveal reveal-delay-1">A single night.<br>An irreversible <em>act.</em></h2>
+      <div class="owt-feature">
+        <div>
+          <div class="section-body reveal reveal-delay-2">
+            <p>What began as a visit to New York for an exhibition became something else entirely. The opportunity to elevate the project presented itself, and the decision was made quickly. Print everything, frame everything, burn everything.</p>
+            <p>The fire was deliberate. Each piece was held, acknowledged, and released. Two years of work reduced to heat and ash in a matter of hours. The feeling mirrored the sacrifice mechanic at the heart of the book. A moment of unease, wrapped in renewal.</p>
+          </div>
+        </div>
+        <div>
+          <div class="owt-image-placeholder reveal reveal-delay-3" style="background:none;border:none;">
+            <img src="images/owt_sacrifice_flame.png" alt="A sacrifice to the flame" style="width:100%;display:block;border:1px solid var(--border);">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Rebirth -->
+  <section class="owt-section" id="rebirth">
+    <div class="section-inner">
+      <div class="section-label reveal">Rebirth</div>
+      <h2 class="section-heading reveal reveal-delay-1">New work from<br>what <em>remained</em></h2>
+      <div class="owt-feature">
+        <div>
+          <div class="section-body reveal reveal-delay-2">
+            <p>The charcoal was transported back at 3am, still warm. Over 500 fragments were individually photographed, then hand-selected down to 275. Each one was digitally refined, composed to feel abstract while preserving the raw texture of what it once was.</p>
+            <p>A single physical piece was also created using the rescued charcoal, scraped directly across the surface by hand. A figure emerged. Taker of all, forgiver of none. It remains unnamed.</p>
+          </div>
+          <ul class="mechanic-list reveal reveal-delay-2">
+            <li><span class="mechanic-icon" style="background:var(--accent-owt);"></span>Each piece contains the DNA of the original book artworks</li>
+            <li><span class="mechanic-icon" style="background:var(--accent-owt);"></span>Abstract in nature, charged with the energy of the fire</li>
+            <li><span class="mechanic-icon" style="background:var(--accent-owt);"></span>First physical artwork created using charcoal from the burn</li>
+          </ul>
+        </div>
+        <div>
+          <div class="owt-image-placeholder reveal reveal-delay-3" style="background:none;border:none;">
+            <img src="images/owt_charcoal_piece.png" alt="Physical charcoal piece" style="width:100%;display:block;border:1px solid var(--border);">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Collect -->
+  <section class="owt-section" id="collect">
+    <div class="section-inner" style="text-align:center;">
+      <div class="section-label reveal" style="text-align:left;">The Collection</div>
+      <h2 class="section-heading reveal reveal-delay-1" style="max-width:700px;">Own what <em>once was</em></h2>
+      <div class="section-body reveal reveal-delay-2" style="margin:0 auto;max-width:600px;text-align:left;">
+        <p>Each fragment is a relic from the pit. A piece of what existed before the fire, transformed into something that stands on its own. The goal was never preservation. It was proof that destruction and creation are the same act, separated only by intent.</p>
+        <p>275 pieces. Built in collaboration with Shape.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OWT CTA -->
+  <section class="cta-section">
+    <div class="hero-glow" style="animation-duration:11s;"></div>
+    <div class="particles" id="particles-owt-cta"></div>
+    <div class="section-inner" style="position:relative;z-index:2;">
+      <h2 class="cta-heading reveal">From <em>Ashes</em></h2>
+      <div class="cta-buttons reveal reveal-delay-1">
+        <a href="https://opensea.io/collection/one-way-ticket" class="btn btn-primary" target="_blank">View on OpenSea <span class="btn-arrow">&rarr;</span></a>
+        <a class="btn btn-ghost" onclick="navigateTo('home')"><span class="btn-arrow" style="transform:rotate(180deg);">&rarr;</span> Back to Odiville</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-left">&copy; Odious, 2025</div>
+    <ul class="footer-links">
+      <li><a href="https://whispers.odiville.com" target="_blank">Whispers</a></li>
+      <li><a href="https://echoes.odiville.com" target="_blank">Echoes</a></li>
+      <li><a href="https://www.x.com/todayodious" target="_blank">X</a></li>
+      <li><a href="mailto:contact@odiville.com">Contact</a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- =============================================================
+     PAGE: WHISPERS
+     ============================================================= -->
+<div id="page-whispers" class="page">
+
+  <div class="sub-hero">
+    <div class="hero-void"></div>
+    <div class="hero-glow"></div>
+    <div class="particles" id="particles-whispers"></div>
+    <div class="sub-hero-content">
+      <p class="sub-hero-eyebrow">The Auction House of Odiville</p>
+      <h1 class="sub-hero-title"><em>Whispers</em> of Odiville</h1>
+      <p class="sub-hero-subtitle">Six pieces. Six whispers from a world unseen. The crescendo of a three-year artistic journey.</p>
+      <a href="https://whispers.odiville.com" class="btn btn-primary btn-sm" target="_blank">Enter Auction House <span class="btn-arrow">&rarr;</span></a>
+    </div>
+  </div>
+
+  <!-- The Lots -->
+  <section class="whispers-section" id="lots">
+    <div class="section-inner">
+      <div class="section-label reveal">The Auction House</div>
+      <h2 class="section-heading reveal reveal-delay-1">Where moments from<br>the world are <em>offered</em></h2>
+      <div class="section-body reveal reveal-delay-2">
+        <p>Whispers is an auction house operating inside Odiville. The first building constructed within its borders. Each of the six lots is drawn from a specific chapter, distilling its atmosphere into image, paired with a bound Resident portrait through a first-of-its-kind binding format on Ethereum.</p>
+      </div>
+
+      <div class="whispers-hero-block reveal reveal-delay-3">
+        <div class="whispers-grid">
+
+          <a href="https://whispers.odiville.com" class="lot-card" target="_blank">
+            <div class="lot-card-img">
+              <img src="images/the_arrival.gif" alt="the arrival">
+              <span class="lot-number">Lot 1</span>
+            </div>
+            <div class="lot-info">
+              <div class="lot-title">the arrival</div>
+              <div class="lot-quote">"I'll trade you a ticket for those coins."</div>
+              <div class="lot-meta">Oil + Glitch on Digital Canvas &middot; 1/1</div>
+            </div>
+          </a>
+
+          <a href="https://whispers.odiville.com" class="lot-card" target="_blank">
+            <div class="lot-card-img">
+              <img src="images/blue_reverie.png" alt="blue reverie">
+              <span class="lot-number">Lot 2</span>
+            </div>
+            <div class="lot-info">
+              <div class="lot-title">blue reverie</div>
+              <div class="lot-quote">"Always settling down here."</div>
+              <div class="lot-meta">Chapter Work &middot; 1/1</div>
+            </div>
+          </a>
+
+          <a href="https://whispers.odiville.com" class="lot-card" target="_blank">
+            <div class="lot-card-img">
+              <img src="images/a_choice_in_the_clouds.png" alt="a choice in the clouds">
+              <span class="lot-number">Lot 3</span>
+            </div>
+            <div class="lot-info">
+              <div class="lot-title">a choice in the clouds</div>
+              <div class="lot-quote">"Thank you, creator."</div>
+              <div class="lot-meta">Chapter Work &middot; 1/1</div>
+            </div>
+          </a>
+
+          <a href="https://whispers.odiville.com" class="lot-card" target="_blank">
+            <div class="lot-card-img">
+              <img src="images/you_re_wrong_about_them.gif" alt="you're wrong about them">
+              <span class="lot-number">Lot 4</span>
+            </div>
+            <div class="lot-info">
+              <div class="lot-title">you're wrong about them</div>
+              <div class="lot-meta">Chapter Work &middot; 1/1</div>
+            </div>
+          </a>
+
+          <a href="https://whispers.odiville.com" class="lot-card" target="_blank">
+            <div class="lot-card-img">
+              <img src="images/antithesis.png" alt="antithesis">
+              <span class="lot-number">Lot 5</span>
+            </div>
+            <div class="lot-info">
+              <div class="lot-title">antithesis</div>
+              <div class="lot-meta">Chapter Work &middot; 1/1</div>
+            </div>
+          </a>
+
+          <a href="https://whispers.odiville.com" class="lot-card" target="_blank">
+            <div class="lot-card-img">
+              <img src="images/farewell_to_odiville.gif" alt="farewell to odiville">
+              <span class="lot-number">Lot 6</span>
+            </div>
+            <div class="lot-info">
+              <div class="lot-title">farewell to odiville</div>
+              <div class="lot-meta">Chapter Work &middot; 1/1</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- The Sacrifice -->
+  <section class="sacrifice-section" id="sacrifice">
+    <div class="section-inner">
+      <div class="section-label reveal">The Ritual</div>
+      <div class="sacrifice-artwork reveal">
+        <img src="images/you_re_wrong_about_them.gif" alt="You're Wrong About Them">
+      </div>
+      <h2 class="section-heading reveal reveal-delay-1">It begins with<br>a <em>sacrifice.</em></h2>
+      <div class="section-body reveal reveal-delay-2">
+        <p>A single transaction carrying the weight of a three-year personal journey. The conscious release of everything I had become while making this work, and a final removal before stepping into a new arena.</p>
+        <p><span style="color:var(--white);font-style:italic;">You're Wrong About Them</span>, minted in 2024 on SuperRare, was created to hold a moment that hadn't yet arrived. On March 2nd, this work is sent to the dead address, concluding the ritual and clearing the ground for the first public auction inside Odiville.</p>
+      </div>
+      <div class="burn-address reveal reveal-delay-3">0x000000000000000000000000000000000000dEaD</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Residents -->
+  <section class="residents-section" id="residents">
+    <div class="section-inner">
+      <div class="section-label reveal">The Portraits</div>
+      <h2 class="section-heading reveal reveal-delay-1">They do not simply move<br>from wallet to wallet.<br><em>They remember.</em></h2>
+
+      <div class="residents-feature">
+        <div>
+          <div class="section-body reveal reveal-delay-2">
+            <p>After finishing an artwork, I assess whether it calls for a counterpart. When it does, I begin the process of reinterpreting as a Resident. Not portraits in the conventional sense, but personifications of their paired works, shaped by atmosphere and intent.</p>
+            <p>The 1/1 artworks live on <em>Whispers of Odiville</em> and the Residents on <em>Residents of Odiville</em>. Both contracts deployed on Ethereum mainnet, connected through on-chain logic.</p>
+          </div>
+          <ul class="mechanic-list reveal reveal-delay-2">
+            <li><span class="mechanic-icon"></span>Each 1/1 artwork is paired with a bound Resident portrait as a single release</li>
+            <li><span class="mechanic-icon"></span>When an artwork transfers, its Resident is burned and reborn into the new owner's wallet</li>
+            <li><span class="mechanic-icon"></span>Every passing is marked on-chain. History preserved, traceable back to birth</li>
+            <li><span class="mechanic-icon"></span>Dual contract architecture: ownership as ritual, not transaction</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="pairing-stack reveal reveal-delay-3">
+            <div class="pairing-back">
+              <img src="images/the_arrival.gif" alt="the arrival">
+            </div>
+            <div class="pairing-front">
+              <img src="images/The_End.gif" alt="The End">
+              <div class="pairing-front-label">
+                <div class="resident-card-name">The End</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="residents-gallery reveal">
+        <div class="residents-gallery-label">Residents of Odiville</div>
+        <div class="residents-grid">
+          <div class="resident-card">
+            <div class="resident-card-img"><img src="images/The_End.gif" alt="The End"></div>
+            <div class="resident-card-info"><div class="resident-card-name">The End</div><div class="resident-card-type">Resident</div></div>
+          </div>
+          <div class="resident-card">
+            <div class="resident-card-img"><img src="images/Neverwas.gif" alt="Neverwas"></div>
+            <div class="resident-card-info"><div class="resident-card-name">Neverwas</div><div class="resident-card-type">Resident</div></div>
+          </div>
+          <div class="resident-card">
+            <div class="resident-card-img"><img src="images/One_Lie.gif" alt="One Lie"></div>
+            <div class="resident-card-info"><div class="resident-card-name">One Lie</div><div class="resident-card-type">Resident</div></div>
+          </div>
+          <div class="resident-card">
+            <div class="resident-card-img"><img src="images/One_Truth.gif" alt="One Truth"></div>
+            <div class="resident-card-info"><div class="resident-card-name">One Truth</div><div class="resident-card-type">Resident</div></div>
+          </div>
+          <div class="resident-card">
+            <div class="resident-card-img"><img src="images/Inbetween.gif" alt="Inbetween"></div>
+            <div class="resident-card-info"><div class="resident-card-name">Inbetween</div><div class="resident-card-type">Resident</div></div>
+          </div>
+          <div class="resident-card">
+            <div class="resident-card-img"><img src="images/Ferryman_resized_v2.gif" alt="Ferryman"></div>
+            <div class="resident-card-info"><div class="resident-card-name">Ferryman</div><div class="resident-card-type">Resident</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Launch Details -->
+  <section class="launch-section" id="launch">
+    <div class="section-inner">
+      <div class="launch-grid">
+        <div>
+          <div class="section-label reveal">Launch Details</div>
+          <h2 class="section-heading reveal reveal-delay-1">The doors open<br><em>March 2nd</em></h2>
+          <div class="section-body reveal reveal-delay-2">
+            <p>Six 1/1 artworks paired with six Resident portraits. Reserve auctions conducted through Whispers. Each work opens at a 1.1 ETH reserve. Once met, a seventy-two hour window begins.</p>
+          </div>
+        </div>
+        <div>
+          <div class="launch-details reveal reveal-delay-2">
+            <div class="launch-detail"><span class="ld-label">Launch Window</span><span class="ld-value highlight">March 2nd, 11am EST</span></div>
+            <div class="launch-detail"><span class="ld-label">Format</span><span class="ld-value">6 &times; 1/1 Artworks + Residents</span></div>
+            <div class="launch-detail"><span class="ld-label">Method</span><span class="ld-value">Reserve Auction</span></div>
+            <div class="launch-detail"><span class="ld-label">Reserve Price</span><span class="ld-value">1.1 ETH</span></div>
+            <div class="launch-detail"><span class="ld-label">Auction Duration</span><span class="ld-value">72 Hours</span></div>
+            <div class="launch-detail"><span class="ld-label">Bid Increment</span><span class="ld-value">+5% Minimum</span></div>
+            <div class="launch-detail"><span class="ld-label">Anti-Snipe</span><span class="ld-value">11 Min Reset</span></div>
+            <div class="launch-detail"><span class="ld-label">Blockchain</span><span class="ld-value">Ethereum Mainnet</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Whispers CTA -->
+  <section class="cta-section">
+    <div class="hero-glow" style="animation-duration:11s;"></div>
+    <div class="particles" id="particles-cta"></div>
+    <div class="section-inner" style="position:relative;z-index:2;">
+      <h2 class="cta-heading reveal">Enter <em>Whispers</em></h2>
+      <p class="cta-sub reveal reveal-delay-1">The first building in Odiville opens its doors.<br>Select a work. Place a bid. Collect a moment.</p>
+      <div class="cta-buttons reveal reveal-delay-2">
+        <a href="https://whispers.odiville.com" class="btn btn-primary" target="_blank">Enter Auction House <span class="btn-arrow">&rarr;</span></a>
+        <a class="btn btn-ghost" onclick="navigateTo('home')"><span class="btn-arrow" style="transform:rotate(180deg);">&rarr;</span> Back to Odiville</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-left">&copy; Odious, 2025</div>
+    <ul class="footer-links">
+      <li><a href="https://whispers.odiville.com" target="_blank">Whispers</a></li>
+      <li><a href="https://echoes.odiville.com" target="_blank">Echoes</a></li>
+      <li><a href="https://www.x.com/todayodious" target="_blank">X</a></li>
+      <li><a href="mailto:contact@odiville.com">Contact</a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- ========== SCRIPTS ========== -->
+<script src="script.js"></script>
+
+</body>
+</html>
