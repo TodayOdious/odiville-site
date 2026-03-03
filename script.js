@@ -97,6 +97,7 @@ function initParticles() {
 /* ========== TORCH CARD EFFECT ========== */
 
 function initTorchCards() {
+  if (window.matchMedia('(hover: none)').matches) return;
   const cards = document.querySelectorAll('.page.active .project-card');
 
   cards.forEach(card => {
