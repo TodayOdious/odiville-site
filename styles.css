@@ -357,7 +357,7 @@ section { position: relative; padding: 9rem 3rem; }
   position: absolute; top: .8rem; left: .8rem; font-size: .5rem; font-weight: 500;
   letter-spacing: .3em; text-transform: uppercase; color: var(--accent-whispers); z-index: 3;
   background: rgba(0,0,0,.7); padding: .25rem .55rem; backdrop-filter: blur(6px);
-  border: 1px solid rgba(74,158,112,.15);
+  border: 1px solid rgba(160,64,64,.2);
 }
 .lot-info { padding: 1rem 1rem 1.3rem; }
 .lot-title { font-size: 1.05rem; font-weight: 400; font-style: italic; margin-bottom: .3rem; }
@@ -370,12 +370,12 @@ section { position: relative; padding: 9rem 3rem; }
 .sacrifice-section { --section-accent: var(--accent-sacrifice); background: var(--black); text-align: center; padding: 10rem 3rem; }
 .sacrifice-section .section-inner { max-width: 700px; }
 .sacrifice-section .section-body { margin: 0 auto; max-width: 550px; }
-.sacrifice-artwork { width: 280px; height: 280px; margin: 0 auto 3rem; border: 1px solid var(--accent-sacrifice); overflow: hidden; position: relative; }
+.sacrifice-artwork { width: 280px; height: 280px; margin: 0 auto 3rem; border: 1px solid rgba(160,64,64,.3); overflow: hidden; position: relative; }
 .sacrifice-artwork img { width: 100%; height: 100%; object-fit: cover; }
 .sacrifice-artwork::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 40px rgba(0,0,0,.4); pointer-events: none; }
 .burn-address {
   display: block; margin: 3rem auto 0; padding: 1.2rem 2rem; background: var(--surface);
-  border: 1px solid rgba(74,158,112,.25); font-family: 'Courier New', monospace; font-size: .62rem;
+  border: 1px solid rgba(160,64,64,.3); font-family: 'Courier New', monospace; font-size: .62rem;
   color: var(--accent-sacrifice); letter-spacing: .06em; word-break: break-all; max-width: 480px;
   position: relative; text-align: center;
 }
