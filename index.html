@@ -7,604 +7,50 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500&display=swap" rel="stylesheet">
-  <style>/* ============================================
-   ODIVILLE — The World of Odious
-   ============================================ */
-
-:root {
-  --black: #000000;
-  --void: #040406;
-  --deep: #08080d;
-  --surface: #0f0f16;
-  --muted: #1a1a24;
-  --border: #1e1e2a;
-  --white: #eae6de;
-  --white-dim: #807c74;
-  --white-faint: #454240;
-  --white-ghost: #2a2826;
-  --accent-intro: #e8e4dc;
-  --accent-whispers: #a04040;
-  --accent-sacrifice: #a04040;
-  --accent-residents: #a04040;
-  --accent-launch: #a04040;
-  --accent-projects: #ffffff;
-  --accent-duu: #9ac5c2;
-  --accent-owt: #4d8a8a;
-  --font: 'Spectral', Georgia, serif;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--white-faint) var(--black); }
-body { background: var(--black); color: var(--white); font-family: var(--font); font-weight: 300; overflow-x: hidden; }
-
-/* Film grain overlay */
-body::after {
-  content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat; background-size: 200px 200px;
-}
-
-h1, h2, h3, h4 { font-family: var(--font); font-weight: 300; }
-::selection { background: var(--white); color: var(--black); }
-
-
-/* ========== PAGE TRANSITIONS ========== */
-
-.page { display: none; }
-.page.active { display: block; animation: pageIn .6s ease forwards; }
-.page.exiting { display: block; animation: pageOut .4s ease forwards; }
-@keyframes pageIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes pageOut { from { opacity: 1; } to { opacity: 0; } }
-
-
-/* ========== NAV ========== */
-
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 1.8rem 3rem; display: flex; justify-content: space-between; align-items: center;
-  background: linear-gradient(180deg, rgba(0,0,0,.95) 0%, rgba(0,0,0,.85) 55%, rgba(0,0,0,0) 100%);
-  box-shadow: 0 4px 30px rgba(0,0,0,.5);
-}
-.nav-logo {
-  font-size: 1rem; font-weight: 500; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--white); text-decoration: none; cursor: pointer;
-}
-.nav-links { display: flex; gap: 2.5rem; list-style: none; }
-.nav-links a {
-  font-size: .72rem; font-weight: 400; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--white); text-decoration: none; position: relative; padding-bottom: 3px;
-  transition: opacity .3s ease; cursor: pointer;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
-  transition: width .5s cubic-bezier(.25,.46,.45,.94);
-}
-.nav-links a:hover::after { width: 100%; }
-
-/* Section-specific nav hover colours */
-#nav-home .nav-links a[data-section="projects"]::after { background: var(--accent-projects); }
-#nav-home .nav-links a[data-section="artist"]::after { background: var(--white); }
-#nav-duu .nav-links a[data-section="echoes"]::after { background: var(--accent-duu); }
-#nav-duu .nav-links a[data-section="shade"]::after { background: var(--accent-duu); }
-#nav-duu .nav-links a[data-section="capture"]::after { background: var(--accent-duu); }
-#nav-duu .nav-links a[data-section="events"]::after { background: var(--accent-duu); }
-#nav-duu .nav-links a[data-section="story"]::after { background: var(--accent-duu); }
-#nav-owt .nav-links a[data-section="concept"]::after { background: var(--accent-owt); }
-#nav-owt .nav-links a[data-section="theburn"]::after { background: var(--accent-owt); }
-#nav-owt .nav-links a[data-section="rebirth"]::after { background: var(--accent-owt); }
-#nav-owt .nav-links a[data-section="collect"]::after { background: var(--accent-owt); }
-#nav-whispers .nav-links a[data-section="lots"]::after { background: var(--white); }
-#nav-whispers .nav-links a[data-section="sacrifice"]::after { background: var(--accent-whispers); }
-#nav-whispers .nav-links a[data-section="residents"]::after { background: var(--accent-whispers); }
-#nav-whispers .nav-links a[data-section="launch"]::after { background: var(--accent-launch); }
-
-.nav-context { display: none; }
-.nav-context.active { display: flex; }
-
-.nav-back {
-  display: flex; align-items: center; gap: .5rem;
-  font-size: .65rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--white-dim); cursor: pointer; transition: color .3s ease; text-decoration: none;
-}
-.nav-back:hover { color: var(--white); }
-.nav-back-arrow { transition: transform .3s ease; }
-.nav-back:hover .nav-back-arrow { transform: translateX(-4px); }
-
-
-/* ========== HERO ========== */
-
-.hero {
-  position: relative; height: 100vh; min-height: 700px;
-  display: flex; flex-direction: column; justify-content: center;
-  align-items: center; text-align: center; overflow: hidden;
-}
-.hero-void { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 55% at 50% 50%, var(--deep) 0%, var(--black) 80%); }
-.hero-glow {
-  position: absolute; width: 700px; height: 700px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(234,230,222,.025) 0%, transparent 65%);
-  top: 50%; left: 50%; transform: translate(-50%,-50%); animation: breathe 9s ease-in-out infinite;
-}
-@keyframes breathe {
-  0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: .5; }
-  50% { transform: translate(-50%,-50%) scale(1.2); opacity: .9; }
-}
-.hero-content { position: relative; z-index: 2; max-width: 850px; padding: 0 2rem; }
-.hero-eyebrow {
-  font-size: .68rem; font-weight: 500; letter-spacing: .4em; text-transform: uppercase;
-  color: var(--white-dim); margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 1.2s ease .4s forwards;
-}
-.hero-title {
-  font-size: clamp(3.2rem, 8.5vw, 7.5rem); font-weight: 300; line-height: .92;
-  letter-spacing: -.025em; margin-bottom: 2rem; opacity: 0; animation: fadeUp 1.4s ease .7s forwards;
-  transition: filter .8s ease, text-shadow .8s ease;
-}
-.hero-title em { font-style: italic; font-weight: 200; }
-.hero-title:hover {
-  filter: blur(2.5px);
-  text-shadow: 0 0 60px rgba(234,230,222,.15), 0 0 120px rgba(234,230,222,.06);
-  cursor: default;
-}
-.hero-subtitle {
-  font-size: 1.15rem; font-weight: 300; font-style: italic; color: var(--white-dim);
-  line-height: 1.8; max-width: 460px; margin: 0 auto; opacity: 0; animation: fadeUp 1.4s ease 1s forwards;
-}
-.hero-scroll {
-  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 2;
-  display: flex; flex-direction: column; align-items: center; gap: .6rem;
-  opacity: 0; animation: fadeUp 1s ease 2s forwards;
-}
-.hero-scroll span { font-size: .55rem; font-weight: 500; letter-spacing: .35em; text-transform: uppercase; color: var(--white-faint); }
-.scroll-line { width: 1px; height: 45px; background: linear-gradient(to bottom, var(--white-faint), transparent); animation: scrollPulse 2.5s ease-in-out infinite; }
-@keyframes scrollPulse { 0%, 100% { opacity: .2; transform: scaleY(1); } 50% { opacity: .8; transform: scaleY(1.4); } }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(35px); } to { opacity: 1; transform: translateY(0); } }
-
-
-/* ========== SUB-PAGE HERO ========== */
-
-.sub-hero { position: relative; padding: 12rem 3rem 5rem; text-align: center; overflow: hidden; background: var(--black); }
-.sub-hero .hero-void { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% 30%, var(--deep) 0%, var(--black) 80%); }
-.sub-hero-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
-.sub-hero-eyebrow { font-size: .6rem; font-weight: 500; letter-spacing: .4em; text-transform: uppercase; color: var(--accent-whispers); margin-bottom: 1.5rem; }
-.sub-hero-title { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 300; line-height: .95; letter-spacing: -.02em; margin-bottom: 1.5rem; }
-.sub-hero-title em { font-style: italic; font-weight: 200; }
-.sub-hero-subtitle { font-size: 1rem; font-weight: 300; font-style: italic; color: var(--white-dim); line-height: 1.8; max-width: 500px; margin: 0 auto 2.5rem; }
-
-
-/* ========== PARTICLES ========== */
-
-.particles { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-.particle {
-  position: absolute; background: var(--white); border-radius: 50%;
-  opacity: 0; animation: drift linear infinite; filter: blur(.3px);
-}
-.particle--large { filter: blur(.6px); box-shadow: 0 0 10px rgba(234,230,222,.2); }
-@keyframes drift {
-  0%   { opacity: 0; transform: translateY(0) translateX(0); }
-  3%   { opacity: var(--p-opacity, .25); }
-  90%  { opacity: var(--p-opacity, .25); }
-  100% { opacity: 0; transform: translateY(var(--p-rise, -150px)) translateX(var(--p-drift, 40px)); }
-}
-
-
-/* ========== COMMON SECTIONS ========== */
-
-section { position: relative; padding: 9rem 3rem; }
-.section-inner { max-width: 1100px; margin: 0 auto; }
-.section-label {
-  font-size: .6rem; font-weight: 500; letter-spacing: .45em; text-transform: uppercase;
-  color: var(--section-accent, var(--white-faint)); margin-bottom: 3rem; padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
-}
-.section-heading { font-size: clamp(2rem, 4.2vw, 3.5rem); font-weight: 300; line-height: 1.18; margin-bottom: 2rem; letter-spacing: -.015em; }
-.section-heading em { font-style: italic; font-weight: 200; color: var(--section-accent, var(--white)); }
-.section-body { font-size: .95rem; line-height: 1.9; color: var(--white-dim); max-width: 620px; }
-.section-body p + p { margin-top: 1.5rem; }
-.divider { width: 100%; max-width: 1100px; margin: 0 auto; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
-
-
-/* ========== BUTTONS ========== */
-
-.btn {
-  display: inline-flex; align-items: center; gap: .7rem; padding: 1rem 2.5rem;
-  font-family: var(--font); font-size: .72rem; font-weight: 500; letter-spacing: .18em;
-  text-transform: uppercase; text-decoration: none; border: none; cursor: pointer;
-  transition: all .45s cubic-bezier(.25,.46,.45,.94);
-}
-.btn-primary { background: var(--white); color: var(--black); }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(234,230,222,.08); }
-.btn-ghost { background: transparent; color: var(--white); border: 1px solid var(--white-faint); }
-.btn-ghost:hover { border-color: var(--white); background: rgba(234,230,222,.03); transform: translateY(-2px); }
-.btn-arrow { transition: transform .3s ease; font-style: normal; }
-.btn:hover .btn-arrow { transform: translateX(5px); }
-.btn-sm { padding: .7rem 1.8rem; font-size: .62rem; }
-
-
-/* ========== INTRO / ARTIST ========== */
-
-.intro { --section-accent: var(--accent-intro); background: linear-gradient(180deg, var(--black) 0%, var(--void) 100%); }
-.intro-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 6rem; align-items: start; }
-.intro-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
-.intro-stat .stat-value { font-size: 2.2rem; font-weight: 200; color: var(--white); letter-spacing: -.02em; }
-.intro-stat .stat-label { font-size: .6rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--white-faint); margin-top: .35rem; }
-
-
-/* ========== PROJECTS — TORCH REVEAL ========== */
-
-.projects-section { --section-accent: var(--accent-projects); background: var(--void); }
-.projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
-
-.project-card {
-  position: relative;
-  background: var(--black);
-  border: 1px solid rgba(234,230,222,.1);
-  padding: 2rem;
-  cursor: pointer;
-  overflow: hidden;
-  min-height: 240px;
-}
-
-/* Edge glow that follows mouse */
-.project-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 10;
-  background: radial-gradient(
-    300px circle at var(--mx, -100px) var(--my, -100px),
-    rgba(234,230,222,.18) 0%,
-    rgba(234,230,222,.04) 35%,
-    transparent 60%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  padding: 1px;
-}
-
-/* Mote canvas */
-.card-fx {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-}
-
-/* Ghost layer — barely visible text */
-.card-ghost { position: relative; z-index: 2; }
-.card-ghost .project-year {
-  font-size: .5rem; font-weight: 500; letter-spacing: .3em;
-  text-transform: uppercase; color: rgba(234,230,222,.06); margin-bottom: 1rem;
-}
-.card-ghost .project-name {
-  font-size: 1.2rem; font-weight: 400; font-style: italic; line-height: 1.2;
-  color: rgba(234,230,222,.06); margin-bottom: .75rem;
-}
-.card-ghost .project-desc {
-  font-size: .82rem; line-height: 1.7; color: rgba(234,230,222,.03); margin-bottom: 1.2rem;
-}
-.card-ghost .project-tag {
-  display: inline-block; font-size: .5rem; font-weight: 500; letter-spacing: .2em;
-  text-transform: uppercase; color: rgba(234,230,222,.03);
-  border: 1px solid rgba(234,230,222,.02); padding: .25rem .6rem;
-}
-
-/* Torch-revealed layer — visible only in radius around cursor */
-.card-reveal {
-  position: absolute; inset: 0; padding: 2rem; z-index: 3; pointer-events: none;
-  -webkit-mask-image: radial-gradient(
-    180px circle at var(--mx, -100px) var(--my, -100px),
-    rgba(0,0,0,1) 0%, rgba(0,0,0,.7) 35%, rgba(0,0,0,0) 65%
-  );
-  mask-image: radial-gradient(
-    180px circle at var(--mx, -100px) var(--my, -100px),
-    rgba(0,0,0,1) 0%, rgba(0,0,0,.7) 35%, rgba(0,0,0,0) 65%
-  );
-}
-.card-reveal .project-year {
-  font-size: .5rem; font-weight: 500; letter-spacing: .3em;
-  text-transform: uppercase; color: var(--white-faint); margin-bottom: 1rem;
-}
-.card-reveal .project-name {
-  font-size: 1.2rem; font-weight: 400; font-style: italic; line-height: 1.2;
-  color: var(--white); margin-bottom: .75rem;
-}
-.card-reveal .project-desc {
-  font-size: .82rem; line-height: 1.7; color: var(--white-dim); margin-bottom: 1.2rem;
-}
-.card-reveal .project-tag {
-  display: inline-block; font-size: .5rem; font-weight: 500; letter-spacing: .2em;
-  text-transform: uppercase; color: var(--white-faint);
-  border: 1px solid var(--border); padding: .25rem .6rem;
-}
-.card-reveal .project-arrow {
-  position: absolute; bottom: 2rem; right: 2rem; width: 24px; height: 24px;
-}
-.card-reveal .project-arrow::before {
-  content: ''; position: absolute; top: 4px; right: 4px;
-  width: 10px; height: 10px;
-  border-top: 1px solid var(--white-faint); border-right: 1px solid var(--white-faint);
-}
-.card-reveal .project-arrow::after {
-  content: ''; position: absolute; top: 4px; right: 4px;
-  width: 14px; height: 1px; background: var(--white-faint);
-  transform-origin: right top; transform: rotate(45deg);
-}
-
-
-/* ========== WHISPERS / LOTS ========== */
-
-.whispers-section { --section-accent: var(--accent-whispers); background: var(--void); }
-.whispers-hero-block {
-  position: relative; width: 100%; max-width: 1100px; margin: 3.5rem auto 0; padding: 3rem;
-  background: linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%); border: 1px solid var(--border);
-}
-.whispers-hero-block::before {
-  content: ''; position: absolute; top: -1px; left: 15%; right: 15%; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-whispers), transparent); opacity: .35;
-}
-.whispers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.5rem; }
-
-.lot-card {
-  position: relative; background: var(--black); border: 1px solid var(--border); overflow: hidden;
-  transition: border-color .5s ease, transform .5s ease; cursor: pointer; text-decoration: none;
-  color: inherit; display: block;
-}
-.lot-card:hover { border-color: var(--accent-whispers); transform: translateY(-3px); }
-.lot-card-img { width: 100%; aspect-ratio: 1; position: relative; overflow: hidden; background: var(--deep); }
-.lot-card-img img {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  transition: transform .6s ease; z-index: 1;
-  backface-visibility: hidden; -webkit-backface-visibility: hidden;
-}
-.lot-card-img::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 45%;
-  background: linear-gradient(to top, var(--black) 5%, rgba(0,0,0,.3) 50%, transparent);
-  pointer-events: none; z-index: 2;
-}
-.lot-number {
-  position: absolute; top: .8rem; left: .8rem; font-size: .5rem; font-weight: 500;
-  letter-spacing: .3em; text-transform: uppercase; color: var(--accent-whispers); z-index: 3;
-  background: rgba(0,0,0,.7); padding: .25rem .55rem; backdrop-filter: blur(6px);
-  border: 1px solid rgba(160,64,64,.2);
-}
-.lot-info { padding: 1rem 1rem 1.3rem; }
-.lot-title { font-size: 1.05rem; font-weight: 400; font-style: italic; margin-bottom: .3rem; }
-.lot-quote { font-size: .75rem; font-style: italic; color: var(--white-faint); margin-bottom: .5rem; }
-.lot-meta { font-size: .6rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase; color: var(--white-faint); }
-
-
-/* ========== SACRIFICE ========== */
-
-.sacrifice-section { --section-accent: var(--accent-sacrifice); background: var(--black); text-align: center; padding: 10rem 3rem; }
-.sacrifice-section .section-inner { max-width: 700px; }
-.sacrifice-section .section-body { margin: 0 auto; max-width: 550px; }
-.sacrifice-artwork { width: 280px; height: 280px; margin: 0 auto 3rem; border: 1px solid rgba(160,64,64,.3); overflow: hidden; position: relative; }
-.sacrifice-artwork img { width: 100%; height: 100%; object-fit: cover; }
-.sacrifice-artwork::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 40px rgba(0,0,0,.4); pointer-events: none; }
-.burn-address {
-  display: block; margin: 3rem auto 0; padding: 1.2rem 2rem; background: var(--surface);
-  border: 1px solid rgba(160,64,64,.3); font-family: 'Courier New', monospace; font-size: .62rem;
-  color: var(--accent-sacrifice); letter-spacing: .06em; word-break: break-all; max-width: 480px;
-  position: relative; text-align: center;
-}
-.burn-address::before {
-  content: 'BURN ADDRESS'; position: absolute; top: -.5rem; left: 50%; transform: translateX(-50%);
-  font-family: var(--font); font-size: .48rem; font-weight: 500; letter-spacing: .35em;
-  background: var(--black); padding: 0 .6rem; color: var(--accent-sacrifice); white-space: nowrap;
-}
-
-
-/* ========== RESIDENTS ========== */
-
-.residents-section { --section-accent: var(--accent-residents); background: linear-gradient(180deg, var(--void) 0%, var(--black) 100%); }
-.residents-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3rem; align-items: start; }
-.mechanic-list { list-style: none; margin-top: 2.5rem; }
-.mechanic-list li {
-  padding: 1.2rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start;
-  gap: 1.2rem; font-size: .9rem; color: var(--white-dim); line-height: 1.65;
-}
-.mechanic-icon { flex-shrink: 0; width: 6px; height: 6px; margin-top: .55rem; border-radius: 50%; background: var(--accent-residents); }
-
-.pairing-stack { position: relative; max-width: 400px; margin: 0 auto; padding-bottom: 2rem; padding-right: 2rem; }
-.pairing-back {
-  position: absolute; bottom: 0; right: 0; width: 75%; border: 1px solid var(--border);
-  transform: rotate(4deg); box-shadow: 0 8px 40px rgba(0,0,0,.6); overflow: hidden; z-index: 1;
-}
-.pairing-back img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-.pairing-front {
-  position: relative; width: 80%; z-index: 2; border: 1px solid var(--border);
-  box-shadow: 0 12px 50px rgba(0,0,0,.7); overflow: hidden;
-}
-.pairing-front img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-.pairing-front-label { padding: .8rem 1rem; background: var(--deep); }
-.pairing-front-label .resident-card-name { font-size: .95rem; font-weight: 400; font-style: italic; margin-bottom: .15rem; }
-.pairing-front-label .resident-card-type { font-size: .5rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--accent-residents); opacity: .7; }
-
-.residents-gallery { margin-top: 5rem; padding-top: 4rem; border-top: 1px solid var(--border); }
-.residents-gallery-label { font-size: .55rem; font-weight: 500; letter-spacing: .4em; text-transform: uppercase; color: var(--accent-residents); margin-bottom: 2rem; opacity: .7; }
-.residents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-
-.resident-card { position: relative; background: var(--deep); border: 1px solid var(--border); overflow: hidden; transition: border-color .5s ease, transform .5s ease; }
-.resident-card:hover { border-color: var(--accent-residents); transform: translateY(-3px); }
-.resident-card-img { width: 100%; aspect-ratio: 1; overflow: hidden; position: relative; background: var(--deep); }
-.resident-card-img img {
-  width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease;
-  backface-visibility: hidden; -webkit-backface-visibility: hidden;
-}
-.resident-card-img::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
-  background: linear-gradient(to top, var(--deep) 5%, transparent); pointer-events: none;
-}
-.resident-card-info { padding: .7rem .8rem .9rem; }
-.resident-card-name { font-size: .85rem; font-weight: 400; font-style: italic; margin-bottom: .15rem; }
-.resident-card-type { font-size: .48rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--accent-residents); opacity: .7; }
-.resident-placeholder { display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--surface), var(--deep)); }
-.resident-placeholder span { font-size: 1.4rem; font-weight: 200; color: rgba(234,230,222,.05); }
-
-
-/* ========== LAUNCH ========== */
-
-.launch-section { --section-accent: var(--accent-launch); background: var(--void); padding: 9rem 3rem; }
-.launch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
-.launch-details { margin-top: 2rem; }
-.launch-detail { display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 0; border-bottom: 1px solid var(--border); font-size: .85rem; }
-.launch-detail .ld-label { color: var(--white-faint); font-size: .62rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; }
-.launch-detail .ld-value { color: var(--white); font-weight: 400; text-align: right; }
-.launch-detail .ld-value.highlight { color: var(--accent-launch); }
-
-
-/* ========== CTA ========== */
-
-.cta-section { position: relative; padding: 11rem 3rem; text-align: center; background: var(--black); overflow: hidden; }
-.cta-section::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, var(--white-faint), transparent); opacity: .3; }
-.cta-heading { font-size: clamp(2.5rem, 5.5vw, 5rem); font-weight: 200; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -.02em; }
-.cta-heading em { font-style: italic; }
-.cta-sub { font-size: 1rem; font-style: italic; color: var(--white-dim); margin: 0 auto 3.5rem; line-height: 1.8; max-width: 400px; }
-.cta-buttons { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
-
-
-/* ========== FOOTER ========== */
-
-footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--black); font-size: .78rem; }
-.footer-left { color: var(--white-faint); }
-.footer-links { display: flex; gap: 2.2rem; list-style: none; }
-.footer-links a { font-size: .6rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--white-faint); text-decoration: none; transition: color .3s ease; }
-.footer-links a:hover { color: var(--white); }
-
-
-/* ========== REVEAL ANIMATIONS ========== */
-
-.reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s ease, transform .9s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: .15s; }
-.reveal-delay-2 { transition-delay: .3s; }
-.reveal-delay-3 { transition-delay: .45s; }
-
-
-/* ========== DUU / DECISIONS ========== */
-
-.duu-section { --section-accent: var(--accent-duu); background: var(--void); }
-
-.owt-section { --section-accent: var(--accent-owt); background: var(--void); }
-.owt-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3rem; align-items: start; }
-.owt-image-placeholder {
-  width: 100%; aspect-ratio: 4/3; background: linear-gradient(135deg, var(--surface), var(--deep));
-  border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-}
-.owt-image-placeholder span {
-  font-size: .55rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase;
-  color: var(--white-faint); opacity: .4;
-}
-.owt-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
-.owt-stat .stat-value { font-size: 2.2rem; font-weight: 200; color: var(--white); letter-spacing: -.02em; }
-.owt-stat .stat-label { font-size: .6rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--white-faint); margin-top: .35rem; }
-.duu-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3rem; align-items: start; }
-.duu-image-placeholder {
-  width: 100%; aspect-ratio: 4/3; background: linear-gradient(135deg, var(--surface), var(--deep));
-  border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-}
-.duu-image-placeholder span {
-  font-size: .55rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase;
-  color: var(--white-faint); opacity: .4;
-}
-
-.events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-.event-card {
-  background: var(--surface); border: 1px solid var(--border); padding: 2.5rem 2rem;
-  transition: border-color .5s ease, transform .5s ease;
-}
-.event-card:hover { border-color: var(--accent-duu); transform: translateY(-3px); }
-.event-icon { font-size: 1.6rem; color: var(--accent-duu); margin-bottom: 1.5rem; opacity: .7; }
-.event-name { font-size: 1rem; font-weight: 400; font-style: italic; margin-bottom: .8rem; }
-.event-desc { font-size: .82rem; color: var(--white-dim); line-height: 1.7; }
-
-
-/* ========== RESPONSIVE ========== */
-
-@media (max-width: 900px) {
-  nav { padding: 1.2rem 1.5rem; }
-  .nav-links { gap: 1.2rem; }
-  section { padding: 6rem 1.5rem; }
-  .intro-grid, .residents-feature, .launch-grid, .duu-feature, .owt-feature { grid-template-columns: 1fr; gap: 3rem; }
-  .whispers-grid, .projects-grid, .events-grid { grid-template-columns: 1fr 1fr; }
-  .residents-grid { grid-template-columns: repeat(3, 1fr); }
-  .whispers-hero-block { padding: 1.5rem; }
-  .sacrifice-section, .cta-section { padding: 7rem 1.5rem; }
-  .sub-hero { padding: 10rem 1.5rem 4rem; }
-}
-
-@media (max-width: 600px) {
-  .nav-links { display: none; }
-  .hero-title { font-size: 2.6rem; }
-  .sub-hero-title { font-size: 2.2rem; }
-  .whispers-grid, .projects-grid, .events-grid { grid-template-columns: 1fr; }
-  .residents-grid { grid-template-columns: repeat(2, 1fr); }
-  .intro-stat-row, .owt-stat-row { grid-template-columns: 1fr; gap: 1.5rem; }
-  .cta-buttons { flex-direction: column; align-items: center; }
-}
-
-/* Touch devices — disable torch, show cards at full visibility */
-@media (hover: none) {
-  .project-card::after { display: none; }
-  .card-fx { display: none; }
-  .card-reveal { display: none; }
-  .card-ghost .project-year { color: var(--white-faint); }
-  .card-ghost .project-name { color: var(--white); }
-  .card-ghost .project-desc { color: var(--white-dim); }
-  .card-ghost .project-tag { color: var(--white-faint); border-color: var(--border); }
-}
-.reveal{opacity:1!important;transform:translateY(0)!important}.card-reveal{-webkit-mask-image:none!important;mask-image:none!important;opacity:1!important}.card-fx{display:none!important}.project-card::after{display:none!important}</style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+<!-- Skip to main content (screen readers / keyboard) -->
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- Ambient audio toggle (fixed, always visible) -->
+<button class="audio-toggle" id="audioToggle" aria-label="Play ambient audio" title="Ambient audio">
+  <!-- Muted icon -->
+  <svg class="audio-icon audio-icon--off" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 7.5h3l4-3.5v12L6 12.5H3V7.5z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+    <line x1="14" y1="7" x2="18" y2="13" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+    <line x1="18" y1="7" x2="14" y2="13" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+  </svg>
+  <!-- Playing icon -->
+  <svg class="audio-icon audio-icon--on" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 7.5h3l4-3.5v12L6 12.5H3V7.5z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M13 7.5a4 4 0 0 1 0 5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+    <path d="M15.5 5a7 7 0 0 1 0 10" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+  </svg>
+</button>
+
+<!-- ========== GATE ========== -->
+<div id="gate" role="button" tabindex="0" aria-label="Enter Odiville">
+  <div class="gate-content">
+    <p class="gate-eyebrow">The World of Odious</p>
+    <h1 class="gate-title"><em>Odiville</em></h1>
+    <span class="gate-enter">Enter</span>
+  </div>
+</div>
+
 <!-- ========== NAV ========== -->
-<nav>
+<nav id="site-nav">
   <a class="nav-logo" onclick="navigateTo('home')">Odiville</a>
-
-  <div id="nav-home" class="nav-context active">
-    <ul class="nav-links">
-      <li><a data-section="artist" onclick="navigateTo('artist')">The Artist</a></li>
-      <li><a data-section="projects" onclick="scrollToSection('projects')">Projects</a></li>
-    </ul>
-  </div>
-
-  <div id="nav-artist" class="nav-context">
-    <ul class="nav-links">
-      <li><a class="nav-back" onclick="navigateTo('home')"><span class="nav-back-arrow">&larr;</span> Return</a></li>
-    </ul>
-  </div>
-
-  <div id="nav-duu" class="nav-context">
-    <ul class="nav-links">
-      <li><a class="nav-back" onclick="navigateTo('home')"><span class="nav-back-arrow">&larr;</span> Return</a></li>
-      <li><a data-section="echoes" onclick="scrollToSection('echoes')">Echoes</a></li>
-      <li><a data-section="shade" onclick="scrollToSection('shade')">Shade</a></li>
-      <li><a data-section="capture" onclick="scrollToSection('capture')">Capture &amp; Sacrifice</a></li>
-      <li><a data-section="events" onclick="scrollToSection('events')">Events</a></li>
-      <li><a data-section="story" onclick="scrollToSection('story')">Story</a></li>
-    </ul>
-  </div>
-
-  <div id="nav-owt" class="nav-context">
-    <ul class="nav-links">
-      <li><a class="nav-back" onclick="navigateTo('home')"><span class="nav-back-arrow">&larr;</span> Return</a></li>
-      <li><a data-section="concept" onclick="scrollToSection('concept')">The Concept</a></li>
-      <li><a data-section="theburn" onclick="scrollToSection('theburn')">The Burn</a></li>
-      <li><a data-section="rebirth" onclick="scrollToSection('rebirth')">Rebirth</a></li>
-      <li><a data-section="collect" onclick="scrollToSection('collect')">Collect</a></li>
-    </ul>
-  </div>
-
-  <div id="nav-whispers" class="nav-context">
-    <ul class="nav-links">
-      <li><a class="nav-back" onclick="navigateTo('home')"><span class="nav-back-arrow">&larr;</span> Return</a></li>
-      <li><a data-section="lots" onclick="scrollToSection('lots')">Lots</a></li>
-      <li><a data-section="sacrifice" onclick="scrollToSection('sacrifice')">The Sacrifice</a></li>
-      <li><a data-section="residents" onclick="scrollToSection('residents')">Residents</a></li>
-      <li><a data-section="launch" onclick="scrollToSection('launch')">Launch</a></li>
-    </ul>
-  </div>
+  <ul class="nav-links" id="nav-links">
+    <li><a data-page="artist"   tabindex="0" onclick="navigateTo('artist');closeNav()">The Artist</a></li>
+    <li><a data-page="duu"      tabindex="0" onclick="navigateTo('duu');closeNav()">The Book</a></li>
+    <li><a data-page="whispers" tabindex="0" onclick="navigateTo('whispers');closeNav()">Whispers</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
 </nav>
 
 
@@ -614,6 +60,7 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
 <div id="page-home" class="page active">
 
   <!-- Hero -->
+  <div id="main-content" tabindex="-1"></div>
   <section class="hero">
     <div class="hero-void"></div>
     <div class="hero-glow"></div>
@@ -744,6 +191,7 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
           <div class="section-body reveal reveal-delay-2">
             <p>I'm Odious, a British artist who first minted on Ethereum in 2020. My work explores unsettling atmospheres and restrained psychological tension rooted in the unknown, expressed through shifting visual styles and recurring motifs.</p>
             <p>My practice has been documented online from my very first painting. Every experiment, every evolution, now spread across thousands of wallets and championing collectors. Odiville is the world that emerged from that journey: an evolving creative village that serves as both armature and anchor for everything I create.</p>
+            <p>The work has always been world-first. Odiville isn't a container for projects — it's the reason they exist. Every series, from the Book to Whispers to the ashes of New York, was built to deepen the same place. The world now holds over five years of decisions, most of them irreversible.</p>
           </div>
         </div>
         <div>
@@ -756,8 +204,76 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
               <div class="stat-value">3,000+</div>
               <div class="stat-label">Wallets Reached</div>
             </div>
+            <div class="intro-stat">
+              <div class="stat-value">50+</div>
+              <div class="stat-label">Book Artworks</div>
+            </div>
+            <div class="intro-stat">
+              <div class="stat-value">275</div>
+              <div class="stat-label">OWT Edition</div>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journey Timeline -->
+  <section class="artist-journey">
+    <div class="section-inner">
+      <div class="section-label reveal">The Journey</div>
+      <h2 class="section-heading reveal reveal-delay-1">Five years.<br>One <em>world.</em></h2>
+      <div class="artist-timeline reveal reveal-delay-2">
+        <div class="artist-timeline-entry">
+          <div class="artist-timeline-year">2020</div>
+          <div class="artist-timeline-title">First Mint on Ethereum</div>
+          <div class="artist-timeline-desc">Early paintings. Unsettling atmospheres, unknown motifs. The practice begins in public, from day one.</div>
+        </div>
+        <div class="artist-timeline-entry">
+          <div class="artist-timeline-year">2021 – 2022</div>
+          <div class="artist-timeline-title">Odiville Takes Shape</div>
+          <div class="artist-timeline-desc">The world emerges. A village, a mythology, a system of recurring characters and places. The Book concept crystallises.</div>
+        </div>
+        <div class="artist-timeline-entry">
+          <div class="artist-timeline-year">2023</div>
+          <div class="artist-timeline-title">The Book Launches</div>
+          <div class="artist-timeline-desc">Decisions, Upsets and Unknowns. A ten-chapter interactive narrative on-chain. Fifty artworks, audio, sacrifice mechanics. Chapter I drops.</div>
+        </div>
+        <div class="artist-timeline-entry">
+          <div class="artist-timeline-year">2024</div>
+          <div class="artist-timeline-title">One-Way Ticket — New York</div>
+          <div class="artist-timeline-desc">Every artwork from the Book is printed, framed, and burned in a single night. 275 fragments from the ash become a new collection. The Book completes.</div>
+        </div>
+        <div class="artist-timeline-entry artist-timeline-entry--current">
+          <div class="artist-timeline-year">2025</div>
+          <div class="artist-timeline-title">Whispers of Odiville</div>
+          <div class="artist-timeline-desc">Six 1/1 artworks. Six bound Residents. The auction house of Odiville opens. The next chapter of the world begins.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Links -->
+  <section class="artist-links-section">
+    <div class="section-inner">
+      <div class="section-label reveal">Find the Work</div>
+      <div class="artist-links reveal reveal-delay-1">
+        <a href="https://echoes.odiville.com" class="artist-link" target="_blank">
+          <span class="artist-link-label">The Book</span>
+          <span class="artist-link-sub">echoes.odiville.com</span>
+        </a>
+        <a href="https://whispers.odiville.com" class="artist-link" target="_blank">
+          <span class="artist-link-label">Whispers</span>
+          <span class="artist-link-sub">whispers.odiville.com</span>
+        </a>
+        <a href="https://opensea.io/todayodious" class="artist-link" target="_blank">
+          <span class="artist-link-label">OpenSea</span>
+          <span class="artist-link-sub">Collection history</span>
+        </a>
+        <a href="https://www.x.com/todayodious" class="artist-link" target="_blank">
+          <span class="artist-link-label">X / Twitter</span>
+          <span class="artist-link-sub">@todayodious</span>
+        </a>
       </div>
     </div>
   </section>
@@ -801,6 +317,90 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
       <a href="https://echoes.odiville.com" class="btn btn-primary btn-sm" target="_blank">Read the Book <span class="btn-arrow">&rarr;</span></a>
     </div>
   </div>
+
+  <!-- Tab Switcher -->
+  <div class="duu-tab-bar">
+    <div class="duu-tab-bar-inner">
+      <button class="duu-tab active" data-view="timeline">Timeline</button>
+      <button class="duu-tab" data-view="info">Info</button>
+    </div>
+  </div>
+
+  <!-- Timeline View (default) -->
+  <div class="duu-view duu-view--timeline active" id="duu-view-timeline">
+
+    <!-- Horizontal Journey Timeline -->
+    <div class="journey" role="navigation" aria-label="Chapter timeline">
+      <div class="journey-track">
+        <svg class="journey-path" aria-hidden="true" viewBox="0 0 1000 55" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="string-fade" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1000" y2="0">
+              <stop offset="0%"   stop-color="white" stop-opacity="0"/>
+              <stop offset="6%"   stop-color="white" stop-opacity="1"/>
+              <stop offset="94%"  stop-color="white" stop-opacity="1"/>
+              <stop offset="100%" stop-color="white" stop-opacity="0"/>
+            </linearGradient>
+            <mask id="string-mask">
+              <rect x="0" y="0" width="1000" height="55" fill="url(#string-fade)"/>
+            </mask>
+          </defs>
+          <g mask="url(#string-mask)">
+            <path class="journey-string s1" d="M -20 8 C 180 52, 380 3, 550 8 C 720 52, 880 8, 1020 8"/>
+            <path class="journey-string s2" d="M -20 48 C 120 5, 260 52, 380 25 C 500 5, 650 50, 820 25 C 920 10, 980 48, 1020 48"/>
+            <path class="journey-string s3" d="M -20 25 C 100 42, 230 10, 350 25 C 470 42, 600 10, 700 25 C 820 42, 930 10, 1020 25"/>
+            <path class="journey-string s4" d="M -20 20 C 300 55, 700 0, 1020 20"/>
+          </g>
+        </svg>
+        <button class="journey-node reveal" data-chapter="1" aria-label="Phase I: The Arrival" aria-expanded="false" aria-controls="chapter-panel"><span class="journey-node-marker"></span><span class="journey-node-label">I</span></button>
+        <button class="journey-node reveal" data-chapter="2" aria-label="Phase II: Meet The Puppets" aria-expanded="false" aria-controls="chapter-panel"><span class="journey-node-marker"></span><span class="journey-node-label">II</span></button>
+        <button class="journey-node reveal" data-chapter="3" aria-label="Phase III: Whispering Winds" aria-expanded="false" aria-controls="chapter-panel"><span class="journey-node-marker"></span><span class="journey-node-label">III</span></button>
+        <button class="journey-node reveal" data-chapter="4" aria-label="Phase IV: Tread Lightly" aria-expanded="false" aria-controls="chapter-panel"><span class="journey-node-marker"></span><span class="journey-node-label">IV</span></button>
+        <button class="journey-node reveal" data-chapter="5" aria-label="Phase V: A Gift" aria-expanded="false" aria-controls="chapter-panel"><span class="journey-node-marker"></span><span class="journey-node-label">V</span></button>
+        <button class="journey-node reveal" data-chapter="6" aria-label="Phase VI: Choice in the Clouds" aria-expanded="false" aria-controls="chapter-panel"><span class="journey-node-marker"></span><span class="journey-node-label">VI</span></button>
+        <button class="journey-node reveal" data-chapter="7" aria-label="Phase VII: Crossroads" aria-expanded="false" aria-controls="chapter-panel"><span class="journey-node-marker"></span><span class="journey-node-label">VII</span></button>
+        <button class="journey-node reveal" data-chapter="8" aria-label="Phase VIII: Pool of Doubt" aria-expanded="false" aria-controls="chapter-panel"><span class="journey-node-marker"></span><span class="journey-node-label">VIII</span></button>
+        <button class="journey-node reveal" data-chapter="9" aria-label="Phase IX: A Ticket Home" aria-expanded="false" aria-controls="chapter-panel"><span class="journey-node-marker"></span><span class="journey-node-label">IX</span></button>
+        <button class="journey-node journey-node--portal reveal" data-chapter="10" aria-label="Phase X: Welcome to Odiville" aria-expanded="false" aria-controls="chapter-panel"><span class="journey-node-marker journey-node-portal"></span><span class="journey-node-label">X</span></button>
+      </div>
+    </div>
+
+    <!-- Chapter Panel (expands below timeline) -->
+    <div class="chapter-panel" id="chapter-panel" aria-live="polite" hidden>
+      <div class="chapter-panel-inner">
+        <div class="chapter-panel-header">
+          <span class="chapter-panel-numeral" id="chapterNumeral"></span>
+          <span class="chapter-panel-divider" aria-hidden="true">&mdash;</span>
+          <span class="chapter-panel-title" id="chapterTitle"></span>
+        </div>
+        <div class="chapter-panel-body">
+          <div class="chapter-masonry" id="chapterMasonry"></div>
+
+          <!-- Artwork detail — sits to the right of the title list -->
+          <div class="duu-lightbox" id="duuLightbox" aria-hidden="true" role="region" aria-label="Artwork detail">
+            <button class="duu-lightbox-close" id="duuLightboxClose" aria-label="Close">&times;</button>
+            <div class="duu-lightbox-media" id="duuLightboxMedia">
+              <button class="duu-lightbox-arrow duu-lightbox-prev" id="duuLightboxPrev" aria-label="Previous artwork">&#8592;</button>
+              <button class="duu-lightbox-arrow duu-lightbox-next" id="duuLightboxNext" aria-label="Next artwork">&#8594;</button>
+            </div>
+            <div class="duu-lightbox-info">
+              <div class="duu-lightbox-chapter" id="duuLightboxChapter"></div>
+              <div class="duu-lightbox-name" id="duuLightboxName"></div>
+              <div class="duu-lightbox-details">
+                <div class="duu-lightbox-detail-row"><span class="duu-lightbox-detail-label">Token ID</span><span class="duu-lightbox-detail-value" id="duuLightboxTokenId"></span></div>
+                <div class="duu-lightbox-detail-row"><span class="duu-lightbox-detail-label">Contract</span><span class="duu-lightbox-detail-value duu-lightbox-contract" id="duuLightboxContract"></span></div>
+                <div class="duu-lightbox-detail-row"><span class="duu-lightbox-detail-label">Shade Cost</span><span class="duu-lightbox-detail-value" id="duuLightboxShadeCost"></span></div>
+                <div class="duu-lightbox-detail-row"><span class="duu-lightbox-detail-label">Shade Value</span><span class="duu-lightbox-detail-value" id="duuLightboxShadeValue"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Info View -->
+  <div class="duu-view duu-view--info" id="duu-view-info">
 
   <!-- Echoes -->
   <section class="duu-section" id="echoes">
@@ -929,6 +529,8 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
     </div>
   </section>
 
+  </div><!-- /duu-view--info -->
+
   <!-- DUU CTA -->
   <section class="cta-section">
     <div class="hero-glow" style="animation-duration:11s;"></div>
@@ -999,7 +601,7 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
         </div>
         <div>
           <div class="owt-image-placeholder reveal reveal-delay-3" style="background:none;border:none;">
-            <img src="images/owt_odiville_book.png" alt="The Odiville Book" style="width:100%;display:block;border:1px solid var(--border);">
+            <img loading="lazy" src="images/One-way Ticket/owt_odiville_book.png" alt="The Odiville Book" style="width:100%;display:block;border:1px solid var(--border);">
           </div>
         </div>
       </div>
@@ -1021,8 +623,11 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
           </div>
         </div>
         <div>
-          <div class="owt-image-placeholder reveal reveal-delay-3" style="background:none;border:none;">
-            <img src="images/owt_sacrifice_flame.png" alt="A sacrifice to the flame" style="width:100%;display:block;border:1px solid var(--border);">
+          <div class="owt-video-wrap reveal reveal-delay-3">
+            <video class="owt-video" src="images/One-way Ticket/OWT Breakdown.mp4"
+              muted playsinline loop preload="none"
+              poster="images/One-way Ticket/owt_sacrifice_flame.png">
+            </video>
           </div>
         </div>
       </div>
@@ -1050,7 +655,7 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
         </div>
         <div>
           <div class="owt-image-placeholder reveal reveal-delay-3" style="background:none;border:none;">
-            <img src="images/owt_charcoal_piece.png" alt="Physical charcoal piece" style="width:100%;display:block;border:1px solid var(--border);">
+            <img loading="lazy" src="images/One-way Ticket/owt_charcoal_piece.png" alt="Physical charcoal piece" style="width:100%;display:block;border:1px solid var(--border);">
           </div>
         </div>
       </div>
@@ -1067,6 +672,12 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
       <div class="section-body reveal reveal-delay-2" style="margin:0 auto;max-width:600px;text-align:left;">
         <p>Each fragment is a relic from the pit. A piece of what existed before the fire, transformed into something that stands on its own. The goal was never preservation. It was proof that destruction and creation are the same act, separated only by intent.</p>
         <p>275 pieces. Built in collaboration with Shape.</p>
+      </div>
+      <div class="owt-feature-video reveal reveal-delay-3">
+        <video class="owt-video owt-video--main" src="images/One-way Ticket/One-way Ticket.mp4"
+          muted playsinline loop preload="none"
+          poster="images/One-way Ticket/One-way-Ticket-Slideshow-v3-gif.gif">
+        </video>
       </div>
     </div>
   </section>
@@ -1119,78 +730,117 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
       <div class="section-label reveal">The Auction House</div>
       <h2 class="section-heading reveal reveal-delay-1">Where moments from<br>the world are <em>offered</em></h2>
       <div class="section-body reveal reveal-delay-2">
-        <p>Whispers is an auction house operating inside Odiville. The first building constructed within its borders. Each of the six lots is drawn from a specific chapter, distilling its atmosphere into image, paired with a bound Resident portrait through a first-of-its-kind binding format on Ethereum.</p>
+        <p>Whispers is the auction house of Odiville and the first building ever constructed within its borders. The inaugural six lots are drawn from chapters of the book, each distilled into a single image. Every artwork is paired with a bound Resident portrait through a first of its kind twin token format on Ethereum.</p>
       </div>
 
       <div class="whispers-hero-block reveal reveal-delay-3">
         <div class="whispers-grid">
 
-          <a href="https://whispers.odiville.com/#auction/1" class="lot-card" target="_blank">
+          <a href="https://whispers.odiville.com/#auction/1" class="lot-card" data-auction-id="1" target="_blank">
             <div class="lot-card-img">
-              <img src="images/the_arrival.gif" alt="the arrival">
+              <img loading="lazy" src="images/Whispers/Whispers_Art/the_arrival.gif" alt="the arrival">
               <span class="lot-number">Lot 1</span>
             </div>
             <div class="lot-info">
-              <div class="lot-title">the arrival</div>
-              <div class="lot-quote">"I'll trade you a ticket for those coins."</div>
-              <div class="lot-meta">Oil + Glitch on Digital Canvas &middot; 1/1</div>
+              <div class="lot-info-top">
+                <span class="lot-title">the arrival <span class="lot-arrow">&#8599;</span></span>
+                <span class="lot-badge lot-badge--pending">Pending</span>
+              </div>
+              <div class="lot-quote">"It flickers in the distance."</div>
+              <div class="lot-info-bottom">
+                <span class="lot-bid"></span>
+                <span class="lot-bid-link"></span>
+              </div>
             </div>
           </a>
 
-          <a href="https://whispers.odiville.com/#auction/2" class="lot-card" target="_blank">
+          <a href="https://whispers.odiville.com/#auction/2" class="lot-card" data-auction-id="2" target="_blank">
             <div class="lot-card-img">
-              <img src="images/blue_reverie.png" alt="blue reverie">
+              <img loading="lazy" src="images/Whispers/Whispers_Art/blue_reverie.png" alt="blue reverie">
               <span class="lot-number">Lot 2</span>
             </div>
             <div class="lot-info">
-              <div class="lot-title">blue reverie</div>
-              <div class="lot-quote">"Always settling down here."</div>
-              <div class="lot-meta">Chapter Work &middot; 1/1</div>
+              <div class="lot-info-top">
+                <span class="lot-title">blue reverie <span class="lot-arrow">&#8599;</span></span>
+                <span class="lot-badge lot-badge--live">Live</span>
+              </div>
+              <div class="lot-quote">"Always sailing down here."</div>
+              <div class="lot-info-bottom">
+                <span class="lot-bid"></span>
+                <span class="lot-bid-link"></span>
+              </div>
             </div>
           </a>
 
-          <a href="https://whispers.odiville.com/#auction/3" class="lot-card" target="_blank">
+          <a href="https://whispers.odiville.com/#auction/3" class="lot-card" data-auction-id="3" target="_blank">
             <div class="lot-card-img">
-              <img src="images/a_choice_in_the_clouds.png" alt="a choice in the clouds">
+              <img loading="lazy" src="images/Whispers/Whispers_Art/a_choice_in_the_clouds.png" alt="a choice in the clouds">
               <span class="lot-number">Lot 3</span>
             </div>
             <div class="lot-info">
-              <div class="lot-title">a choice in the clouds</div>
+              <div class="lot-info-top">
+                <span class="lot-title">a choice in the clouds <span class="lot-arrow">&#8599;</span></span>
+                <span class="lot-badge lot-badge--pending">Pending</span>
+              </div>
               <div class="lot-quote">"Thank you, creator."</div>
-              <div class="lot-meta">Chapter Work &middot; 1/1</div>
+              <div class="lot-info-bottom">
+                <span class="lot-bid"></span>
+                <span class="lot-bid-link"></span>
+              </div>
             </div>
           </a>
 
-          <a href="https://whispers.odiville.com/#auction/4" class="lot-card" target="_blank">
+          <a href="https://whispers.odiville.com/#auction/4" class="lot-card" data-auction-id="4" target="_blank">
             <div class="lot-card-img">
-              <img src="images/you_re_wrong_about_them.gif" alt="you're wrong about them">
+              <img loading="lazy" src="images/Whispers/Whispers_Art/you_re_wrong_about_them.gif" alt="you're wrong about them">
               <span class="lot-number">Lot 4</span>
             </div>
             <div class="lot-info">
-              <div class="lot-title">you're wrong about them</div>
-              <div class="lot-meta">Chapter Work &middot; 1/1</div>
+              <div class="lot-info-top">
+                <span class="lot-title">you're wrong about them <span class="lot-arrow">&#8599;</span></span>
+                <span class="lot-badge lot-badge--pending">Pending</span>
+              </div>
+              <div class="lot-quote">"The room you seek is occupied, try the other lock."</div>
+              <div class="lot-info-bottom">
+                <span class="lot-bid"></span>
+                <span class="lot-bid-link"></span>
+              </div>
             </div>
           </a>
 
-          <a href="https://whispers.odiville.com/#auction/5" class="lot-card" target="_blank">
+          <a href="https://whispers.odiville.com/#auction/5" class="lot-card" data-auction-id="5" target="_blank">
             <div class="lot-card-img">
-              <img src="images/antithesis.png" alt="antithesis">
+              <img loading="lazy" src="images/Whispers/Whispers_Art/antithesis.png" alt="antithesis">
               <span class="lot-number">Lot 5</span>
             </div>
             <div class="lot-info">
-              <div class="lot-title">antithesis</div>
-              <div class="lot-meta">Chapter Work &middot; 1/1</div>
+              <div class="lot-info-top">
+                <span class="lot-title">antithesis <span class="lot-arrow">&#8599;</span></span>
+                <span class="lot-badge lot-badge--pending">Pending</span>
+              </div>
+              <div class="lot-quote">"Looks different?"</div>
+              <div class="lot-info-bottom">
+                <span class="lot-bid"></span>
+                <span class="lot-bid-link"></span>
+              </div>
             </div>
           </a>
 
-          <a href="https://whispers.odiville.com/#auction/6" class="lot-card" target="_blank">
+          <a href="https://whispers.odiville.com/#auction/6" class="lot-card" data-auction-id="6" target="_blank">
             <div class="lot-card-img">
-              <img src="images/farewell_to_odiville.gif" alt="farewell to odiville">
+              <img loading="lazy" src="images/Whispers/Whispers_Art/farewell_to_odiville.gif" alt="farewell to odiville">
               <span class="lot-number">Lot 6</span>
             </div>
             <div class="lot-info">
-              <div class="lot-title">farewell to odiville</div>
-              <div class="lot-meta">Chapter Work &middot; 1/1</div>
+              <div class="lot-info-top">
+                <span class="lot-title">farewell to odiville <span class="lot-arrow">&#8599;</span></span>
+                <span class="lot-badge lot-badge--pending">Pending</span>
+              </div>
+              <div class="lot-quote">"Goodbye old friend."</div>
+              <div class="lot-info-bottom">
+                <span class="lot-bid"></span>
+                <span class="lot-bid-link"></span>
+              </div>
             </div>
           </a>
 
@@ -1206,12 +856,12 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
     <div class="section-inner">
       <div class="section-label reveal">The Ritual</div>
       <div class="sacrifice-artwork reveal">
-        <img src="images/you_re_wrong_about_them.gif" alt="You're Wrong About Them">
+        <img loading="lazy" src="images/Whispers/Whispers_Art/you_re_wrong_about_them.gif" alt="You're Wrong About Them">
       </div>
       <h2 class="section-heading reveal reveal-delay-1">It began with<br>a <em>sacrifice.</em></h2>
       <div class="section-body reveal reveal-delay-2">
         <p>A single transaction carrying the weight of a three-year personal journey. The conscious release of everything I had become while making this work, and a final removal before stepping into a new arena.</p>
-        <p><span style="color:var(--white);font-style:italic;">You're Wrong About Them</span>, minted in 2024 on SuperRare, was created to hold a moment that hadn't yet arrived. On March 2nd, this work was sent to the dead address, concluding the ritual and clearing the ground for the first public auction inside Odiville.</p>
+        <p><span style="color:var(--white);font-style:italic;">You're Wrong About Them</span>, minted in 2024 on SuperRare, was created to hold a moment that hadn't yet arrived. On March 2nd, this work was sent to the <a href="https://etherscan.io/tx/0x8fc7e00136eab5dc0bea90350cab483575b07eca40426b08a731be76fd309bea" target="_blank" class="contract-link" style="text-decoration:underline;text-underline-offset:3px;">dead address</a>, concluding the ritual and clearing the ground for the first public auction inside Odiville.</p>
       </div>
       <div class="burn-address reveal reveal-delay-3">0x000000000000000000000000000000000000dEaD</div>
     </div>
@@ -1229,7 +879,7 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
         <div>
           <div class="section-body reveal reveal-delay-2">
             <p>After finishing an artwork, I assess whether it calls for a counterpart. When it does, I begin the process of reinterpreting as a Resident. Not portraits in the conventional sense, but personifications of their paired works, shaped by atmosphere and intent.</p>
-            <p>The 1/1 artworks live on <em>Whispers of Odiville</em> and the Residents on <em>Residents of Odiville</em>. Both contracts deployed on Ethereum mainnet, connected through on-chain logic.</p>
+            <p>The artworks live on <a href="https://opensea.io/collection/whispers-of-odiville" target="_blank" class="contract-link"><em>Whispers of Odiville</em></a>. The Residents on <a href="https://opensea.io/collection/residents-of-odiville" target="_blank" class="contract-link"><em>Residents of Odiville</em></a>. Two contracts on Ethereum, connected through on-chain logic.</p>
           </div>
           <ul class="mechanic-list reveal reveal-delay-2">
             <li><span class="mechanic-icon"></span>Each 1/1 artwork is paired with a bound Resident portrait as a single release</li>
@@ -1242,10 +892,10 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
         <div>
           <div class="pairing-stack reveal reveal-delay-3">
             <div class="pairing-back">
-              <img src="images/the_arrival.gif" alt="the arrival">
+              <img loading="lazy" src="images/Whispers/Whispers_Art/the_arrival.gif" alt="the arrival">
             </div>
             <div class="pairing-front">
-              <img src="images/The_End.gif" alt="The End">
+              <img loading="lazy" src="images/Whispers/Residents/The End.gif" alt="The End">
               <div class="pairing-front-label">
                 <div class="resident-card-name">The End</div>
               </div>
@@ -1257,28 +907,28 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
       <div class="residents-gallery reveal">
         <div class="residents-gallery-label">Residents of Odiville</div>
         <div class="residents-grid">
-          <div class="resident-card">
-            <div class="resident-card-img"><img src="images/The_End.gif" alt="The End"></div>
+          <div class="resident-card" data-resident="the-end">
+            <div class="resident-card-img"><img loading="lazy" src="images/Whispers/Residents/The End.gif" alt="The End"></div>
             <div class="resident-card-info"><div class="resident-card-name">The End</div><div class="resident-card-type">Resident</div></div>
           </div>
-          <div class="resident-card">
-            <div class="resident-card-img"><img src="images/Neverwas.gif" alt="Neverwas"></div>
+          <div class="resident-card" data-resident="neverwas">
+            <div class="resident-card-img"><img loading="lazy" src="images/Whispers/Residents/Neverwas.gif" alt="Neverwas"></div>
             <div class="resident-card-info"><div class="resident-card-name">Neverwas</div><div class="resident-card-type">Resident</div></div>
           </div>
-          <div class="resident-card">
-            <div class="resident-card-img"><img src="images/One_Lie.gif" alt="One Lie"></div>
+          <div class="resident-card" data-resident="one-lie">
+            <div class="resident-card-img"><img loading="lazy" src="images/Whispers/Residents/One Lie.gif" alt="One Lie"></div>
             <div class="resident-card-info"><div class="resident-card-name">One Lie</div><div class="resident-card-type">Resident</div></div>
           </div>
-          <div class="resident-card">
-            <div class="resident-card-img"><img src="images/One_Truth.gif" alt="One Truth"></div>
+          <div class="resident-card" data-resident="one-truth">
+            <div class="resident-card-img"><img loading="lazy" src="images/Whispers/Residents/One Truth.gif" alt="One Truth"></div>
             <div class="resident-card-info"><div class="resident-card-name">One Truth</div><div class="resident-card-type">Resident</div></div>
           </div>
-          <div class="resident-card">
-            <div class="resident-card-img"><img src="images/Inbetween.gif" alt="Inbetween"></div>
+          <div class="resident-card" data-resident="inbetween">
+            <div class="resident-card-img"><img loading="lazy" src="images/Whispers/Residents/Inbetween.gif" alt="Inbetween"></div>
             <div class="resident-card-info"><div class="resident-card-name">Inbetween</div><div class="resident-card-type">Resident</div></div>
           </div>
-          <div class="resident-card">
-            <div class="resident-card-img"><img src="images/Ferryman_resized_v2.gif" alt="Ferryman"></div>
+          <div class="resident-card" data-resident="ferryman">
+            <div class="resident-card-img"><img loading="lazy" src="images/Whispers/Residents/Ferryman_resized.gif" alt="Ferryman"></div>
             <div class="resident-card-info"><div class="resident-card-name">Ferryman</div><div class="resident-card-type">Resident</div></div>
           </div>
         </div>
@@ -1294,14 +944,14 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
       <div class="launch-grid">
         <div>
           <div class="section-label reveal">Launch Details</div>
-          <h2 class="section-heading reveal reveal-delay-1">The doors are<br><em>open</em></h2>
+          <h2 class="section-heading reveal reveal-delay-1">The doors are<br><em>Open.</em></h2>
           <div class="section-body reveal reveal-delay-2">
-            <p>Six 1/1 artworks paired with six Resident portraits. Reserve auctions conducted through Whispers. Each work opens at a 1.1 ETH reserve. Once met, a seventy-two hour window begins.</p>
+            <p>Six original works, each bound to a Resident portrait. Reserve auctions held inside Whispers, once the reserve is met, a seventy-two hour window opens.</p>
           </div>
         </div>
         <div>
           <div class="launch-details reveal reveal-delay-2">
-            <div class="launch-detail"><span class="ld-label">Launch Window</span><span class="ld-value highlight">March 2nd, 11am EST</span></div>
+            <div class="launch-detail"><span class="ld-label">Opening Date</span><span class="ld-value highlight">March 2nd, 11am EST</span></div>
             <div class="launch-detail"><span class="ld-label">Format</span><span class="ld-value">6 &times; 1/1 Artworks + Residents</span></div>
             <div class="launch-detail"><span class="ld-label">Method</span><span class="ld-value">Reserve Auction</span></div>
             <div class="launch-detail"><span class="ld-label">Reserve Price</span><span class="ld-value">1.1 ETH</span></div>
@@ -1342,208 +992,123 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
 
 
 <!-- ========== SCRIPTS ========== -->
-<script>/* ========== PAGE NAVIGATION ========== */
+<script src="js/navigation.js"></script>
 
-function navigateTo(pageId) {
-  const currentPage = document.querySelector('.page.active');
-  const targetPage = document.getElementById('page-' + pageId);
-  if (!targetPage || currentPage === targetPage) return;
+<script type="module" src="js/auction.js"></script>
 
-  // Switch nav context
-  document.querySelectorAll('.nav-context').forEach(n => n.classList.remove('active'));
-  const navCtx = document.getElementById('nav-' + pageId);
-  if (navCtx) navCtx.classList.add('active');
+<!-- Resident Modal -->
+<div class="resident-modal-overlay" id="residentModal">
+  <div class="resident-modal">
+    <button class="resident-modal-close" id="residentModalClose">&times;</button>
+    <div class="resident-modal-visual">
+      <div class="resident-modal-img"><img loading="lazy" id="rmImg" src="" alt=""></div>
+      <div class="resident-modal-pair">
+        <img loading="lazy" id="rmPairImg" src="" alt="">
+        <div class="resident-modal-pair-label" id="rmPairLabel">Paired artwork</div>
+      </div>
+    </div>
+    <div class="resident-modal-body">
+      <div class="resident-modal-label">Resident of Odiville</div>
+      <div class="resident-modal-name" id="rmName"></div>
+      <div class="resident-modal-chapter" id="rmChapter"></div>
+      <p class="resident-modal-desc" id="rmDesc"></p>
+      <a class="resident-modal-link" id="rmLink" href="https://opensea.io/collection/residents-of-odiville" target="_blank">View Collection &#8599;</a>
+    </div>
+  </div>
+</div>
 
-  // Animate out current page
-  currentPage.classList.add('exiting');
-  currentPage.classList.remove('active');
+<script src="js/residents.js"></script>
 
-  setTimeout(() => {
-    currentPage.classList.remove('exiting');
-    targetPage.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'instant' });
+<!-- Chapter galleries are injected inline into tree-nodes via JS -->
 
-    // Re-observe reveals on new page
-    observeReveals();
-
-    // Re-init torch cards if navigating to home
-    if (pageId === 'home') {
-      initTorchCards();
-    }
-
-    // Init particles for the new page
-    initParticles();
-  }, 400);
-}
-
-function scrollToSection(sectionId) {
-  const el = document.getElementById(sectionId);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+<script src="js/chapters.js"></script>
 
 
-/* ========== SCROLL REVEAL ========== */
+<!-- ========= PAGE: ARCHIVE =========== -->
+<div id="page-archive" class="page">
 
-function observeReveals() {
-  const reveals = document.querySelectorAll('.page.active .reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  <section class="sub-hero sub-hero--archive">
+    <div class="hero-void"></div>
+    <div class="particles" id="particles-archive"></div>
+    <div class="sub-hero-content">
+      <p class="sub-hero-eyebrow" style="color:var(--white-dim);">Body of Work</p>
+      <h1 class="sub-hero-title">The Archive</h1>
+      <p class="sub-hero-subtitle">Every artwork from every project. The complete record of Odiville.</p>
+    </div>
+  </section>
 
-  reveals.forEach(el => {
-    // Reset for re-observation
-    if (!el.classList.contains('visible')) {
-      observer.observe(el);
-    }
-  });
-}
+  <section class="archive-section">
+    <div class="archive-filters" id="archiveFilters">
+      <div class="archive-filter-group">
+        <span class="archive-filter-label">Project</span>
+        <button class="archive-filter active" data-filter="project" data-value="all">All</button>
+        <button class="archive-filter" data-filter="project" data-value="duu">The Book</button>
+        <button class="archive-filter" data-filter="project" data-value="whispers">Whispers</button>
+        <button class="archive-filter" data-filter="project" data-value="owt">One-Way Ticket</button>
+      </div>
+      <div class="archive-filter-group">
+        <span class="archive-filter-label">Type</span>
+        <button class="archive-filter active" data-filter="type" data-value="all">All</button>
+        <button class="archive-filter" data-filter="type" data-value="artwork">Artwork</button>
+        <button class="archive-filter" data-filter="type" data-value="lot">Lot</button>
+        <button class="archive-filter" data-filter="type" data-value="resident">Resident</button>
+      </div>
+      <span class="archive-count" id="archiveCount"></span>
+    </div>
+    <div class="archive-grid" id="archiveGrid"></div>
+  </section>
 
+</div>
 
-/* ========== PARTICLES ========== */
-
-function initParticles() {
-  document.querySelectorAll('.page.active .particles').forEach(container => {
-    if (container.children.length > 0) return;
-    const count = 33;
-    for (let i = 0; i < count; i++) {
-      const p = document.createElement('div');
-      const isLarge = Math.random() < 0.3;
-      p.className = 'particle' + (isLarge ? ' particle--large' : '');
-      const size = isLarge ? (Math.random() * 4 + 4) : (Math.random() * 3 + 1.5);
-      const left = Math.random() * 100;
-      const top = Math.random() * 100;
-      const duration = Math.random() * 5.2 + 3.9;
-      const delay = -(Math.random() * duration);
-      const drift = (Math.random() - 0.5) * 120;
-      const rise = -(Math.random() * 300 + 150);
-      const opacity = isLarge ? (Math.random() * 0.18 + 0.14) : (Math.random() * 0.22 + 0.12);
-
-      p.style.cssText = `
-        width: ${size}px; height: ${size}px;
-        left: ${left}%; top: ${top}%;
-        animation-duration: ${duration}s;
-        animation-delay: ${delay}s;
-        --p-drift: ${drift}px;
-        --p-rise: ${rise}px;
-        --p-opacity: ${opacity};
-      `;
-      container.appendChild(p);
-    }
-  });
-}
+<!-- Archive lightbox -->
+<div class="archive-lightbox" id="archiveLightbox" aria-hidden="true">
+  <div class="archive-lightbox-backdrop" id="archiveLightboxBackdrop"></div>
+  <button class="archive-lightbox-close" id="archiveLightboxClose" aria-label="Close">&times;</button>
+  <div class="archive-lightbox-content">
+    <div class="archive-lightbox-media" id="archiveLightboxMedia"></div>
+    <div class="archive-lightbox-info">
+      <div class="archive-lightbox-project" id="archiveLightboxProject"></div>
+      <div class="archive-lightbox-name" id="archiveLightboxName"></div>
+      <div class="archive-lightbox-meta" id="archiveLightboxMeta"></div>
+    </div>
+  </div>
+</div>
 
 
-/* ========== TORCH CARD EFFECT ========== */
+<!-- ========= PAGE: PRESS =========== -->
+<div id="page-press" class="page">
 
-function initTorchCards() {
-  if (window.matchMedia('(hover: none)').matches) return;
-  const cards = document.querySelectorAll('.page.active .project-card');
+  <section class="sub-hero">
+    <div class="hero-void"></div>
+    <div class="particles" id="particles-press"></div>
+    <div class="sub-hero-content">
+      <p class="sub-hero-eyebrow" style="color:var(--white-dim);">Recognition</p>
+      <h1 class="sub-hero-title">Press &amp; Exhibitions</h1>
+      <p class="sub-hero-subtitle">Coverage, features, and appearances in the physical world.</p>
+    </div>
+  </section>
 
-  cards.forEach(card => {
-    // Prevent duplicate listeners
-    if (card._torchInit) return;
-    card._torchInit = true;
+  <section class="press-section" id="pressSection">
+    <div class="press-empty" id="pressPlaceholder">
+      <div class="press-empty-rule"></div>
+      <p class="press-empty-label">Press</p>
+      <p class="press-empty-text">This chapter is still being written.</p>
+      <div class="press-empty-rule"></div>
+      <p class="press-empty-label">Exhibitions</p>
+      <p class="press-empty-text">The first appearance is coming.</p>
+    </div>
+    <div id="pressEntries" style="display:none;"></div>
+  </section>
 
-    const canvas = card.querySelector('.card-fx');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let mouseX = -200, mouseY = -200;
-    let isHovering = false;
-    let animId = null;
-
-    function resize() {
-      const rect = card.getBoundingClientRect();
-      canvas.width = rect.width;
-      canvas.height = rect.height;
-    }
-
-    class Mote {
-      constructor(x, y) {
-        const angle = Math.random() * Math.PI * 2;
-        const dist = Math.random() * 40 + 10;
-        this.x = x + Math.cos(angle) * dist;
-        this.y = y + Math.sin(angle) * dist;
-        this.size = Math.random() * 1.2 + 0.3;
-        this.life = 1;
-        this.decay = Math.random() * 0.006 + 0.003;
-        this.vy = -(Math.random() * 0.35 + 0.1);
-        this.vx = (Math.random() - 0.5) * 0.15;
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.vx += (Math.random() - 0.5) * 0.008;
-        this.life -= this.decay;
-      }
-      draw(ctx) {
-        if (this.life <= 0) return;
-        const alpha = this.life * 0.18;
-        if (alpha < 0.01) return;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size * (0.5 + this.life * 0.5), 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(234, 230, 222, ${alpha})`;
-        ctx.fill();
-      }
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (isHovering && Math.random() < 0.3) {
-        particles.push(new Mote(mouseX, mouseY));
-      }
-      particles.forEach(p => { p.update(); p.draw(ctx); });
-      particles = particles.filter(p => p.life > 0);
-      animId = requestAnimationFrame(animate);
-    }
-
-    card.addEventListener('mouseenter', () => {
-      isHovering = true;
-      resize();
-      if (!animId) animate();
-    });
-
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
-      card.style.setProperty('--mx', mouseX + 'px');
-      card.style.setProperty('--my', mouseY + 'px');
-    });
-
-    card.addEventListener('mouseleave', () => {
-      isHovering = false;
-      mouseX = -200;
-      mouseY = -200;
-      card.style.setProperty('--mx', '-100px');
-      card.style.setProperty('--my', '-100px');
-      setTimeout(() => {
-        if (!isHovering && particles.length === 0) {
-          cancelAnimationFrame(animId);
-          animId = null;
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-      }, 2500);
-    });
-
-    window.addEventListener('resize', resize);
-  });
-}
+</div>
 
 
-/* ========== INIT ========== */
-
-document.addEventListener('DOMContentLoaded', () => {
-  observeReveals();
-  initParticles();
-  initTorchCards();
-});
-</script>
+<script src="js/data/artworks.js"></script>
+<script src="js/archive.js"></script>
+<script src="js/data/press.js"></script>
+<script src="js/press.js"></script>
+<script src="js/gate.js"></script>
+<script src="js/audio.js"></script>
 
 </body>
 </html>
