@@ -28,12 +28,21 @@
       gate.style.transition = 'opacity 2s ease';
       gate.style.opacity = '0';
 
-      gate.addEventListener('transitionend', function cleanup() {
-        gate.removeEventListener('transitionend', cleanup);
+      var done = false;
+      function cleanup() {
+        if (done) return;
+        done = true;
+        gate.removeEventListener('transitionend', onEnd);
         gate.remove();
         document.body.style.overflow = '';
         sessionStorage.setItem('gate-passed', '1');
-      });
+      }
+      function onEnd(e) {
+        if (e.target === gate && e.propertyName === 'opacity') cleanup();
+      }
+      gate.addEventListener('transitionend', onEnd);
+      // Fallback in case transitionend doesn't fire (reduced-motion, etc.)
+      setTimeout(cleanup, 2200);
     }, 1500);
   }
 
