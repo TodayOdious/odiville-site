@@ -1,6 +1,7 @@
 /**
  * api/listings.js — Vercel serverless function
  * Proxies OpenSea listings + floor prices for all Odiville collections.
+ * Also enriches listings with NFT title/image from inventory.json.
  * Response is CDN-cached for 5 minutes (s-maxage=300).
  */
 
@@ -10,7 +11,18 @@ const { readFileSync } = require('fs');
 const { join }        = require('path');
 
 const OPENSEA_BASE = 'https://api.opensea.io/api/v2';
-const PAGE_LIMIT   = 10; // max pagination pages per collection (safety cap)
+const PAGE_LIMIT   = 10;
+
+/* ── Inventory helpers ─────────────────────────────────────── */
+
+function getInventory() {
+  const data = JSON.parse(
+    readFileSync(join(process.cwd(), 'js', 'data', 'inventory.json'), 'utf-8')
+  );
+  const records = data.records || [];
+  const slugs   = [...new Set(records.map(r => r.openseaCollection).filter(Boolean))].sort();
+  return { records, slugs };
+}
 
 /* ── OpenSea helpers ───────────────────────────────────────── */
 
@@ -18,9 +30,9 @@ async function apiGet(path, apiKey) {
   const url = OPENSEA_BASE + path;
   const res = await fetch(url, {
     headers: {
-      'x-api-key':    apiKey,
-      'Accept':       'application/json',
-      'User-Agent':   'odiville-listings/1.0',
+      'x-api-key':  apiKey,
+      'Accept':     'application/json',
+      'User-Agent': 'odiville-listings/1.0',
     },
   });
   if (!res.ok) return null;
@@ -33,19 +45,6 @@ function weiToEth(valueStr, decimals) {
   } catch (_) {
     return 0;
   }
-}
-
-/* ── Read collection slugs from inventory.json ─────────────── */
-
-function getSlugs() {
-  const inv = JSON.parse(
-    readFileSync(join(process.cwd(), 'js', 'data', 'inventory.json'), 'utf-8')
-  );
-  const seen = new Set();
-  for (const rec of inv.records || []) {
-    if (rec.openseaCollection) seen.add(rec.openseaCollection);
-  }
-  return [...seen].sort();
 }
 
 /* ── Fetch floor price for one collection ──────────────────── */
@@ -114,14 +113,12 @@ async function fetchListings(slug, apiKey) {
 /* ── Handler ───────────────────────────────────────────────── */
 
 module.exports = async function handler(req, res) {
-  // CORS — allow main site (any origin) to call this function
   res.setHeader('Access-Control-Allow-Origin',  '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  // CDN cache: serve stale for 5 min, revalidate in background for 10 min
   res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=600');
 
   const API_KEY = process.env.OPENSEA_API_KEY;
@@ -130,9 +127,8 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const slugs = getSlugs();
+    const { records, slugs } = getInventory();
 
-    // Fetch floors and listings in parallel across all collections
     const [floorResults, listingResults] = await Promise.all([
       Promise.all(slugs.map(function(slug) {
         return fetchFloor(slug, API_KEY).then(function(fp) { return { slug: slug, fp: fp }; });
@@ -142,14 +138,11 @@ module.exports = async function handler(req, res) {
       })),
     ]);
 
-    // Build floors map
     const floors = {};
     for (const { slug, fp } of floorResults) {
-      if (fp) floors[slug] = fp;
-      else    floors[slug] = { price: 0, currency: '' };
+      floors[slug] = fp ? fp : { price: 0, currency: '' };
     }
 
-    // Build listings map — keep lowest price per token
     const allListings = {};
     for (const { items } of listingResults) {
       for (const item of items) {
@@ -170,11 +163,26 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    // Enrich listings with NFT details from inventory
+    const nftDetails = {};
+    for (const rec of records) {
+      const k = (rec.contract || '').toLowerCase() + ':' + rec.tokenId;
+      if (allListings[k]) {
+        nftDetails[k] = {
+          title:       rec.title       || '',
+          imageUrl:    rec.displayAnimationUrl || rec.imageUrl || rec.mediaUrl || '',
+          openseaUrl:  rec.openseaUrl  || '',
+          projectName: rec.projectName || '',
+        };
+      }
+    }
+
     return res.json({
       fetchedAt:    new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
       listingCount: Object.keys(allListings).length,
       floors:       floors,
       listings:     allListings,
+      nftDetails:   nftDetails,
     });
 
   } catch (e) {

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odiville — Market Dashboard</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a0a;
+      --surface:     #111111;
+      --surface-2:   #161616;
+      --border:      rgba(255,255,255,0.07);
+      --text:        #e8e4dc;
+      --text-dim:    #888;
+      --text-faint:  #444;
+      --green:       #8fd4a0;
+      --green-dim:   rgba(143,212,160,0.12);
+      --red:         #e87070;
+      --blue:        #7ab3d4;
+      --yellow:      #d4c27a;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { opacity: 0.75; }
+
+    /* ── Layout ── */
+
+    .dash-header {
+      padding: 2rem 2.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .dash-brand { display: flex; flex-direction: column; gap: 0.2rem; }
+    .dash-brand-name {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .dash-title {
+      font-size: 1.4rem;
+      font-weight: normal;
+      letter-spacing: 0.05em;
+    }
+
+    .dash-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-faint);
+    }
+
+    .dash-refresh {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.75rem;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .dash-refresh:hover { border-color: var(--text-dim); color: var(--text); }
+
+    .dash-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    /* ── Section ── */
+
+    .dash-section { display: flex; flex-direction: column; gap: 1rem; }
+    .dash-section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dash-section-title {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .dash-section-count {
+      font-size: 0.65rem;
+      color: var(--text-faint);
+    }
+
+    /* ── Loading / empty ── */
+
+    .dash-loading, .dash-empty {
+      color: var(--text-faint);
+      font-size: 0.8rem;
+      padding: 1.5rem 0;
+    }
+
+    /* ── For Sale cards ── */
+
+    .sale-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .sale-card {
+      background: var(--surface);
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+      transition: background 0.2s;
+    }
+    .sale-card:hover { background: var(--surface-2); }
+
+    .sale-card-img {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--surface-2);
+    }
+    .sale-card-img-placeholder {
+      width: 72px;
+      height: 72px;
+      background: var(--surface-2);
+      flex-shrink: 0;
+    }
+
+    .sale-card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.5rem;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .sale-card-info { display: flex; flex-direction: column; gap: 0.1rem; }
+    .sale-card-collection {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sale-card-title {
+      font-size: 0.85rem;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sale-card-footer { display: flex; align-items: center; gap: 0.75rem; }
+    .sale-card-price {
+      font-size: 1rem;
+      color: var(--green);
+      white-space: nowrap;
+    }
+    .sale-card-buy {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.5rem;
+      white-space: nowrap;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .sale-card-buy:hover { border-color: var(--green); color: var(--green); opacity: 1; }
+
+    /* ── Collections table ── */
+
+    .collections-table { width: 100%; border-collapse: collapse; }
+    .collections-table th,
+    .collections-table td {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .collections-table th {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      font-weight: normal;
+    }
+    .collections-table td { font-size: 0.8rem; }
+    .collections-table tr:hover td { background: var(--surface); }
+
+    .col-name { color: var(--text); max-width: 200px; overflow: hidden; text-overflow: ellipsis; }
+    .col-floor { color: var(--green); }
+    .col-zero  { color: var(--text-faint); }
+    .col-listed-badge {
+      display: inline-block;
+      background: var(--green-dim);
+      color: var(--green);
+      font-size: 0.6rem;
+      padding: 0.1rem 0.4rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Activity feed ── */
+
+    .activity-feed { display: flex; flex-direction: column; }
+
+    .activity-row {
+      display: grid;
+      grid-template-columns: 6rem 1fr 8rem 8rem 7rem;
+      gap: 0.5rem;
+      align-items: center;
+      padding: 0.55rem 0.25rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .activity-row:hover { background: var(--surface); }
+
+    .activity-type {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.4rem;
+      border: 1px solid;
+      display: inline-block;
+      width: fit-content;
+    }
+    .activity-type--sale     { color: var(--green);  border-color: rgba(143,212,160,0.3); }
+    .activity-type--listing  { color: var(--blue);   border-color: rgba(122,179,212,0.3); }
+    .activity-type--transfer { color: var(--text-dim); border-color: var(--border); }
+    .activity-type--mint     { color: var(--yellow); border-color: rgba(212,194,122,0.3); }
+    .activity-type--offer    { color: var(--text-dim); border-color: var(--border); }
+    .activity-type--cancel   { color: var(--text-faint); border-color: var(--border); }
+
+    .activity-nft {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 0;
+    }
+    .activity-nft-img {
+      width: 28px;
+      height: 28px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--surface-2);
+    }
+    .activity-nft-name {
+      font-size: 0.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .activity-nft-name a:hover { color: var(--green); opacity: 1; }
+
+    .activity-price { font-size: 0.8rem; color: var(--green); }
+    .activity-price--none { color: var(--text-faint); }
+
+    .activity-collection {
+      font-size: 0.65rem;
+      color: var(--text-faint);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .activity-time {
+      font-size: 0.7rem;
+      color: var(--text-faint);
+      text-align: right;
+    }
+
+    /* ── Responsive ── */
+
+    @media (max-width: 700px) {
+      .dash-main { padding: 1.5rem 1.25rem 3rem; }
+      .dash-header { padding: 1.5rem 1.25rem 1rem; }
+      .activity-row {
+        grid-template-columns: 5rem 1fr 6rem;
+      }
+      .activity-collection,
+      .activity-time { display: none; }
+      .collections-table .hide-mobile { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="dash-header">
+  <div class="dash-brand">
+    <span class="dash-brand-name">Odiville</span>
+    <h1 class="dash-title">Market Dashboard</h1>
+  </div>
+  <div class="dash-meta">
+    <span id="dashUpdated">Loading…</span>
+    <button class="dash-refresh" id="dashRefresh">↻ Refresh</button>
+  </div>
+</header>
+
+<main class="dash-main">
+
+  <!-- For Sale -->
+  <section class="dash-section" id="sectionForSale">
+    <div class="dash-section-header">
+      <span class="dash-section-title">For Sale</span>
+      <span class="dash-section-count" id="saleCount"></span>
+    </div>
+    <div id="saleContent"><div class="dash-loading">Loading listings…</div></div>
+  </section>
+
+  <!-- Collections -->
+  <section class="dash-section" id="sectionCollections">
+    <div class="dash-section-header">
+      <span class="dash-section-title">Collections</span>
+    </div>
+    <div id="collectionsContent"><div class="dash-loading">Loading stats…</div></div>
+  </section>
+
+  <!-- Activity -->
+  <section class="dash-section" id="sectionActivity">
+    <div class="dash-section-header">
+      <span class="dash-section-title">Recent Activity</span>
+      <span class="dash-section-count" id="activityCount"></span>
+    </div>
+    <div id="activityContent"><div class="dash-loading">Loading activity…</div></div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var API = 'https://odiville-site.vercel.app/api';
+
+  /* ── Helpers ── */
+
+  function esc(str) {
+    var d = document.createElement('div');
+    d.textContent = String(str || '');
+    return d.innerHTML;
+  }
+
+  function fmtPrice(price, currency) {
+    if (!price || price <= 0) return null;
+    var p = price < 0.001 ? price.toFixed(6)
+          : price < 1     ? price.toFixed(4)
+          : price < 100   ? price.toFixed(2)
+          : String(Math.round(price));
+    if (p.indexOf('.') !== -1) p = p.replace(/0+$/, '').replace(/\.$/, '');
+    return p + ' ' + (currency || 'ETH');
+  }
+
+  function fmtVolume(vol) {
+    if (!vol || vol <= 0) return '—';
+    if (vol < 0.001) return vol.toFixed(6) + ' ETH';
+    if (vol < 1)     return vol.toFixed(4) + ' ETH';
+    if (vol < 1000)  return vol.toFixed(2) + ' ETH';
+    return (vol / 1000).toFixed(1) + 'K ETH';
+  }
+
+  function timeAgo(dateStr) {
+    if (!dateStr) return '';
+    var diff = Date.now() - new Date(dateStr).getTime();
+    if (isNaN(diff)) return '';
+    var mins = Math.floor(diff / 60000);
+    if (mins < 1)  return 'just now';
+    if (mins < 60) return mins + 'm ago';
+    var hrs = Math.floor(mins / 60);
+    if (hrs < 24)  return hrs + 'h ago';
+    var days = Math.floor(hrs / 24);
+    return days + 'd ago';
+  }
+
+  function shortAddr(addr) {
+    if (!addr) return '—';
+    return addr.slice(0, 6) + '…' + addr.slice(-4);
+  }
+
+  /* ── Render: For Sale ── */
+
+  function renderForSale(listingsData) {
+    var el      = document.getElementById('saleContent');
+    var countEl = document.getElementById('saleCount');
+    var listings   = listingsData.listings   || {};
+    var nftDetails = listingsData.nftDetails || {};
+    var keys = Object.keys(listings);
+
+    countEl.textContent = keys.length + ' listed';
+
+    if (!keys.length) {
+      el.innerHTML = '<div class="dash-empty">No active listings.</div>';
+      return;
+    }
+
+    // Sort by price asc
+    keys.sort(function (a, b) { return (listings[a].price || 0) - (listings[b].price || 0); });
+
+    var html = '<div class="sale-grid">';
+    keys.forEach(function (k) {
+      var l   = listings[k];
+      var nft = nftDetails[k] || {};
+      var pStr = fmtPrice(l.price, l.currency) || '—';
+      var imgHtml = nft.imageUrl
+        ? '<img class="sale-card-img" src="' + esc(nft.imageUrl) + '" alt="" loading="lazy">'
+        : '<div class="sale-card-img-placeholder"></div>';
+      var buyHtml = nft.openseaUrl
+        ? '<a class="sale-card-buy" href="' + esc(nft.openseaUrl) + '" target="_blank" rel="noopener">Buy →</a>'
+        : '';
+      html +=
+        '<div class="sale-card">' +
+          imgHtml +
+          '<div class="sale-card-body">' +
+            '<div class="sale-card-info">' +
+              '<span class="sale-card-collection">' + esc(nft.projectName || l.collection) + '</span>' +
+              '<span class="sale-card-title">' + esc(nft.title || ('Token #' + l.tokenId)) + '</span>' +
+            '</div>' +
+            '<div class="sale-card-footer">' +
+              '<span class="sale-card-price">' + esc(pStr) + '</span>' +
+              buyHtml +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    });
+    html += '</div>';
+    el.innerHTML = html;
+  }
+
+  /* ── Render: Collections ── */
+
+  function renderCollections(statsData, listingsData) {
+    var el = document.getElementById('collectionsContent');
+    var collections = statsData.collections || [];
+
+    // Count listings per collection slug
+    var listedPerSlug = {};
+    var listings = (listingsData && listingsData.listings) || {};
+    Object.values(listings).forEach(function (l) {
+      listedPerSlug[l.collection] = (listedPerSlug[l.collection] || 0) + 1;
+    });
+
+    if (!collections.length) {
+      el.innerHTML = '<div class="dash-empty">No stats available.</div>';
+      return;
+    }
+
+    var html =
+      '<table class="collections-table">' +
+      '<thead><tr>' +
+        '<th>Collection</th>' +
+        '<th>Floor</th>' +
+        '<th class="hide-mobile">All-Time Vol</th>' +
+        '<th class="hide-mobile">24h Sales</th>' +
+        '<th class="hide-mobile">Owners</th>' +
+        '<th class="hide-mobile">Supply</th>' +
+        '<th>Listed</th>' +
+      '</tr></thead><tbody>';
+
+    collections.forEach(function (c) {
+      var floor   = c.floor && c.floor > 0 ? fmtPrice(c.floor, c.floorSymbol) : null;
+      var listed  = listedPerSlug[c.slug] || 0;
+      html +=
+        '<tr>' +
+          '<td class="col-name">' + esc(c.name || c.slug) + '</td>' +
+          '<td class="' + (floor ? 'col-floor' : 'col-zero') + '">' + esc(floor || '—') + '</td>' +
+          '<td class="hide-mobile">' + esc(fmtVolume(c.volume)) + '</td>' +
+          '<td class="hide-mobile">' + (c.sales24h ? esc(String(c.sales24h)) : '<span class="col-zero">—</span>') + '</td>' +
+          '<td class="hide-mobile">' + (c.owners ? esc(String(c.owners)) : '<span class="col-zero">—</span>') + '</td>' +
+          '<td class="hide-mobile">' + (c.supply ? esc(String(c.supply)) : '<span class="col-zero">—</span>') + '</td>' +
+          '<td>' + (listed ? '<span class="col-listed-badge">' + listed + '</span>' : '<span class="col-zero">—</span>') + '</td>' +
+        '</tr>';
+    });
+
+    html += '</tbody></table>';
+    el.innerHTML = html;
+  }
+
+  /* ── Render: Activity ── */
+
+  var TYPE_LABELS = {
+    sale:     'Sale',
+    listing:  'Listed',
+    transfer: 'Transfer',
+    mint:     'Mint',
+    offer:    'Offer',
+    cancel:   'Cancelled',
+  };
+
+  function renderActivity(activityData) {
+    var el      = document.getElementById('activityContent');
+    var countEl = document.getElementById('activityCount');
+    var events  = activityData.events || [];
+
+    // Filter to meaningful events only
+    var shown = events.filter(function (e) {
+      return e.type === 'sale' || e.type === 'listing' || e.type === 'transfer' || e.type === 'mint';
+    });
+
+    countEl.textContent = shown.length + ' events';
+
+    if (!shown.length) {
+      el.innerHTML = '<div class="dash-empty">No recent activity.</div>';
+      return;
+    }
+
+    var html = '<div class="activity-feed">';
+    shown.forEach(function (e) {
+      var typeLabel = TYPE_LABELS[e.type] || e.type;
+      var typeClass = 'activity-type--' + e.type;
+      var pStr      = fmtPrice(e.price, e.currency);
+      var imgHtml   = e.nftImage
+        ? '<img class="activity-nft-img" src="' + esc(e.nftImage) + '" alt="" loading="lazy">'
+        : '';
+      var nameHtml  = e.nftUrl
+        ? '<a href="' + esc(e.nftUrl) + '" target="_blank" rel="noopener">' + esc(e.nftName || ('Token #' + e.tokenId)) + '</a>'
+        : esc(e.nftName || ('Token #' + e.tokenId) || '—');
+
+      html +=
+        '<div class="activity-row">' +
+          '<span class="activity-type ' + typeClass + '">' + esc(typeLabel) + '</span>' +
+          '<div class="activity-nft">' +
+            imgHtml +
+            '<span class="activity-nft-name">' + nameHtml + '</span>' +
+          '</div>' +
+          '<span class="' + (pStr ? 'activity-price' : 'activity-price activity-price--none') + '">' + esc(pStr || '—') + '</span>' +
+          '<span class="activity-collection">' + esc(e.collection) + '</span>' +
+          '<span class="activity-time">' + esc(timeAgo(e.date)) + '</span>' +
+        '</div>';
+    });
+    html += '</div>';
+    el.innerHTML = html;
+  }
+
+  /* ── Fetch all data ── */
+
+  var listingsData = null;
+
+  function updateTimestamp() {
+    var el = document.getElementById('dashUpdated');
+    if (el) el.textContent = 'Updated ' + new Date().toLocaleTimeString();
+  }
+
+  function load() {
+    document.getElementById('saleContent').innerHTML       = '<div class="dash-loading">Loading listings…</div>';
+    document.getElementById('collectionsContent').innerHTML = '<div class="dash-loading">Loading stats…</div>';
+    document.getElementById('activityContent').innerHTML   = '<div class="dash-loading">Loading activity…</div>';
+
+    var fetchListings = fetch(API + '/listings')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; });
+
+    var fetchStats = fetch(API + '/stats')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; });
+
+    var fetchActivity = fetch(API + '/activity')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; });
+
+    fetchListings.then(function (data) {
+      listingsData = data;
+      if (data) {
+        renderForSale(data);
+      } else {
+        document.getElementById('saleContent').innerHTML = '<div class="dash-empty">Could not load listings.</div>';
+      }
+    });
+
+    Promise.all([fetchStats, fetchListings]).then(function (results) {
+      var stats    = results[0];
+      var listings = results[1];
+      if (stats) {
+        renderCollections(stats, listings || {});
+      } else {
+        document.getElementById('collectionsContent').innerHTML = '<div class="dash-empty">Could not load stats.</div>';
+      }
+    });
+
+    fetchActivity.then(function (data) {
+      if (data) {
+        renderActivity(data);
+      } else {
+        document.getElementById('activityContent').innerHTML = '<div class="dash-empty">Could not load activity.</div>';
+      }
+    });
+
+    Promise.all([fetchListings, fetchStats, fetchActivity]).then(updateTimestamp);
+  }
+
+  /* ── Init ── */
+
+  document.getElementById('dashRefresh').addEventListener('click', load);
+
+  // Auto-refresh every 5 minutes
+  setInterval(load, 5 * 60 * 1000);
+
+  load();
+})();
+</script>
+
+</body>
+</html>
