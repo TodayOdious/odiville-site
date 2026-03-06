@@ -1,0 +1,19 @@
+{
+  "identifier": "2",
+  "collection": "game-master-1",
+  "contract": "0x67a931807e871c09d1af4d3062ec85562908efcd",
+  "token_standard": "erc721",
+  "name": "Take The Base Pill",
+  "description": "That's where you'll find me. https://opensea.io/collection/decisions-upsets-and-unknowns",
+  "image_url": "https://i2c.seadn.io/ethereum/0x67a931807e871c09d1af4d3062ec85562908efcd/66e0e42524df81ea1c992985b35e4f/0766e0e42524df81ea1c992985b35e4f.gif",
+  "display_image_url": "https://i2c.seadn.io/ethereum/0x67a931807e871c09d1af4d3062ec85562908efcd/66e0e42524df81ea1c992985b35e4f/0766e0e42524df81ea1c992985b35e4f.gif",
+  "display_animation_url": null,
+  "metadata_url": "https://arweave.net/Kj_X2a1wz0QfPwhnJL8b-vzUoWGnTk95ihvT6hRR4JU/",
+  "opensea_url": "https://opensea.io/assets/ethereum/0x67a931807e871c09d1af4d3062ec85562908efcd/2",
+  "updated_at": "2026-03-06T19:36:27.640275",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": "https://arweave.net/IkjABZ8T6xzg1aJFIDq1_77_58f51tLX1KH2EANP9hs",
+  "original_animation_url": null,
+  "traits": []
+}

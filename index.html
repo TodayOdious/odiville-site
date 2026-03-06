@@ -1052,36 +1052,51 @@
     <div class="archive-controls">
       <div class="archive-filter-tabs" id="archiveFilters">
         <button class="archive-filter-tab active" data-filter="all">All</button>
-        <button class="archive-filter-tab" data-filter="duu">The Book</button>
+        <button class="archive-filter-tab" data-filter="duu">Echoes by Odious</button>
         <button class="archive-filter-tab" data-filter="whispers">Whispers</button>
+        <button class="archive-filter-tab" data-filter="residents">Residents</button>
         <button class="archive-filter-tab" data-filter="owt">One-Way Ticket</button>
+        <button class="archive-filter-tab" data-filter="this-place-remembers">This Place Remembers</button>
+        <button class="archive-filter-tab" data-filter="ferrymanspromise">Ferryman's Promise</button>
+        <button class="archive-filter-tab" data-filter="this-is-reality">This is Reality</button>
+        <button class="archive-filter-tab" data-filter="editions">Editions</button>
+        <button class="archive-filter-tab" data-filter="game-master">Game Master</button>
+        <button class="archive-filter-tab" data-filter="originals">Originals</button>
+        <button class="archive-filter-tab" data-filter="receipts">RECEIPTS</button>
+        <button class="archive-filter-tab archive-filter-tab--sale" data-filter="for-sale">For Sale</button>
       </div>
       <div class="archive-controls-right">
+        <div class="archive-view-toggle">
+          <button class="archive-view-btn active" data-view="table" title="Table view">&#9776;</button>
+          <button class="archive-view-btn" data-view="grid" title="Grid view">&#9635;</button>
+        </div>
         <div class="archive-search-wrap">
           <input type="text" class="archive-search" id="archiveSearch" placeholder="Search titles, series, phase…" autocomplete="off">
         </div>
         <span class="archive-count" id="archiveCount"></span>
+        <span class="archive-listings-age" id="archiveListingsAge"></span>
       </div>
     </div>
 
-    <div class="archive-table">
+    <div class="archive-table" id="archiveTable">
       <div class="archive-thead">
+        <span class="atcol atcol--token    sortable" data-sort="token">ID</span>
         <span class="atcol atcol--title    sortable" data-sort="name">Title</span>
         <span class="atcol atcol--series   sortable" data-sort="project">Collection</span>
-        <span class="atcol atcol--platform sortable" data-sort="platform">Platform</span>
-        <span class="atcol atcol--token    sortable" data-sort="token">ID</span>
         <span class="atcol atcol--date     sortable" data-sort="date">Date</span>
-        <span class="atcol atcol--edition  sortable" data-sort="edition">#</span>
-        <span class="atcol atcol--chain">Chain</span>
+        <span class="atcol atcol--chain    sortable" data-sort="blockchain">Chain</span>
         <span class="atcol atcol--standard sortable" data-sort="standard">Standard</span>
         <span class="atcol atcol--filetype sortable" data-sort="filetype">Type</span>
-        <span class="atcol atcol--filesize">Size</span>
-        <span class="atcol atcol--dims">Dimensions</span>
+        <span class="atcol atcol--price   sortable" data-sort="price">Price</span>
+        <span class="atcol atcol--owner">Owner</span>
       </div>
       <div class="archive-tbody" id="archiveList"></div>
     </div>
 
+    <div class="archive-grid" id="archiveGrid"></div>
+
   </section>
+
 
 </div>
 
@@ -1115,13 +1130,24 @@
 
 
 <script src="js/data/artworks.js"></script>
+<script src="js/data/inventory.js"></script>
+<script src="js/data/listings.js"></script>
 <script src="js/archive.js"></script>
-<script src="js/chain-fetch.js"></script>
 <script src="js/data/press.js"></script>
 <script src="js/press.js"></script>
 <script src="js/gate.js"></script>
 <script src="js/audio.js"></script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<!-- Gallery detail panel — must be direct child of body to escape stacking contexts -->
+<div class="gallery-panel" id="galleryPanel" aria-hidden="true">
+  <button class="gallery-panel-close" id="galleryPanelClose">&#x2715;</button>
+  <div class="gallery-panel-inner">
+    <div class="gallery-panel-media" id="galleryPanelMedia"></div>
+    <div class="gallery-panel-meta" id="galleryPanelMeta"></div>
+  </div>
+</div>
+<div class="gallery-panel-overlay" id="galleryPanelOverlay"></div>
 
 </body>
 </html>

@@ -1,0 +1,19 @@
+{
+  "identifier": "3",
+  "collection": "this-place-remembers",
+  "contract": "0x8ef59800a6751305fe26a2f6ea4a401411567a7e",
+  "token_standard": "erc721",
+  "name": "The List You're Not On",
+  "description": "Your name isn’t there.\nThey didn’t forget.\nDid they?",
+  "image_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/bc1678a665c49eb415c309da481048/79bc1678a665c49eb415c309da481048.gif",
+  "display_image_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/bc1678a665c49eb415c309da481048/79bc1678a665c49eb415c309da481048.gif",
+  "display_animation_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/bc1678a665c49eb415c309da481048/79bc1678a665c49eb415c309da481048.gif",
+  "metadata_url": "ipfs://QmNhq67JXK273WXEtTUE6DcMeHgEAQVXDvkd4opp6Zbx9c/0",
+  "opensea_url": "https://opensea.io/assets/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/3",
+  "updated_at": "2026-03-06T19:35:09.836969",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": "ipfs://QmS5fGCTfYa74DcPLRkCbkoZRqVrPEzLV1QGHBsYF9jSLH/media",
+  "original_animation_url": "ipfs://QmS5fGCTfYa74DcPLRkCbkoZRqVrPEzLV1QGHBsYF9jSLH/media",
+  "traits": []
+}

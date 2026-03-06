@@ -1,0 +1,37 @@
+name: Refresh OpenSea Listings
+
+on:
+  schedule:
+    # Every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch listings from OpenSea
+        env:
+          OPENSEA_API_KEY: ${{ secrets.OPENSEA_API_KEY }}
+        run: python scripts/fetch-listings.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add js/data/listings.json js/data/listings.js
+          if git diff --cached --quiet; then
+            echo "No listing changes"
+          else
+            git commit -m "Auto-refresh OpenSea listings data"
+            git push
+          fi

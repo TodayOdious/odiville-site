@@ -1,0 +1,38 @@
+{
+  "identifier": "3",
+  "collection": "game-master-1",
+  "contract": "0x67a931807e871c09d1af4d3062ec85562908efcd",
+  "token_standard": "erc721",
+  "name": "Box B",
+  "description": "Pick me",
+  "image_url": null,
+  "display_image_url": null,
+  "display_animation_url": "https://raw2.seadn.io/ethereum/0x67a931807e871c09d1af4d3062ec85562908efcd/ede199e3bb36a59a06de2c4fd34960/8aede199e3bb36a59a06de2c4fd34960.mp4",
+  "metadata_url": "https://arweave.net/omLlB8xEsPIto_LreIK8AFlNA_GDo7ZwVal1Im40Jzs",
+  "opensea_url": "https://opensea.io/assets/ethereum/0x67a931807e871c09d1af4d3062ec85562908efcd/3",
+  "updated_at": "2026-03-06T19:36:27.640260",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": null,
+  "original_animation_url": "https://arweave.net/ggAXe2mMv6fCf7v5xtxZiy0qn1SXnMsGkhCvHjkxDJo",
+  "traits": [
+    {
+      "trait_type": "Box",
+      "display_type": null,
+      "max_value": null,
+      "value": "B"
+    },
+    {
+      "trait_type": "Role",
+      "display_type": null,
+      "max_value": null,
+      "value": "Game Master"
+    },
+    {
+      "trait_type": "Phase",
+      "display_type": null,
+      "max_value": null,
+      "value": "2B"
+    }
+  ]
+}

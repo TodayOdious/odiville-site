@@ -1,0 +1,17 @@
+{
+  "contracts": {
+    "0x8ef59800a6751305fe26a2f6ea4a401411567a7e": 5,
+    "0xcbef61f2675981080da1375647741c508db2b198": 25,
+    "0xa3e8fe3a0e82947bfc505ba83f2967408fc568bf": 46,
+    "0x7957acfae47695c341c40f5a3f7474f1af13397c": 2,
+    "0x67a931807e871c09d1af4d3062ec85562908efcd": 3,
+    "0xdaa19c2c091575bf4fcdb7a63f794fdb2aa3eabb": 1,
+    "0x941b14b24c3ca713554d32cdb42563e4992b4dbc": 1
+  },
+  "total": 83,
+  "skipped": [
+    "0x45c03cef4bac4ee37f22bd2081bd931fec2716c2  (Shape)",
+    "0x54cba79fd1ccc5658b2a9abe7b5bf19a39172421  (Shape)",
+    "0xf65c302e0aee68843af2c5324fbc49ba322d970f  (Apechain)"
+  ]
+}

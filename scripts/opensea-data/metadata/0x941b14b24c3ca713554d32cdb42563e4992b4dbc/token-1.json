@@ -1,0 +1,19 @@
+{
+  "identifier": "1",
+  "collection": "the-whispering-well",
+  "contract": "0x941b14b24c3ca713554d32cdb42563e4992b4dbc",
+  "token_standard": "erc1155",
+  "name": "Was it worth it?",
+  "description": "August, 2025\n\nX compatible download (15mb) - https://arweave.net/jetc5rdCdlmEKiMqQz24QzO99K6LVplhBglSr2is56w",
+  "image_url": "https://i2c.seadn.io/ethereum/0x941b14b24c3ca713554d32cdb42563e4992b4dbc/5cc487ef6ba0939ac16b8ec141774c/b75cc487ef6ba0939ac16b8ec141774c.gif",
+  "display_image_url": "https://i2c.seadn.io/ethereum/0x941b14b24c3ca713554d32cdb42563e4992b4dbc/5cc487ef6ba0939ac16b8ec141774c/b75cc487ef6ba0939ac16b8ec141774c.gif",
+  "display_animation_url": null,
+  "metadata_url": "https://arweave.net/rDSdjgVlNbhinVYp718MKaaYrx-820HADSDf18J-xDQ/",
+  "opensea_url": "https://opensea.io/assets/ethereum/0x941b14b24c3ca713554d32cdb42563e4992b4dbc/1",
+  "updated_at": "2026-03-06T19:36:33.594098",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": "https://arweave.net/c3ozhFrscu1pljwKoiP-gW0RrZv6cwOBOw4JwizJuAw",
+  "original_animation_url": null,
+  "traits": []
+}

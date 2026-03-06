@@ -1,0 +1,19 @@
+{
+  "identifier": "1",
+  "collection": "game-master-1",
+  "contract": "0x67a931807e871c09d1af4d3062ec85562908efcd",
+  "token_standard": "erc721",
+  "name": "The Airdrop",
+  "description": "Take the Base pill, that's where you'll find me. https://opensea.io/collection/decisions-upsets-and-unknowns",
+  "image_url": "https://i2c.seadn.io/ethereum/0x67a931807e871c09d1af4d3062ec85562908efcd/db8f2e4a27cd57b0e6decd04aaa148/40db8f2e4a27cd57b0e6decd04aaa148.png",
+  "display_image_url": "https://i2c.seadn.io/ethereum/0x67a931807e871c09d1af4d3062ec85562908efcd/db8f2e4a27cd57b0e6decd04aaa148/40db8f2e4a27cd57b0e6decd04aaa148.png",
+  "display_animation_url": null,
+  "metadata_url": "https://arweave.net/9zOnMPdZWLSdS3_OGpifXx96mA8voe1LTL1Oh--zX34/",
+  "opensea_url": "https://opensea.io/assets/ethereum/0x67a931807e871c09d1af4d3062ec85562908efcd/1",
+  "updated_at": "2026-03-06T19:36:27.640285",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": "https://arweave.net/rd8WLhRuNR6gGVFtdyv_hG-OZqmGuGy-M-0hmhIbHZc",
+  "original_animation_url": null,
+  "traits": []
+}

@@ -1,0 +1,19 @@
+{
+  "identifier": "2",
+  "collection": "odiouseditions",
+  "contract": "0x7957acfae47695c341c40f5a3f7474f1af13397c",
+  "token_standard": "erc1155",
+  "name": "get played arcade",
+  "description": "out of action",
+  "image_url": "https://i2c.seadn.io/ethereum/0x7957acfae47695c341c40f5a3f7474f1af13397c/ee0b2ddce44279e114c4201a4064e7/58ee0b2ddce44279e114c4201a4064e7.gif",
+  "display_image_url": "https://i2c.seadn.io/ethereum/0x7957acfae47695c341c40f5a3f7474f1af13397c/ee0b2ddce44279e114c4201a4064e7/58ee0b2ddce44279e114c4201a4064e7.gif",
+  "display_animation_url": null,
+  "metadata_url": "https://4txlxffjmqdehtjyrfjnghzbpectmpkxexnsws6nbkenzopgqc3a.arweave.net/5O67lKlkBkPNOIlS0x8heQU2PVcl2ytLzQqI3LnmgLY/",
+  "opensea_url": "https://opensea.io/assets/ethereum/0x7957acfae47695c341c40f5a3f7474f1af13397c/2",
+  "updated_at": "2026-03-06T19:36:25.178216",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": "https://arweave.net/SG3PA5yCZJNFlEfDeN8WSKVqH4VbT7KPXEPEKFcJvmM",
+  "original_animation_url": null,
+  "traits": []
+}

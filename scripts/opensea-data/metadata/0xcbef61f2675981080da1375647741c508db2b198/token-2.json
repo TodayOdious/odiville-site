@@ -1,0 +1,19 @@
+{
+  "identifier": "2",
+  "collection": "the-ferrymans-promise",
+  "contract": "0xcbef61f2675981080da1375647741c508db2b198",
+  "token_standard": "erc721",
+  "name": "blue vow",
+  "description": "The Ferryman sends his regards.",
+  "image_url": "https://i2c.seadn.io/ethereum/0xcbef61f2675981080da1375647741c508db2b198/a50feebea13751fa81e83374e6511a/90a50feebea13751fa81e83374e6511a.gif",
+  "display_image_url": "https://i2c.seadn.io/ethereum/0xcbef61f2675981080da1375647741c508db2b198/a50feebea13751fa81e83374e6511a/90a50feebea13751fa81e83374e6511a.gif",
+  "display_animation_url": "https://i2c.seadn.io/ethereum/0xcbef61f2675981080da1375647741c508db2b198/a50feebea13751fa81e83374e6511a/90a50feebea13751fa81e83374e6511a.gif",
+  "metadata_url": "ipfs://QmQDzgVNsdUNXbBYWXqJcUy3nFM2ucVkfw1oqPBqMTkkzo/0",
+  "opensea_url": "https://opensea.io/assets/ethereum/0xcbef61f2675981080da1375647741c508db2b198/2",
+  "updated_at": "2026-03-06T19:35:59.808895",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": "ipfs://QmfKAj1xKFMHqTPNyLBU17fLJXHVpkM2HoX2CaZ2a9PT1e/media",
+  "original_animation_url": "ipfs://QmfKAj1xKFMHqTPNyLBU17fLJXHVpkM2HoX2CaZ2a9PT1e/media",
+  "traits": []
+}

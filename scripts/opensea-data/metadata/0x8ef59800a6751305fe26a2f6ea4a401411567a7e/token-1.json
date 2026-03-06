@@ -1,0 +1,19 @@
+{
+  "identifier": "1",
+  "collection": "this-place-remembers",
+  "contract": "0x8ef59800a6751305fe26a2f6ea4a401411567a7e",
+  "token_standard": "erc721",
+  "name": "All Time High Beneath The Sky",
+  "description": "Do you remember?",
+  "image_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/f28c98f65256f59d84029b3c2a654a/60f28c98f65256f59d84029b3c2a654a.png",
+  "display_image_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/f28c98f65256f59d84029b3c2a654a/60f28c98f65256f59d84029b3c2a654a.png",
+  "display_animation_url": "https://raw2.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/df4719ce648f3891dd9ca2afbb74f6/9cdf4719ce648f3891dd9ca2afbb74f6.mp4",
+  "metadata_url": "ipfs://Qmaot6MEw3wHTRKJb2jdsfcwES3VrVXhLdFZjtA5irQkqT/0",
+  "opensea_url": "https://opensea.io/assets/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/1",
+  "updated_at": "2026-03-06T19:35:09.836993",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": "ipfs://QmbBJVReziFZEseWQ4TiNYWVHAvaFkVUmFBX88G1wedCVf/thumbnail",
+  "original_animation_url": "ipfs://QmbBJVReziFZEseWQ4TiNYWVHAvaFkVUmFBX88G1wedCVf/media",
+  "traits": []
+}

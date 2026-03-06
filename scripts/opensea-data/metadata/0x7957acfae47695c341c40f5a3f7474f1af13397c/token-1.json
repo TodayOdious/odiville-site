@@ -1,0 +1,26 @@
+{
+  "identifier": "1",
+  "collection": "odiouseditions",
+  "contract": "0x7957acfae47695c341c40f5a3f7474f1af13397c",
+  "token_standard": "erc1155",
+  "name": "the tale of a fearless caterpillar",
+  "description": "the tale of a black winged butterfly - counterpart",
+  "image_url": "https://i2c.seadn.io/ethereum/0x7957acfae47695c341c40f5a3f7474f1af13397c/547a64926ded7ab68eca4af8a978d5/e4547a64926ded7ab68eca4af8a978d5.png",
+  "display_image_url": "https://i2c.seadn.io/ethereum/0x7957acfae47695c341c40f5a3f7474f1af13397c/547a64926ded7ab68eca4af8a978d5/e4547a64926ded7ab68eca4af8a978d5.png",
+  "display_animation_url": null,
+  "metadata_url": "https://arweave.net/io6XStbv6cPwUpz8o6Bg_2lN5xz85bXxxSg0lwxy_78/",
+  "opensea_url": "https://opensea.io/assets/ethereum/0x7957acfae47695c341c40f5a3f7474f1af13397c/1",
+  "updated_at": "2026-03-06T19:36:25.178229",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": "https://arweave.net/6-25JlQTDjPcofg6n0BWHYnKT3yVnShVT2dJPuvd8N8",
+  "original_animation_url": null,
+  "traits": [
+    {
+      "trait_type": "Artist",
+      "display_type": null,
+      "max_value": null,
+      "value": "Odious"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "identifier": "2",
+  "collection": "this-place-remembers",
+  "contract": "0x8ef59800a6751305fe26a2f6ea4a401411567a7e",
+  "token_standard": "erc721",
+  "name": "Left on Red",
+  "description": "No one answered.",
+  "image_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/71ae2f4b527247d36b5399bad4735c/6e71ae2f4b527247d36b5399bad4735c.gif",
+  "display_image_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/71ae2f4b527247d36b5399bad4735c/6e71ae2f4b527247d36b5399bad4735c.gif",
+  "display_animation_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/71ae2f4b527247d36b5399bad4735c/6e71ae2f4b527247d36b5399bad4735c.gif",
+  "metadata_url": "ipfs://QmU2QYBwoZ9A9k4PHd6UZ4yMUYKBi7ybgbeL9JSHeggk8u/0",
+  "opensea_url": "https://opensea.io/assets/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/2",
+  "updated_at": "2026-03-06T19:35:09.837000",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": "ipfs://QmQdEKATdepFg8qeewhtaZsZH753qve3nEet5tc6fdLFUD/media",
+  "original_animation_url": "ipfs://QmQdEKATdepFg8qeewhtaZsZH753qve3nEet5tc6fdLFUD/media",
+  "traits": []
+}

@@ -1,0 +1,26 @@
+{
+  "identifier": "1",
+  "collection": "odiousoriginals",
+  "contract": "0xdaa19c2c091575bf4fcdb7a63f794fdb2aa3eabb",
+  "token_standard": "erc721",
+  "name": "Blank",
+  "description": "Soon..",
+  "image_url": "https://i2c.seadn.io/ethereum/0xdaa19c2c091575bf4fcdb7a63f794fdb2aa3eabb/7d69bbd18b672eb270e24599d59fba/277d69bbd18b672eb270e24599d59fba.webp",
+  "display_image_url": "https://i2c.seadn.io/ethereum/0xdaa19c2c091575bf4fcdb7a63f794fdb2aa3eabb/7d69bbd18b672eb270e24599d59fba/277d69bbd18b672eb270e24599d59fba.webp",
+  "display_animation_url": null,
+  "metadata_url": "https://arweave.net/Jn5DzV1E4Cs22Q7j2SiGuTS-wB1liitGciyF-8fOZMY/",
+  "opensea_url": "https://opensea.io/assets/ethereum/0xdaa19c2c091575bf4fcdb7a63f794fdb2aa3eabb/1",
+  "updated_at": "2026-03-06T19:36:32.477601",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": "https://arweave.net/8zqP-rYirvCI3S-T8bx3Rwfdg1_OQl4sV3YfkYc5Dok",
+  "original_animation_url": null,
+  "traits": [
+    {
+      "trait_type": "Artist",
+      "display_type": null,
+      "max_value": null,
+      "value": "odious"
+    }
+  ]
+}

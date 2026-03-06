@@ -1,0 +1,19 @@
+{
+  "identifier": "5",
+  "collection": "this-place-remembers",
+  "contract": "0x8ef59800a6751305fe26a2f6ea4a401411567a7e",
+  "token_standard": "erc721",
+  "name": "All I Can Do Is Paint",
+  "description": "1 of 1 \n\nDecember, 2025\n\nX compatible download (15mb) - https://arweave.net/4tBBD5pMy9LokQv13LWLf0tHz4Q8HGJEOnsSeSaBWlk",
+  "image_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/c6a0f3ebf46eb2794fddaed1f62035/29c6a0f3ebf46eb2794fddaed1f62035.gif",
+  "display_image_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/c6a0f3ebf46eb2794fddaed1f62035/29c6a0f3ebf46eb2794fddaed1f62035.gif",
+  "display_animation_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/c6a0f3ebf46eb2794fddaed1f62035/29c6a0f3ebf46eb2794fddaed1f62035.gif",
+  "metadata_url": "ipfs://QmZVpaJThnKyNkBW1obbaQvGwxv1Q4RVayssJ3S2qYU7vB/0",
+  "opensea_url": "https://opensea.io/assets/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/5",
+  "updated_at": "2026-03-06T19:35:09.836982",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": "ipfs://QmYVHV2j5Zva7yWDA3JDTYgrGPuKySkCeyJUoBCLg8hnD2/media",
+  "original_animation_url": "ipfs://QmYVHV2j5Zva7yWDA3JDTYgrGPuKySkCeyJUoBCLg8hnD2/media",
+  "traits": []
+}

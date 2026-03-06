@@ -1,0 +1,19 @@
+{
+  "identifier": "38",
+  "collection": "keys-of-the-collective",
+  "contract": "0xa3e8fe3a0e82947bfc505ba83f2967408fc568bf",
+  "token_standard": "erc721",
+  "name": "Keys of the Collective #38",
+  "description": "An unusual key, for an unusual lock.",
+  "image_url": "https://i2c.seadn.io/ethereum/0xa3e8fe3a0e82947bfc505ba83f2967408fc568bf/05ff7219b6060c8432f9a1bf6156ad/9905ff7219b6060c8432f9a1bf6156ad.gif",
+  "display_image_url": "https://i2c.seadn.io/ethereum/0xa3e8fe3a0e82947bfc505ba83f2967408fc568bf/05ff7219b6060c8432f9a1bf6156ad/9905ff7219b6060c8432f9a1bf6156ad.gif",
+  "display_animation_url": null,
+  "metadata_url": "https://copper-eligible-goldfish-600.mypinata.cloud/ipfs/bafybeibus6gm5ts5bbllnfb42nzhasdqziszkfkddsbsyy5zh2ngxgfrlq/38.json",
+  "opensea_url": "https://opensea.io/assets/ethereum/0xa3e8fe3a0e82947bfc505ba83f2967408fc568bf/38",
+  "updated_at": "2026-03-06T19:36:03.829082",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": "https://copper-eligible-goldfish-600.mypinata.cloud/ipfs/bafybeiaxnzvkgdhoa3pttwa2kmhrzn3qqye2pqfnch4slcg43jf5txsobm",
+  "original_animation_url": null,
+  "traits": []
+}

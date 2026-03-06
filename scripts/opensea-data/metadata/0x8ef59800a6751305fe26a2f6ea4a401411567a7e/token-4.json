@@ -1,0 +1,19 @@
+{
+  "identifier": "4",
+  "collection": "this-place-remembers",
+  "contract": "0x8ef59800a6751305fe26a2f6ea4a401411567a7e",
+  "token_standard": "erc721",
+  "name": "SIDEMIMED",
+  "description": "1 of 1 \n\nJuly, 2025\n\nX compatible download (15mb) - https://arweave.net/OUR5b_f8LKNqXVouKuRx8N3M24UmRbY-FWLNtq2A1sA",
+  "image_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/0fe7e750f660b9a9ce3b5d95f4eb7b/5b0fe7e750f660b9a9ce3b5d95f4eb7b.gif",
+  "display_image_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/0fe7e750f660b9a9ce3b5d95f4eb7b/5b0fe7e750f660b9a9ce3b5d95f4eb7b.gif",
+  "display_animation_url": "https://i2c.seadn.io/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/0fe7e750f660b9a9ce3b5d95f4eb7b/5b0fe7e750f660b9a9ce3b5d95f4eb7b.gif",
+  "metadata_url": "ipfs://QmNxRwjJWNioQvaQbGeMwKmzG77GnjXdXXWYHSBT79o5UU/0",
+  "opensea_url": "https://opensea.io/assets/ethereum/0x8ef59800a6751305fe26a2f6ea4a401411567a7e/4",
+  "updated_at": "2026-03-06T19:35:09.837007",
+  "is_disabled": false,
+  "is_nsfw": false,
+  "original_image_url": "ipfs://QmUrBKnV1C5PXMPnGJReXTRRekWe2F6cV6f7HhhV152oT5/media",
+  "original_animation_url": "ipfs://QmUrBKnV1C5PXMPnGJReXTRRekWe2F6cV6f7HhhV152oT5/media",
+  "traits": []
+}
