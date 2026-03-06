@@ -211,9 +211,7 @@
     .col-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+      gap: 0.5rem;
     }
 
     .nft-card {
@@ -224,8 +222,6 @@
       flex-direction: column;
     }
     .nft-card:hover { background: var(--surface-2); }
-    .nft-card.is-listed { background: var(--surface); }
-    .nft-card.is-listed:hover { background: var(--surface-2); }
 
     .nft-card-media {
       position: relative;
@@ -237,7 +233,7 @@
     .nft-card-img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
       transition: opacity 0.2s;
     }
@@ -255,7 +251,7 @@
       left: 0.5rem;
       background: rgba(10,10,10,0.85);
       color: var(--green);
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       padding: 0.2rem 0.5rem;
       border: 1px solid var(--green-border);
       backdrop-filter: blur(4px);
@@ -265,16 +261,16 @@
       padding: 0.75rem;
       display: flex;
       flex-direction: column;
-      gap: 0.15rem;
+      gap: 0.2rem;
     }
 
     .nft-card-token {
-      font-size: 0.6rem;
+      font-size: 0.9rem;
       color: var(--text-faint);
     }
 
     .nft-card-title {
-      font-size: 0.82rem;
+      font-size: 1.23rem;
       color: var(--text);
       white-space: nowrap;
       overflow: hidden;
@@ -282,8 +278,8 @@
     }
 
     .nft-card-price {
-      font-size: 0.8rem;
-      margin-top: 0.2rem;
+      font-size: 1.2rem;
+      margin-top: 0.25rem;
     }
     .nft-card-price--listed { color: var(--green); }
     .nft-card-price--none   { color: var(--text-faint); }
@@ -609,7 +605,7 @@
       .col-toolbar, .col-grid-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
       .col-nav { padding: 0.75rem 1.25rem; }
       .col-stat { padding: 0.5rem 1rem; min-width: 70px; }
-      .col-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+      .col-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.35rem; }
     }
   </style>
 </head>
@@ -618,7 +614,10 @@
 <!-- Nav -->
 <nav class="col-nav">
   <a class="col-nav-back" href="/">← Odiville</a>
-  <span class="col-nav-brand">Odiville</span>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <a class="col-nav-back" href="dashboard.html">Dashboard</a>
+    <span class="col-nav-brand">Odiville</span>
+  </div>
 </nav>
 
 <!-- Header (populated by JS) -->

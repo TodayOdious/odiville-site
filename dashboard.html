@@ -315,10 +315,11 @@
 
 <header class="dash-header">
   <div class="dash-brand">
-    <span class="dash-brand-name">Odiville</span>
+    <span class="dash-brand-name"><a href="/" style="color:inherit;">← Odiville</a></span>
     <h1 class="dash-title">Market Dashboard</h1>
   </div>
   <div class="dash-meta">
+    <a href="collection.html" style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);border:1px solid var(--border);padding:0.3rem 0.75rem;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--border-2)'" onmouseout="this.style.color='var(--text-dim)';this.style.borderColor='var(--border)'">Collections</a>
     <span id="dashUpdated">Loading…</span>
     <button class="dash-refresh" id="dashRefresh">↻ Refresh</button>
   </div>
@@ -488,7 +489,7 @@
       var listed  = listedPerSlug[c.slug] || 0;
       html +=
         '<tr>' +
-          '<td class="col-name">' + esc(c.name || c.slug) + '</td>' +
+          '<td class="col-name"><a href="collection.html?slug=' + encodeURIComponent(c.slug) + '" style="color:inherit;">' + esc(c.name || c.slug) + '</a></td>' +
           '<td class="' + (floor ? 'col-floor' : 'col-zero') + '">' + esc(floor || '—') + '</td>' +
           '<td class="hide-mobile">' + esc(fmtVolume(c.volume)) + '</td>' +
           '<td class="hide-mobile">' + (c.sales24h ? esc(String(c.sales24h)) : '<span class="col-zero">—</span>') + '</td>' +
