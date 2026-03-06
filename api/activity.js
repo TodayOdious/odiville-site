@@ -51,8 +51,8 @@ module.exports = async function handler(req, res) {
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  // Cache 2 min, stale for 5 min
-  res.setHeader('Cache-Control', 's-maxage=120, stale-while-revalidate=300');
+  // Cache 60s, stale for 2 min
+  res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=120');
 
   const API_KEY = process.env.OPENSEA_API_KEY;
   if (!API_KEY) return res.status(500).json({ error: 'OPENSEA_API_KEY not set' });

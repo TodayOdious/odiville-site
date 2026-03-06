@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collection — Odiville</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a0a;
+      --surface:     #111111;
+      --surface-2:   #161616;
+      --border:      rgba(255,255,255,0.07);
+      --border-2:    rgba(255,255,255,0.12);
+      --text:        #e8e4dc;
+      --text-dim:    #888;
+      --text-faint:  #444;
+      --green:       #8fd4a0;
+      --green-bg:    rgba(143,212,160,0.10);
+      --green-border: rgba(143,212,160,0.25);
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav bar ── */
+
+    .col-nav {
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .col-nav-back {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .col-nav-back:hover { color: var(--text); }
+
+    .col-nav-brand {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    /* ── Collection header ── */
+
+    .col-header {
+      padding: 3rem 2rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .col-header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .col-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .col-name {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: normal;
+      font-family: Georgia, 'Times New Roman', serif;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+
+    .col-opensea-link {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.8rem;
+      white-space: nowrap;
+      align-self: flex-start;
+      margin-top: 0.4rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .col-opensea-link:hover { border-color: var(--border-2); color: var(--text); }
+
+    /* ── Stats row ── */
+
+    .col-stats {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .col-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.75rem 1.5rem;
+      border-right: 1px solid var(--border);
+      min-width: 90px;
+    }
+    .col-stat:first-child { padding-left: 0; }
+    .col-stat:last-child  { border-right: none; }
+
+    .col-stat-value {
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+    .col-stat-value--green { color: var(--green); }
+    .col-stat-value--dim   { color: var(--text-dim); }
+
+    .col-stat-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    /* ── Toolbar ── */
+
+    .col-toolbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .col-filters {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .col-filter-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .col-filter-btn:hover { border-color: var(--border-2); color: var(--text); }
+    .col-filter-btn.active {
+      border-color: var(--green);
+      color: var(--green);
+      background: var(--green-bg);
+    }
+
+    .col-toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .col-count {
+      font-size: 0.7rem;
+      color: var(--text-faint);
+    }
+
+    .col-sort {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 0.6rem;
+      cursor: pointer;
+      outline: none;
+    }
+    .col-sort:focus { border-color: var(--border-2); }
+
+    /* ── NFT Grid ── */
+
+    .col-grid-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 4rem;
+    }
+
+    .col-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .nft-card {
+      background: var(--bg);
+      cursor: pointer;
+      transition: background 0.15s;
+      display: flex;
+      flex-direction: column;
+    }
+    .nft-card:hover { background: var(--surface-2); }
+    .nft-card.is-listed { background: var(--surface); }
+    .nft-card.is-listed:hover { background: var(--surface-2); }
+
+    .nft-card-media {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .nft-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.2s;
+    }
+    .nft-card:hover .nft-card-img { opacity: 0.9; }
+
+    .nft-card-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--surface-2);
+    }
+
+    .nft-card-price-badge {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 0.5rem;
+      background: rgba(10,10,10,0.85);
+      color: var(--green);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid var(--green-border);
+      backdrop-filter: blur(4px);
+    }
+
+    .nft-card-body {
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .nft-card-token {
+      font-size: 0.6rem;
+      color: var(--text-faint);
+    }
+
+    .nft-card-title {
+      font-size: 0.82rem;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nft-card-price {
+      font-size: 0.8rem;
+      margin-top: 0.2rem;
+    }
+    .nft-card-price--listed { color: var(--green); }
+    .nft-card-price--none   { color: var(--text-faint); }
+
+    /* ── Empty / loading ── */
+
+    .col-empty {
+      color: var(--text-faint);
+      font-size: 0.8rem;
+      padding: 3rem 0;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* ── Modal / detail panel ── */
+
+    .panel-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 100;
+      display: none;
+      backdrop-filter: blur(2px);
+    }
+    .panel-overlay.is-open { display: block; }
+
+    .panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(520px, 100vw);
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      z-index: 101;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .panel.is-open { transform: translateX(0); }
+
+    .panel-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.25rem;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.25rem;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .panel-close:hover { color: var(--text); }
+
+    .panel-media {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--bg);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .panel-media img,
+    .panel-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .panel-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .panel-collection {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+    .panel-title {
+      font-size: 1.3rem;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: normal;
+      color: var(--text);
+      margin-top: 0.2rem;
+    }
+
+    .panel-price-block {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+    }
+    .panel-price-amount {
+      font-size: 1.1rem;
+      color: var(--green);
+      flex: 1;
+    }
+    .panel-buy-btn {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--green);
+      color: #0a0a0a;
+      padding: 0.45rem 1rem;
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .panel-buy-btn:hover { opacity: 0.85; }
+
+    .panel-desc {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    .panel-rows { display: flex; flex-direction: column; gap: 0; }
+    .panel-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.78rem;
+    }
+    .panel-row:last-child { border-bottom: none; }
+    .panel-row-label { color: var(--text-faint); flex-shrink: 0; }
+    .panel-row-val   { color: var(--text); text-align: right; }
+
+    .panel-traits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .panel-trait {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      padding: 0.35rem 0.6rem;
+      border: 1px solid var(--border);
+      min-width: 80px;
+    }
+    .panel-trait-type {
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+    }
+    .panel-trait-val {
+      font-size: 0.75rem;
+      color: var(--text);
+    }
+
+    .panel-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .panel-link {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .panel-link:hover { border-color: var(--border-2); color: var(--text); }
+
+    /* ── Not found ── */
+
+    .not-found {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem;
+      gap: 1rem;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    /* ── Responsive ── */
+
+    @media (max-width: 600px) {
+      .col-header { padding: 2rem 1.25rem 1.5rem; }
+      .col-toolbar, .col-grid-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .col-nav { padding: 0.75rem 1.25rem; }
+      .col-stat { padding: 0.5rem 1rem; min-width: 70px; }
+      .col-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="col-nav">
+  <a class="col-nav-back" href="/">← Odiville</a>
+  <span class="col-nav-brand">Odiville</span>
+</nav>
+
+<!-- Header (populated by JS) -->
+<header class="col-header" id="colHeader" style="display:none">
+  <div class="col-header-inner">
+    <div class="col-title-row">
+      <h1 class="col-name" id="colName"></h1>
+      <a class="col-opensea-link" id="colOpenseaLink" href="#" target="_blank" rel="noopener">View on OpenSea ↗</a>
+    </div>
+    <div class="col-stats" id="colStats"></div>
+  </div>
+</header>
+
+<!-- Loading state -->
+<div id="colLoading" style="padding:4rem 2rem; color:#444; font-size:0.8rem;">Loading collection…</div>
+
+<!-- Not found state -->
+<div id="colNotFound" style="display:none">
+  <div class="not-found">
+    <span>Collection not found.</span>
+    <a href="/" style="color:var(--text-dim); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase;">← Back to Odiville</a>
+  </div>
+</div>
+
+<!-- Toolbar -->
+<div class="col-toolbar" id="colToolbar" style="display:none">
+  <div class="col-filters">
+    <button class="col-filter-btn active" data-filter="all">All</button>
+    <button class="col-filter-btn" data-filter="for-sale">For Sale</button>
+  </div>
+  <div class="col-toolbar-right">
+    <span class="col-count" id="colCount"></span>
+    <select class="col-sort" id="colSort">
+      <option value="token">Token ID</option>
+      <option value="price-asc">Price: Low → High</option>
+      <option value="price-desc">Price: High → Low</option>
+      <option value="name">Name A–Z</option>
+    </select>
+  </div>
+</div>
+
+<!-- Grid -->
+<div class="col-grid-wrap" id="colGridWrap" style="display:none">
+  <div class="col-grid" id="colGrid"></div>
+</div>
+
+<!-- Detail panel -->
+<div class="panel-overlay" id="panelOverlay"></div>
+<aside class="panel" id="panel" aria-hidden="true">
+  <button class="panel-close" id="panelClose">×</button>
+  <div class="panel-media" id="panelMedia"></div>
+  <div class="panel-body" id="panelBody"></div>
+</aside>
+
+<script>
+(function () {
+  'use strict';
+
+  var API   = 'https://odiville-site.vercel.app/api';
+  var slug  = new URLSearchParams(location.search).get('slug') || '';
+
+  var state = {
+    nfts:     [],
+    listings: {},
+    filter:   'all',
+    sort:     'token',
+  };
+
+  /* ── Helpers ── */
+
+  function esc(s) {
+    var d = document.createElement('div');
+    d.textContent = String(s || '');
+    return d.innerHTML;
+  }
+
+  function fmtPrice(price, currency) {
+    if (!price || price <= 0) return null;
+    var p = price < 0.001 ? price.toFixed(6)
+          : price < 1     ? price.toFixed(4)
+          : price < 100   ? price.toFixed(2)
+          : String(Math.round(price));
+    if (p.indexOf('.') !== -1) p = p.replace(/0+$/, '').replace(/\.$/, '');
+    return p + '\u00a0' + (currency || 'ETH');
+  }
+
+  function fmtVol(v) {
+    if (!v || v <= 0) return '—';
+    if (v < 1)    return v.toFixed(4) + ' ETH';
+    if (v < 1000) return v.toFixed(2) + ' ETH';
+    return (v / 1000).toFixed(1) + 'K ETH';
+  }
+
+  function getListing(nft) {
+    var k = (nft.contract || '').toLowerCase() + ':' + nft.tokenId;
+    return state.listings[k] || null;
+  }
+
+  /* ── Render header ── */
+
+  function renderHeader(data) {
+    document.title = data.name + ' — Odiville';
+    document.getElementById('colName').textContent = data.name;
+
+    var link = document.getElementById('colOpenseaLink');
+    link.href = 'https://opensea.io/collection/' + encodeURIComponent(data.slug);
+
+    var s       = data.stats || {};
+    var floor   = fmtPrice(s.floor, s.floorSymbol);
+    var listed  = Object.keys(data.listings || {}).length;
+
+    var stats = [
+      { label: 'Floor',   value: floor  || '—',       green: !!floor },
+      { label: 'Volume',  value: fmtVol(s.volume) },
+      { label: 'Items',   value: s.supply  || data.nfts.length || '—' },
+      { label: 'Owners',  value: s.owners  || '—' },
+      { label: 'Listed',  value: listed    || '—',     green: listed > 0 },
+    ];
+
+    document.getElementById('colStats').innerHTML = stats.map(function (st) {
+      var cls = st.green ? 'col-stat-value col-stat-value--green' : 'col-stat-value';
+      return '<div class="col-stat">' +
+        '<span class="' + cls + '">' + esc(String(st.value)) + '</span>' +
+        '<span class="col-stat-label">' + esc(st.label) + '</span>' +
+      '</div>';
+    }).join('');
+
+    document.getElementById('colHeader').style.display  = '';
+    document.getElementById('colLoading').style.display = 'none';
+    document.getElementById('colToolbar').style.display  = '';
+    document.getElementById('colGridWrap').style.display = '';
+  }
+
+  /* ── Render grid ── */
+
+  function getItems() {
+    var items = state.nfts.slice();
+
+    // Filter
+    if (state.filter === 'for-sale') {
+      items = items.filter(function (n) { return !!getListing(n); });
+    }
+
+    // Sort
+    items.sort(function (a, b) {
+      var la = getListing(a), lb = getListing(b);
+      if (state.sort === 'price-asc') {
+        var pa = la ? la.price : 999999;
+        var pb = lb ? lb.price : 999999;
+        return pa - pb;
+      }
+      if (state.sort === 'price-desc') {
+        var pa2 = la ? la.price : -1;
+        var pb2 = lb ? lb.price : -1;
+        return pb2 - pa2;
+      }
+      if (state.sort === 'name') {
+        return (a.title || '').localeCompare(b.title || '');
+      }
+      // token (default)
+      var ta = a.tokenId != null ? Number(a.tokenId) : 9999;
+      var tb = b.tokenId != null ? Number(b.tokenId) : 9999;
+      return ta - tb;
+    });
+
+    return items;
+  }
+
+  function renderGrid() {
+    var grid    = document.getElementById('colGrid');
+    var countEl = document.getElementById('colCount');
+    var items   = getItems();
+
+    countEl.textContent = items.length + ' item' + (items.length !== 1 ? 's' : '');
+
+    if (!items.length) {
+      grid.innerHTML = '<div class="col-empty">No items found.</div>';
+      return;
+    }
+
+    grid.innerHTML = items.map(function (nft) {
+      var listing = getListing(nft);
+      var pStr    = listing ? fmtPrice(listing.price, listing.currency) : null;
+
+      var imgHtml = nft.imageUrl
+        ? '<img class="nft-card-img" src="' + esc(nft.imageUrl) + '" alt="' + esc(nft.title) + '" loading="lazy">'
+        : '<div class="nft-card-placeholder"></div>';
+
+      var badgeHtml = pStr
+        ? '<span class="nft-card-price-badge">' + esc(pStr) + '</span>'
+        : '';
+
+      var priceHtml = pStr
+        ? '<span class="nft-card-price nft-card-price--listed">' + esc(pStr) + '</span>'
+        : '<span class="nft-card-price nft-card-price--none">—</span>';
+
+      var listedClass = listing ? ' is-listed' : '';
+
+      return '<div class="nft-card' + listedClass + '" data-token="' + esc(String(nft.tokenId)) + '">' +
+        '<div class="nft-card-media">' + imgHtml + badgeHtml + '</div>' +
+        '<div class="nft-card-body">' +
+          '<span class="nft-card-token">#' + esc(String(nft.tokenId != null ? nft.tokenId : '?')) + '</span>' +
+          '<span class="nft-card-title">' + esc(nft.title || ('Token #' + nft.tokenId)) + '</span>' +
+          priceHtml +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    // Attach click handlers
+    grid.querySelectorAll('.nft-card').forEach(function (card, idx) {
+      card.addEventListener('click', function () {
+        openPanel(items[idx]);
+      });
+    });
+  }
+
+  /* ── Detail panel ── */
+
+  function openPanel(nft) {
+    var listing = getListing(nft);
+    var media   = document.getElementById('panelMedia');
+    var body    = document.getElementById('panelBody');
+
+    // Media
+    var isVideo = nft.imageUrl && /\.(mp4|webm|mov)(\?|$)/i.test(nft.imageUrl);
+    if (isVideo) {
+      media.innerHTML = '<video src="' + esc(nft.imageUrl) + '" autoplay loop muted playsinline controls></video>';
+    } else if (nft.imageUrl) {
+      media.innerHTML = '<img src="' + esc(nft.imageUrl) + '" alt="' + esc(nft.title) + '">';
+    } else {
+      media.innerHTML = '<div style="width:100%;height:100%;background:var(--surface-2)"></div>';
+    }
+
+    // Price block
+    var priceHtml = '';
+    if (listing) {
+      var pStr = fmtPrice(listing.price, listing.currency) || '—';
+      priceHtml = '<div class="panel-price-block">' +
+        '<span class="panel-price-amount">' + esc(pStr) + '</span>' +
+        (nft.openseaUrl
+          ? '<a class="panel-buy-btn" href="' + esc(nft.openseaUrl) + '" target="_blank" rel="noopener">Buy on OpenSea</a>'
+          : '') +
+      '</div>';
+    }
+
+    // Traits
+    var traitsHtml = '';
+    if (nft.traits && nft.traits.length) {
+      traitsHtml = '<div class="panel-traits">' +
+        nft.traits.map(function (t) {
+          return '<div class="panel-trait">' +
+            '<span class="panel-trait-type">' + esc(t.trait_type || t.type || '') + '</span>' +
+            '<span class="panel-trait-val">'  + esc(String(t.value || '')) + '</span>' +
+          '</div>';
+        }).join('') +
+      '</div>';
+    }
+
+    function row(label, val) {
+      if (!val) return '';
+      return '<div class="panel-row">' +
+        '<span class="panel-row-label">' + esc(label) + '</span>' +
+        '<span class="panel-row-val">'   + val + '</span>' +
+      '</div>';
+    }
+
+    // Links
+    var links = [];
+    if (nft.openseaUrl)
+      links.push('<a class="panel-link" href="' + esc(nft.openseaUrl) + '" target="_blank" rel="noopener">View on OpenSea ↗</a>');
+
+    body.innerHTML =
+      '<span class="panel-collection">' + esc(nft.projectName || slug) + '</span>' +
+      '<h2 class="panel-title">' + esc(nft.title || ('Token #' + nft.tokenId)) + '</h2>' +
+      priceHtml +
+      (nft.description ? '<p class="panel-desc">' + esc(nft.description).replace(/\n/g, '<br>') + '</p>' : '') +
+      traitsHtml +
+      '<div class="panel-rows">' +
+        row('Token ID',   nft.tokenId != null ? String(nft.tokenId) : null) +
+        row('Blockchain', nft.blockchain || 'ethereum') +
+        row('Contract',   nft.contract ? nft.contract.slice(0,6) + '…' + nft.contract.slice(-4) : null) +
+        row('Mint Date',  nft.mintDate || null) +
+        row('Editions',   nft.editions && nft.editions > 1 ? String(nft.editions) : null) +
+      '</div>' +
+      (links.length ? '<div class="panel-links">' + links.join('') + '</div>' : '');
+
+    document.getElementById('panel').classList.add('is-open');
+    document.getElementById('panelOverlay').classList.add('is-open');
+    document.getElementById('panel').setAttribute('aria-hidden', 'false');
+  }
+
+  function closePanel() {
+    document.getElementById('panel').classList.remove('is-open');
+    document.getElementById('panelOverlay').classList.remove('is-open');
+    document.getElementById('panel').setAttribute('aria-hidden', 'true');
+  }
+
+  /* ── Load data ── */
+
+  function load() {
+    if (!slug) {
+      document.getElementById('colLoading').style.display = 'none';
+      document.getElementById('colNotFound').style.display = '';
+      return;
+    }
+
+    fetch(API + '/collection?slug=' + encodeURIComponent(slug))
+      .then(function (r) {
+        if (r.status === 404) throw new Error('not-found');
+        if (!r.ok) throw new Error('api-error');
+        return r.json();
+      })
+      .then(function (data) {
+        state.nfts     = data.nfts     || [];
+        state.listings = data.listings || {};
+        renderHeader(data);
+        renderGrid();
+      })
+      .catch(function (e) {
+        document.getElementById('colLoading').style.display = 'none';
+        document.getElementById('colNotFound').style.display = '';
+      });
+  }
+
+  /* ── Events ── */
+
+  document.querySelectorAll('.col-filter-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      state.filter = btn.dataset.filter;
+      document.querySelectorAll('.col-filter-btn').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      renderGrid();
+    });
+  });
+
+  document.getElementById('colSort').addEventListener('change', function (e) {
+    state.sort = e.target.value;
+    renderGrid();
+  });
+
+  document.getElementById('panelClose').addEventListener('click', closePanel);
+  document.getElementById('panelOverlay').addEventListener('click', closePanel);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePanel();
+  });
+
+  load();
+})();
+</script>
+
+</body>
+</html>

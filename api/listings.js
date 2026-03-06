@@ -119,7 +119,7 @@ module.exports = async function handler(req, res) {
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=600');
+  res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=120');
 
   const API_KEY = process.env.OPENSEA_API_KEY;
   if (!API_KEY) {

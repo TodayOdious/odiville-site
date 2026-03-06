@@ -618,8 +618,8 @@
 
   document.getElementById('dashRefresh').addEventListener('click', load);
 
-  // Auto-refresh every 5 minutes
-  setInterval(load, 5 * 60 * 1000);
+  // Auto-refresh every 60 seconds
+  setInterval(load, 60 * 1000);
 
   load();
 })();
