@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Odiville — Market Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -25,7 +28,8 @@
     html, body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Courier New', Courier, monospace;
+      font-family: 'Spectral', Georgia, serif;
+      font-weight: 300;
       font-size: 14px;
       line-height: 1.6;
       min-height: 100vh;
@@ -207,13 +211,13 @@
       white-space: nowrap;
     }
     .collections-table th {
-      font-size: 0.6rem;
+      font-size: 1.2rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--text-faint);
       font-weight: normal;
     }
-    .collections-table td { font-size: 0.8rem; }
+    .collections-table td { font-size: 1.6rem; }
     .collections-table tr:hover td { background: var(--surface); }
 
     .col-name { color: var(--text); max-width: 200px; overflow: hidden; text-overflow: ellipsis; }
