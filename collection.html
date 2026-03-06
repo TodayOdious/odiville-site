@@ -465,6 +465,130 @@
     }
     .panel-link:hover { border-color: var(--border-2); color: var(--text); }
 
+    /* ── Layout with sidebar ── */
+
+    .col-body {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      align-items: start;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ── Sidebar ── */
+
+    .col-sidebar {
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      max-height: 100vh;
+      overflow-y: auto;
+      padding: 1.5rem 0;
+    }
+
+    .col-sidebar-title {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      padding: 0 1.25rem 0.75rem;
+    }
+
+    .col-sidebar-item {
+      display: block;
+      width: 100%;
+      padding: 0.55rem 1.25rem;
+      font-family: inherit;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      border-left: 2px solid transparent;
+      transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .col-sidebar-item:hover {
+      color: var(--text);
+      background: var(--surface);
+    }
+    .col-sidebar-item.active {
+      color: var(--green);
+      border-left-color: var(--green);
+      background: var(--green-bg);
+    }
+
+    .col-sidebar-count {
+      font-size: 0.6rem;
+      color: var(--text-faint);
+      margin-left: 0.35rem;
+    }
+
+    /* ── Main content area ── */
+
+    .col-main { min-width: 0; }
+
+    /* ── Prev/next nav ── */
+
+    .col-prevnext {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 2rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      gap: 1rem;
+    }
+
+    .col-prevnext-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .col-prevnext-btn:hover { border-color: var(--border-2); color: var(--text); }
+    .col-prevnext-btn:disabled { opacity: 0.2; cursor: default; pointer-events: none; }
+
+    .col-prevnext-pos {
+      color: var(--text-faint);
+      font-size: 0.65rem;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 780px) {
+      .col-body { grid-template-columns: 1fr; }
+      .col-sidebar {
+        position: static;
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .col-sidebar-title { padding-bottom: 0.5rem; }
+      .col-sidebar-list  { display: flex; flex-wrap: wrap; gap: 0.25rem; padding: 0 1rem 0.5rem; }
+      .col-sidebar-item  { width: auto; border-left: none; border-bottom: 2px solid transparent; padding: 0.3rem 0.6rem; font-size: 0.7rem; }
+      .col-sidebar-item.active { border-bottom-color: var(--green); border-left-color: transparent; }
+      .col-prevnext { padding: 0.6rem 1.25rem; }
+    }
+
     /* ── Not found ── */
 
     .not-found {
@@ -519,27 +643,49 @@
   </div>
 </div>
 
-<!-- Toolbar -->
-<div class="col-toolbar" id="colToolbar" style="display:none">
-  <div class="col-filters">
-    <button class="col-filter-btn active" data-filter="all">All</button>
-    <button class="col-filter-btn" data-filter="for-sale">For Sale</button>
-  </div>
-  <div class="col-toolbar-right">
-    <span class="col-count" id="colCount"></span>
-    <select class="col-sort" id="colSort">
-      <option value="token">Token ID</option>
-      <option value="price-asc">Price: Low → High</option>
-      <option value="price-desc">Price: High → Low</option>
-      <option value="name">Name A–Z</option>
-    </select>
-  </div>
-</div>
+<!-- Body: sidebar + main -->
+<div class="col-body" id="colBody" style="display:none">
 
-<!-- Grid -->
-<div class="col-grid-wrap" id="colGridWrap" style="display:none">
-  <div class="col-grid" id="colGrid"></div>
-</div>
+  <!-- Sidebar: collection list -->
+  <aside class="col-sidebar">
+    <div class="col-sidebar-title">Collections</div>
+    <div class="col-sidebar-list" id="colSidebarList"></div>
+  </aside>
+
+  <!-- Main content -->
+  <div class="col-main">
+
+    <!-- Prev / Next -->
+    <div class="col-prevnext" id="colPrevNext">
+      <button class="col-prevnext-btn" id="colPrevBtn" disabled>← Prev</button>
+      <span class="col-prevnext-pos" id="colPrevNextPos"></span>
+      <button class="col-prevnext-btn" id="colNextBtn" disabled>Next →</button>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="col-toolbar" id="colToolbar">
+      <div class="col-filters">
+        <button class="col-filter-btn active" data-filter="all">All</button>
+        <button class="col-filter-btn" data-filter="for-sale">For Sale</button>
+      </div>
+      <div class="col-toolbar-right">
+        <span class="col-count" id="colCount"></span>
+        <select class="col-sort" id="colSort">
+          <option value="token">Token ID</option>
+          <option value="price-asc">Price: Low → High</option>
+          <option value="price-desc">Price: High → Low</option>
+          <option value="name">Name A–Z</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="col-grid-wrap" id="colGridWrap">
+      <div class="col-grid" id="colGrid"></div>
+    </div>
+
+  </div><!-- /col-main -->
+</div><!-- /col-body -->
 
 <!-- Detail panel -->
 <div class="panel-overlay" id="panelOverlay"></div>
@@ -553,14 +699,15 @@
 (function () {
   'use strict';
 
-  var API   = 'https://odiville-site.vercel.app/api';
-  var slug  = new URLSearchParams(location.search).get('slug') || '';
+  var API  = 'https://odiville-site.vercel.app/api';
 
   var state = {
-    nfts:     [],
-    listings: {},
-    filter:   'all',
-    sort:     'token',
+    slug:           new URLSearchParams(location.search).get('slug') || '',
+    nfts:           [],
+    listings:       {},
+    allCollections: [],
+    filter:         'all',
+    sort:           'token',
   };
 
   /* ── Helpers ── */
@@ -593,6 +740,62 @@
     return state.listings[k] || null;
   }
 
+  /* ── Sidebar + prev/next ── */
+
+  function renderSidebar() {
+    var list = document.getElementById('colSidebarList');
+    if (!list || !state.allCollections.length) return;
+
+    list.innerHTML = state.allCollections.map(function (c) {
+      var active = c.slug === state.slug ? ' active' : '';
+      return '<button class="col-sidebar-item' + active + '" data-slug="' + esc(c.slug) + '">' +
+        esc(c.name) +
+      '</button>';
+    }).join('');
+
+    list.querySelectorAll('.col-sidebar-item').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        switchCollection(btn.dataset.slug);
+      });
+    });
+  }
+
+  function renderPrevNext() {
+    var cols  = state.allCollections;
+    var idx   = cols.findIndex(function (c) { return c.slug === state.slug; });
+    var prev  = cols[idx - 1] || null;
+    var next  = cols[idx + 1] || null;
+
+    var prevBtn = document.getElementById('colPrevBtn');
+    var nextBtn = document.getElementById('colNextBtn');
+    var posEl   = document.getElementById('colPrevNextPos');
+
+    prevBtn.textContent = prev ? '← ' + prev.name : '←';
+    prevBtn.disabled    = !prev;
+    nextBtn.textContent = next ? next.name + ' →' : '→';
+    nextBtn.disabled    = !next;
+
+    if (posEl) posEl.textContent = cols.length ? (idx + 1) + ' / ' + cols.length : '';
+
+    prevBtn.onclick = prev ? function () { switchCollection(prev.slug); } : null;
+    nextBtn.onclick = next ? function () { switchCollection(next.slug); } : null;
+  }
+
+  function switchCollection(newSlug) {
+    if (newSlug === state.slug) return;
+    state.slug = newSlug;
+    history.pushState({}, '', '?slug=' + encodeURIComponent(newSlug));
+    // Reset filter/sort
+    state.filter = 'all';
+    state.sort   = 'token';
+    document.querySelectorAll('.col-filter-btn').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.filter === 'all');
+    });
+    document.getElementById('colSort').value = 'token';
+    // Reload
+    loadCollection();
+  }
+
   /* ── Render header ── */
 
   function renderHeader(data) {
@@ -602,16 +805,16 @@
     var link = document.getElementById('colOpenseaLink');
     link.href = 'https://opensea.io/collection/' + encodeURIComponent(data.slug);
 
-    var s       = data.stats || {};
-    var floor   = fmtPrice(s.floor, s.floorSymbol);
-    var listed  = Object.keys(data.listings || {}).length;
+    var s      = data.stats || {};
+    var floor  = fmtPrice(s.floor, s.floorSymbol);
+    var listed = Object.keys(data.listings || {}).length;
 
     var stats = [
-      { label: 'Floor',   value: floor  || '—',       green: !!floor },
-      { label: 'Volume',  value: fmtVol(s.volume) },
-      { label: 'Items',   value: s.supply  || data.nfts.length || '—' },
-      { label: 'Owners',  value: s.owners  || '—' },
-      { label: 'Listed',  value: listed    || '—',     green: listed > 0 },
+      { label: 'Floor',  value: floor || '—',              green: !!floor },
+      { label: 'Volume', value: fmtVol(s.volume) },
+      { label: 'Items',  value: s.supply || data.nfts.length || '—' },
+      { label: 'Owners', value: s.owners || '—' },
+      { label: 'Listed', value: listed   || '—',            green: listed > 0 },
     ];
 
     document.getElementById('colStats').innerHTML = stats.map(function (st) {
@@ -624,8 +827,7 @@
 
     document.getElementById('colHeader').style.display  = '';
     document.getElementById('colLoading').style.display = 'none';
-    document.getElementById('colToolbar').style.display  = '';
-    document.getElementById('colGridWrap').style.display = '';
+    document.getElementById('colBody').style.display    = '';
   }
 
   /* ── Render grid ── */
@@ -794,14 +996,17 @@
 
   /* ── Load data ── */
 
-  function load() {
-    if (!slug) {
+  function loadCollection() {
+    if (!state.slug) {
       document.getElementById('colLoading').style.display = 'none';
       document.getElementById('colNotFound').style.display = '';
       return;
     }
 
-    fetch(API + '/collection?slug=' + encodeURIComponent(slug))
+    // Show loading state while keeping sidebar visible if already rendered
+    document.getElementById('colGrid').innerHTML = '<div class="col-empty">Loading…</div>';
+
+    fetch(API + '/collection?slug=' + encodeURIComponent(state.slug))
       .then(function (r) {
         if (r.status === 404) throw new Error('not-found');
         if (!r.ok) throw new Error('api-error');
@@ -810,10 +1015,18 @@
       .then(function (data) {
         state.nfts     = data.nfts     || [];
         state.listings = data.listings || {};
+
+        // Only update allCollections on first load (it doesn't change)
+        if (!state.allCollections.length && data.allCollections) {
+          state.allCollections = data.allCollections;
+        }
+
         renderHeader(data);
+        renderSidebar();
+        renderPrevNext();
         renderGrid();
       })
-      .catch(function (e) {
+      .catch(function () {
         document.getElementById('colLoading').style.display = 'none';
         document.getElementById('colNotFound').style.display = '';
       });
@@ -842,7 +1055,14 @@
     if (e.key === 'Escape') closePanel();
   });
 
-  load();
+  // Handle browser back/forward
+  window.addEventListener('popstate', function () {
+    state.slug = new URLSearchParams(location.search).get('slug') || '';
+    closePanel();
+    loadCollection();
+  });
+
+  loadCollection();
 })();
 </script>
 

@@ -13,11 +13,22 @@ const { join }        = require('path');
 const OPENSEA_BASE = 'https://api.opensea.io/api/v2';
 const PAGE_LIMIT   = 10;
 
-function getCollectionNFTs(slug) {
+function getInventoryData(slug) {
   const data = JSON.parse(
     readFileSync(join(process.cwd(), 'js', 'data', 'inventory.json'), 'utf-8')
   );
-  return (data.records || [])
+  const records = data.records || [];
+
+  // Build ordered list of all unique collections (preserving first-seen order)
+  const seen  = new Map();
+  for (const r of records) {
+    if (r.openseaCollection && !seen.has(r.openseaCollection)) {
+      seen.set(r.openseaCollection, r.projectName || r.openseaCollection);
+    }
+  }
+  const allCollections = [...seen.entries()].map(([s, name]) => ({ slug: s, name }));
+
+  const nfts = records
     .filter(r => r.openseaCollection === slug)
     .map(r => ({
       tokenId:     r.tokenId,
@@ -34,6 +45,8 @@ function getCollectionNFTs(slug) {
       mintDate:    r.mintDate    || '',
       blockchain:  r.blockchain  || 'ethereum',
     }));
+
+  return { nfts, allCollections };
 }
 
 async function apiGet(path, apiKey) {
@@ -128,7 +141,7 @@ module.exports = async function handler(req, res) {
   if (!API_KEY) return res.status(500).json({ error: 'OPENSEA_API_KEY not set' });
 
   try {
-    const nfts = getCollectionNFTs(slug);
+    const { nfts, allCollections } = getInventoryData(slug);
     if (!nfts.length) {
       return res.status(404).json({ error: 'Collection not found: ' + slug });
     }
@@ -139,12 +152,13 @@ module.exports = async function handler(req, res) {
     ]);
 
     return res.json({
-      fetchedAt: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
-      slug:      slug,
-      name:      nfts[0].projectName || slug,
-      stats:     stats,
-      listings:  listings,
-      nfts:      nfts,
+      fetchedAt:      new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
+      slug:           slug,
+      name:           nfts[0].projectName || slug,
+      stats:          stats,
+      listings:       listings,
+      nfts:           nfts,
+      allCollections: allCollections,
     });
 
   } catch (e) {
