@@ -43,9 +43,12 @@
 <nav id="site-nav">
   <a class="nav-logo" onclick="navigateTo('home')">Odiville</a>
   <ul class="nav-links" id="nav-links">
+    <li><a data-page="home"     tabindex="0" onclick="navigateTo('home');closeNav()">Home</a></li>
     <li><a data-page="artist"   tabindex="0" onclick="navigateTo('artist');closeNav()">The Artist</a></li>
     <li><a data-page="duu"      tabindex="0" onclick="navigateTo('duu');closeNav()">The Book</a></li>
     <li><a data-page="whispers" tabindex="0" onclick="navigateTo('whispers');closeNav()">Whispers</a></li>
+    <li><a data-page="archive"  tabindex="0" onclick="navigateTo('archive');closeNav()">Archive</a></li>
+    <li><a data-page="press"    tabindex="0" onclick="navigateTo('press');closeNav()">Press</a></li>
   </ul>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation" aria-expanded="false">
     <span></span>
@@ -402,129 +405,149 @@
   <!-- Info View -->
   <div class="duu-view duu-view--info" id="duu-view-info">
 
-  <!-- Echoes -->
-  <section class="duu-section" id="echoes">
+  <!-- Section 1: Echoes — asymmetric editorial -->
+  <section class="duu-section duu-section--echoes duu-ghost-num" id="echoes">
     <div class="section-inner">
-      <div class="section-label reveal">The Artworks</div>
-      <h2 class="section-heading reveal reveal-delay-1">Not every Echo can<br>be <em>captured</em></h2>
-      <div class="duu-feature">
-        <div>
-          <div class="section-body reveal reveal-delay-2">
-            <p>Echoes are the artworks of Odiville. Impressions of what was, is, or will be. They drift through the book, each one carrying a distinct mark. Some can be collected. All can be destroyed.</p>
-            <p>Their behaviour is unpredictable. Some hold still long enough to be taken. Others shift and deteriorate without warning. Over fifty have been found so far, scattered across ten chapters.</p>
-          </div>
-          <ul class="mechanic-list reveal reveal-delay-2">
-            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>Over 50 Echoes hidden across the ten-chapter narrative</li>
-            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>Each one carries a Shade cost to collect and a Shade value within</li>
-            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>Availability varies. Some are timed, some permanent, some auctioned</li>
-          </ul>
+      <div class="duu-echoes-text">
+        <div class="section-label reveal">The Artworks</div>
+        <h2 class="section-heading reveal reveal-delay-1">Not every Echo can<br>be <em>captured</em></h2>
+        <div class="section-body reveal reveal-delay-2">
+          <p>Echoes are the artworks of Odiville. Impressions of what was, is, or will be. They drift through the book, each one carrying a distinct mark. Some can be collected. All can be destroyed.</p>
+          <p>Their behaviour is unpredictable. Some hold still long enough to be taken. Others shift and deteriorate without warning. Over fifty have been found so far, scattered across ten chapters.</p>
         </div>
-        <div>
-          <div class="duu-image-placeholder reveal reveal-delay-3">
-            <span>Artwork Markings</span>
-          </div>
+        <div class="duu-fact-chips reveal-stagger reveal-delay-2">
+          <div class="duu-fact-chip" style="--i:0"><span class="duu-fact-chip-num">01</span>Over 50 Echoes hidden across the ten-chapter narrative</div>
+          <div class="duu-fact-chip" style="--i:1"><span class="duu-fact-chip-num">02</span>Each one carries a Shade cost to collect and a Shade value within</div>
+          <div class="duu-fact-chip" style="--i:2"><span class="duu-fact-chip-num">03</span>Availability varies. Some are timed, some permanent, some auctioned</div>
+        </div>
+      </div>
+      <div class="duu-echoes-image reveal-from-right reveal-delay-2">
+        <div class="duu-image-placeholder">
+          <span>Artwork Markings</span>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="divider"></div>
+  <div class="duu-divider-ornament"><div class="duu-divider-diamond"></div></div>
 
-  <!-- Shade -->
-  <section class="duu-section" id="shade">
+  <!-- Section 2: Shade — centered precision -->
+  <section class="duu-section duu-section--shade duu-ghost-num" id="shade">
     <div class="section-inner">
       <div class="section-label reveal">The Currency</div>
       <h2 class="section-heading reveal reveal-delay-1">Everything runs<br>on <em>Shade</em></h2>
-      <div class="duu-feature">
-        <div>
-          <div class="section-body reveal reveal-delay-2">
-            <p>Shade is the underlying resource of Odiville. It lives inside your tickets and inside every Echo you collect. It is both the price of entry and the reward for letting go.</p>
-            <p>Each Echo has two values: a <span style="color:var(--white);font-style:italic;">cost</span> to capture it, and the <span style="color:var(--white);font-style:italic;">Shade stored within</span> once held. Some return more than they take. Others give back less. The difference is never revealed until after the act.</p>
-          </div>
-        </div>
-        <div>
-          <div class="duu-image-placeholder reveal reveal-delay-3">
-            <span>Shade Conversion</span>
-          </div>
-        </div>
+      <div class="duu-shade-rule reveal reveal-delay-1"></div>
+      <div class="section-body reveal reveal-delay-2">
+        <p>Shade is the underlying resource of Odiville. It lives inside your tickets and inside every Echo you collect. It is both the price of entry and the reward for letting go.</p>
+        <p>Each Echo has two values: a <span class="shade-term">cost</span> to capture it, and the <span class="shade-term">Shade stored within</span> once held. Some return more than they take. Others give back less. The difference is never revealed until after the act.</p>
       </div>
     </div>
   </section>
 
-  <div class="divider"></div>
+  <div class="duu-divider-ornament"><div class="duu-divider-diamond"></div></div>
 
-  <!-- Capture & Sacrifice -->
-  <section class="duu-section" id="capture">
+  <!-- Section 3: Capture & Sacrifice — split-screen duality -->
+  <section class="duu-section duu-section--capture duu-ghost-num" id="capture">
     <div class="section-inner">
       <div class="section-label reveal">The Mechanics</div>
       <h2 class="section-heading reveal reveal-delay-1">To collect is to hold.<br>To sacrifice is to <em>become.</em></h2>
-      <div class="duu-feature">
-        <div>
-          <div class="section-body reveal reveal-delay-2">
-            <p><span style="color:var(--white);font-style:italic;">Capture</span>. Echoes surface without warning. When one appears, you can mint it, pulling it from the ether into your wallet. Once captured, it is yours to hold, trade, or destroy.</p>
-            <p><span style="color:var(--white);font-style:italic;">Sacrifice</span>. Every Echo contains Shade beneath the surface. To access it, the artwork must be burned. The act is permanent. What remains is the resource to pursue something else. Ashes exchanged for new possibilities.</p>
-          </div>
-          <ul class="mechanic-list reveal reveal-delay-2">
-            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>Captured Echoes appear in your inventory and wallet immediately</li>
-            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>Every Echo is connected, bound by the Shade that flows between them</li>
-            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>The collection is always shifting, shaped by the choices of those within it</li>
-            <li><span class="mechanic-icon" style="background:var(--accent-duu);"></span>What the community preserves and what it burns tells its own story</li>
-          </ul>
-        </div>
-        <div>
-          <div class="duu-image-placeholder reveal reveal-delay-3">
-            <span>Capture Preview</span>
+
+      <div class="duu-split">
+        <div class="duu-split-divider"></div>
+        <div class="duu-split-col reveal-from-left reveal-delay-2">
+          <div class="section-body">
+            <span class="duu-split-heading">Capture</span>
+            <p>Echoes surface without warning. When one appears, you can mint it, pulling it from the ether into your wallet. Once captured, it is yours to hold, trade, or destroy.</p>
           </div>
         </div>
+        <div class="duu-split-col reveal-from-right reveal-delay-2">
+          <div class="section-body">
+            <span class="duu-split-heading">Sacrifice</span>
+            <p>Every Echo contains Shade beneath the surface. To access it, the artwork must be burned. The act is permanent. What remains is the resource to pursue something else. Ashes exchanged for new possibilities.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="duu-mechanics-grid reveal-stagger reveal-delay-3">
+        <div class="duu-mechanic-item" style="--i:0">Captured Echoes appear in your inventory and wallet immediately</div>
+        <div class="duu-mechanic-item" style="--i:1">Every Echo is connected, bound by the Shade that flows between them</div>
+        <div class="duu-mechanic-item" style="--i:2">The collection is always shifting, shaped by the choices of those within it</div>
+        <div class="duu-mechanic-item" style="--i:3">What the community preserves and what it burns tells its own story</div>
       </div>
     </div>
   </section>
 
-  <div class="divider"></div>
+  <div class="duu-divider-ornament"><div class="duu-divider-diamond"></div></div>
 
-  <!-- Events -->
-  <section class="duu-section" id="events">
+  <!-- Section 4: Chronicle of decisions -->
+  <section class="duu-section duu-section--events duu-ghost-num" id="events">
     <div class="section-inner">
       <div class="section-label reveal">Throughout the Book</div>
-      <h2 class="section-heading reveal reveal-delay-1">The story does not<br>wait for <em>you</em></h2>
-      <div class="section-body reveal reveal-delay-2" style="margin-bottom:3rem;">
-        <p>As chapters unfold, windows open and close. Some moments pass quickly. Others demand participation. The book rewards those who are present.</p>
+      <h2 class="section-heading reveal reveal-delay-1">Decisions made.<br>Choices that <em>mattered.</em></h2>
+      <div class="section-body reveal reveal-delay-2" style="margin-bottom:2.5rem;">
+        <p>A record of the real moments. Events, windows, and challenges that shaped the book as it unfolded — in order, as they happened.</p>
       </div>
 
-      <div class="events-grid">
-        <div class="event-card reveal reveal-delay-2">
-          <div class="event-icon">&#9719;</div>
-          <div class="event-name">Limited Time Artworks</div>
-          <div class="event-desc">A window opens. For a brief period, certain Echoes become available to capture. Their Shade value stays hidden until the window closes. Avoiding gamification.</div>
-        </div>
+      <div class="chronicle-header reveal reveal-delay-2">
+        <span>Phase</span>
+        <span>Type</span>
+        <span>Event</span>
+        <span style="text-align:right;">Note</span>
+      </div>
 
-        <div class="event-card reveal reveal-delay-3">
-          <div class="event-icon">&#10022;</div>
-          <div class="event-name">Interactive Challenges</div>
-          <div class="event-desc">Open to all. Those who solve them are rewarded.</div>
+      <div class="chronicle-list reveal-stagger reveal-delay-2">
+        <div class="chronicle-entry" style="--i:0">
+          <span class="chronicle-phase">Phase I</span>
+          <span class="chronicle-type">Decision</span>
+          <span class="chronicle-title">—</span>
+          <span class="chronicle-note">—</span>
         </div>
-
-        <div class="event-card reveal">
-          <div class="event-icon">&#9879;</div>
-          <div class="event-name">Timed Auctions</div>
-          <div class="event-desc">Singular Echoes marking pivotal moments in the narrative. Listed at Whispers, the auction house within Odiville's borders.</div>
+        <div class="chronicle-entry" style="--i:1">
+          <span class="chronicle-phase">Phase II</span>
+          <span class="chronicle-type">Window</span>
+          <span class="chronicle-title">—</span>
+          <span class="chronicle-note">—</span>
+        </div>
+        <div class="chronicle-entry" style="--i:2">
+          <span class="chronicle-phase">Phase III</span>
+          <span class="chronicle-type">Challenge</span>
+          <span class="chronicle-title">—</span>
+          <span class="chronicle-note">—</span>
+        </div>
+        <div class="chronicle-entry" style="--i:3">
+          <span class="chronicle-phase">Phase IV</span>
+          <span class="chronicle-type">Auction</span>
+          <span class="chronicle-title">—</span>
+          <span class="chronicle-note">—</span>
+        </div>
+        <div class="chronicle-entry" style="--i:4">
+          <span class="chronicle-phase">Phase V</span>
+          <span class="chronicle-type">Decision</span>
+          <span class="chronicle-title">—</span>
+          <span class="chronicle-note">—</span>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="divider"></div>
+  <div class="duu-divider-ornament"><div class="duu-divider-diamond"></div></div>
 
-  <!-- Story -->
-  <section class="duu-section" id="story">
-    <div class="section-inner" style="text-align:center;">
-      <div class="section-label reveal" style="text-align:left;">The Arrival</div>
-      <h2 class="section-heading reveal reveal-delay-1" style="max-width:700px;">Something has arrived<br>at the edge of <em>town</em></h2>
-      <div class="section-body reveal reveal-delay-2" style="margin:0 auto;max-width:600px;text-align:left;">
+  <!-- Section 5: Story — cinematic resolution -->
+  <section class="duu-section duu-section--story duu-ghost-num" id="story">
+    <div class="section-inner">
+      <div class="section-label reveal">The Arrival</div>
+      <h2 class="section-heading reveal reveal-delay-1">Something has arrived<br>at the edge of <em>town</em></h2>
+      <div class="section-body reveal reveal-delay-2">
         <p>A circus appears at the edge of town. No announcement. No invitation. Just a gate where the road used to end and a queue of people who can't explain why they joined it.</p>
+      </div>
+      <div class="section-body reveal reveal-delay-3">
         <p>You hand over your coins before reading the ticket. Through the entrance, the noise thins and the light shifts. A sign stands alone at the threshold, painted by hand.</p>
-        <p style="color:var(--white);font-style:italic;text-align:center;font-size:1.15rem;margin-top:2rem;">"Welcome to Odiville"</p>
-        <p style="text-align:center;margin-top:1.5rem;">Ten chapters. Over fifty artworks. A world that remembers every decision you make, and every one you don't.</p>
+      </div>
+      <div class="duu-quote-frame reveal-contract reveal-delay-3">
+        <p>&ldquo;Welcome to Odiville&rdquo;</p>
+      </div>
+      <div class="duu-colophon reveal reveal-slow">
+        <p>Ten chapters. Over fifty artworks. A world that remembers every decision you make, and every one you don't.</p>
       </div>
     </div>
   </section>
@@ -599,10 +622,11 @@
             </div>
           </div>
         </div>
-        <div>
-          <div class="owt-image-placeholder reveal reveal-delay-3" style="background:none;border:none;">
-            <img loading="lazy" src="images/One-way Ticket/owt_odiville_book.png" alt="The Odiville Book" style="width:100%;display:block;border:1px solid var(--border);">
-          </div>
+        <div class="owt-feature-video reveal reveal-delay-3">
+          <video class="owt-video owt-video--main" src="images/One-way Ticket/One-way Ticket.mp4"
+            muted playsinline loop preload="none"
+            poster="images/One-way Ticket/One-way-Ticket-Slideshow-v3-gif.gif">
+          </video>
         </div>
       </div>
     </div>
@@ -615,21 +639,12 @@
     <div class="section-inner">
       <div class="section-label reveal">The Burn</div>
       <h2 class="section-heading reveal reveal-delay-1">A single night.<br>An irreversible <em>act.</em></h2>
-      <div class="owt-feature">
-        <div>
-          <div class="section-body reveal reveal-delay-2">
-            <p>What began as a visit to New York for an exhibition became something else entirely. The opportunity to elevate the project presented itself, and the decision was made quickly. Print everything, frame everything, burn everything.</p>
-            <p>The fire was deliberate. Each piece was held, acknowledged, and released. Two years of work reduced to heat and ash in a matter of hours. The feeling mirrored the sacrifice mechanic at the heart of the book. A moment of unease, wrapped in renewal.</p>
-          </div>
-        </div>
-        <div>
-          <div class="owt-video-wrap reveal reveal-delay-3">
-            <video class="owt-video" src="images/One-way Ticket/OWT Breakdown.mp4"
-              muted playsinline loop preload="none"
-              poster="images/One-way Ticket/owt_sacrifice_flame.png">
-            </video>
-          </div>
-        </div>
+      <div class="section-body section-body--wide reveal reveal-delay-2">
+        <p>What began as a visit to New York for an exhibition became something else entirely. The opportunity to elevate the project presented itself, and the decision was made quickly. Print everything, frame everything, burn everything.</p>
+        <p>The fire was deliberate. Each piece was held, acknowledged, and released. Two years of work reduced to heat and ash in a matter of hours. The feeling mirrored the sacrifice mechanic at the heart of the book. A moment of unease, wrapped in renewal.</p>
+      </div>
+      <div class="owt-x-embed owt-x-embed--full reveal reveal-delay-3">
+        <blockquote class="twitter-tweet" data-media-max-width="1200" data-chrome="noborder transparent"><p lang="en" dir="ltr">&quot;One-way Ticket&quot; <br>Monday Oct, 13th<a href="https://twitter.com/opensea?ref_src=twsrc%5Etfw">@opensea</a> x @Shape_L2 <a href="https://t.co/Xwkcm0wTAg">pic.twitter.com/Xwkcm0wTAg</a></p>&mdash; odious (@todayodious) <a href="https://twitter.com/todayodious/status/1975939963280888168?ref_src=twsrc%5Etfw">October 8, 2025</a></blockquote>
       </div>
     </div>
   </section>
@@ -639,23 +654,21 @@
   <!-- Rebirth -->
   <section class="owt-section" id="rebirth">
     <div class="section-inner">
-      <div class="section-label reveal">Rebirth</div>
-      <h2 class="section-heading reveal reveal-delay-1">New work from<br>what <em>remained</em></h2>
-      <div class="owt-feature">
+      <div class="owt-feature owt-feature--rebirth">
         <div>
-          <div class="section-body reveal reveal-delay-2">
-            <p>The charcoal was transported back at 3am, still warm. Over 500 fragments were individually photographed, then hand-selected down to 275. Each one was digitally refined, composed to feel abstract while preserving the raw texture of what it once was.</p>
-            <p>A single physical piece was also created using the rescued charcoal, scraped directly across the surface by hand. A figure emerged. Taker of all, forgiver of none. It remains unnamed.</p>
-          </div>
-          <ul class="mechanic-list reveal reveal-delay-2">
+          <img class="owt-rebirth-img reveal" loading="lazy" src="images/One-way Ticket/One way ticket video.01_54_25_01.Still005.png" alt="One Way Ticket">
+          <ul class="mechanic-list mechanic-list--facts reveal reveal-delay-2" style="margin-top:1.5rem;">
             <li><span class="mechanic-icon" style="background:var(--accent-owt);"></span>Each piece contains the DNA of the original book artworks</li>
             <li><span class="mechanic-icon" style="background:var(--accent-owt);"></span>Abstract in nature, charged with the energy of the fire</li>
             <li><span class="mechanic-icon" style="background:var(--accent-owt);"></span>First physical artwork created using charcoal from the burn</li>
           </ul>
         </div>
         <div>
-          <div class="owt-image-placeholder reveal reveal-delay-3" style="background:none;border:none;">
-            <img loading="lazy" src="images/One-way Ticket/owt_charcoal_piece.png" alt="Physical charcoal piece" style="width:100%;display:block;border:1px solid var(--border);">
+          <div class="section-label reveal">Rebirth</div>
+          <h2 class="section-heading reveal reveal-delay-1">New work from<br>what <em>remained</em></h2>
+          <div class="section-body reveal reveal-delay-2">
+            <p>The charcoal was transported back at 3am, still warm. Over 500 fragments were individually photographed, then hand-selected down to 275. Each one was digitally refined, composed to feel abstract while preserving the raw texture of what it once was.</p>
+            <p>A single physical piece was also created using the rescued charcoal, scraped directly across the surface by hand. A figure emerged. Taker of all, forgiver of none. It remains unnamed.</p>
           </div>
         </div>
       </div>
@@ -666,18 +679,15 @@
 
   <!-- Collect -->
   <section class="owt-section" id="collect">
-    <div class="section-inner" style="text-align:center;">
-      <div class="section-label reveal" style="text-align:left;">The Collection</div>
-      <h2 class="section-heading reveal reveal-delay-1" style="max-width:700px;">Own what <em>once was</em></h2>
-      <div class="section-body reveal reveal-delay-2" style="margin:0 auto;max-width:600px;text-align:left;">
+    <div class="section-inner">
+      <div class="section-label reveal">The Collection</div>
+      <h2 class="section-heading reveal reveal-delay-1">Own what <em>once was</em></h2>
+      <div class="section-body section-body--wide reveal reveal-delay-2">
         <p>Each fragment is a relic from the pit. A piece of what existed before the fire, transformed into something that stands on its own. The goal was never preservation. It was proof that destruction and creation are the same act, separated only by intent.</p>
         <p>275 pieces. Built in collaboration with Shape.</p>
       </div>
-      <div class="owt-feature-video reveal reveal-delay-3">
-        <video class="owt-video owt-video--main" src="images/One-way Ticket/One-way Ticket.mp4"
-          muted playsinline loop preload="none"
-          poster="images/One-way Ticket/One-way-Ticket-Slideshow-v3-gif.gif">
-        </video>
+      <div class="owt-banner-wrap reveal reveal-delay-3">
+        <img src="images/One-way Ticket/OWT-Banner.gif" alt="One-Way Ticket collection" loading="lazy" class="owt-banner-gif">
       </div>
     </div>
   </section>
@@ -1038,40 +1048,41 @@
   </section>
 
   <section class="archive-section">
-    <div class="archive-filters" id="archiveFilters">
-      <div class="archive-filter-group">
-        <span class="archive-filter-label">Project</span>
-        <button class="archive-filter active" data-filter="project" data-value="all">All</button>
-        <button class="archive-filter" data-filter="project" data-value="duu">The Book</button>
-        <button class="archive-filter" data-filter="project" data-value="whispers">Whispers</button>
-        <button class="archive-filter" data-filter="project" data-value="owt">One-Way Ticket</button>
+
+    <div class="archive-controls">
+      <div class="archive-filter-tabs" id="archiveFilters">
+        <button class="archive-filter-tab active" data-filter="all">All</button>
+        <button class="archive-filter-tab" data-filter="duu">The Book</button>
+        <button class="archive-filter-tab" data-filter="whispers">Whispers</button>
+        <button class="archive-filter-tab" data-filter="owt">One-Way Ticket</button>
       </div>
-      <div class="archive-filter-group">
-        <span class="archive-filter-label">Type</span>
-        <button class="archive-filter active" data-filter="type" data-value="all">All</button>
-        <button class="archive-filter" data-filter="type" data-value="artwork">Artwork</button>
-        <button class="archive-filter" data-filter="type" data-value="lot">Lot</button>
-        <button class="archive-filter" data-filter="type" data-value="resident">Resident</button>
+      <div class="archive-controls-right">
+        <div class="archive-search-wrap">
+          <input type="text" class="archive-search" id="archiveSearch" placeholder="Search titles, series, phase…" autocomplete="off">
+        </div>
+        <span class="archive-count" id="archiveCount"></span>
       </div>
-      <span class="archive-count" id="archiveCount"></span>
     </div>
-    <div class="archive-grid" id="archiveGrid"></div>
+
+    <div class="archive-table">
+      <div class="archive-thead">
+        <span class="atcol atcol--title    sortable" data-sort="name">Title</span>
+        <span class="atcol atcol--series   sortable" data-sort="project">Collection</span>
+        <span class="atcol atcol--platform sortable" data-sort="platform">Platform</span>
+        <span class="atcol atcol--token    sortable" data-sort="token">ID</span>
+        <span class="atcol atcol--date     sortable" data-sort="date">Date</span>
+        <span class="atcol atcol--edition  sortable" data-sort="edition">#</span>
+        <span class="atcol atcol--chain">Chain</span>
+        <span class="atcol atcol--standard sortable" data-sort="standard">Standard</span>
+        <span class="atcol atcol--filetype sortable" data-sort="filetype">Type</span>
+        <span class="atcol atcol--filesize">Size</span>
+        <span class="atcol atcol--dims">Dimensions</span>
+      </div>
+      <div class="archive-tbody" id="archiveList"></div>
+    </div>
+
   </section>
 
-</div>
-
-<!-- Archive lightbox -->
-<div class="archive-lightbox" id="archiveLightbox" aria-hidden="true">
-  <div class="archive-lightbox-backdrop" id="archiveLightboxBackdrop"></div>
-  <button class="archive-lightbox-close" id="archiveLightboxClose" aria-label="Close">&times;</button>
-  <div class="archive-lightbox-content">
-    <div class="archive-lightbox-media" id="archiveLightboxMedia"></div>
-    <div class="archive-lightbox-info">
-      <div class="archive-lightbox-project" id="archiveLightboxProject"></div>
-      <div class="archive-lightbox-name" id="archiveLightboxName"></div>
-      <div class="archive-lightbox-meta" id="archiveLightboxMeta"></div>
-    </div>
-  </div>
 </div>
 
 
@@ -1105,10 +1116,12 @@
 
 <script src="js/data/artworks.js"></script>
 <script src="js/archive.js"></script>
+<script src="js/chain-fetch.js"></script>
 <script src="js/data/press.js"></script>
 <script src="js/press.js"></script>
 <script src="js/gate.js"></script>
 <script src="js/audio.js"></script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 </body>
 </html>

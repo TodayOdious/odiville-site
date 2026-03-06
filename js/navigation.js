@@ -59,7 +59,9 @@ function closeNav() {
 /* ========== SCROLL REVEAL ========== */
 
 function observeReveals() {
-  const reveals = document.querySelectorAll('.page.active .reveal');
+  // Element-level reveals (fade/slide in once)
+  const revealSelectors = '.reveal, .reveal-from-left, .reveal-from-right, .reveal-contract, .reveal-stagger, .duu-shade-bleed-reveal';
+  const reveals = document.querySelectorAll('.page.active :is(' + revealSelectors + ')');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -72,6 +74,23 @@ function observeReveals() {
   reveals.forEach(el => {
     if (!el.classList.contains('visible')) {
       observer.observe(el);
+    }
+  });
+
+  // Section-level .in-view (for ghost numbers, divider animations, thread lines)
+  const sections = document.querySelectorAll('.page.active .duu-section');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        sectionObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+  sections.forEach(el => {
+    if (!el.classList.contains('in-view')) {
+      sectionObserver.observe(el);
     }
   });
 }
@@ -272,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Pages not shown in nav — redirect to home if accessed directly
-  const HIDDEN_PAGES = ['owt', 'archive', 'press'];
+  const HIDDEN_PAGES = ['owt'];
 
   // Hash-based routing: browser back/forward
   window.addEventListener('popstate', () => {
