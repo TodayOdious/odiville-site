@@ -229,15 +229,13 @@
 
     .nft-card-media {
       position: relative;
-      aspect-ratio: 1;
       overflow: hidden;
       background: var(--bg);
     }
 
     .nft-card-img {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
+      height: auto;
       display: block;
       transition: opacity 0.2s;
     }
@@ -884,13 +882,9 @@
       var listing = getListing(nft);
       var pStr    = listing ? fmtPrice(listing.price, listing.currency) : null;
 
-      var videoSrc = nft.displayAnimationUrl && /\.(mp4|webm|mov)(\?|$)/i.test(nft.displayAnimationUrl)
-        ? nft.displayAnimationUrl : null;
-      var imgHtml = videoSrc
-        ? '<video class="nft-card-img" src="' + esc(videoSrc) + '" autoplay muted loop playsinline preload="metadata"></video>'
-        : (nft.imageUrl
-            ? '<img class="nft-card-img" src="' + esc(nft.imageUrl) + '" alt="' + esc(nft.title) + '" loading="lazy">'
-            : '<div class="nft-card-placeholder"></div>');
+      var imgHtml = nft.imageUrl
+        ? '<img class="nft-card-img" src="' + esc(nft.imageUrl) + '" alt="' + esc(nft.title) + '" loading="lazy">'
+        : '<div class="nft-card-placeholder"></div>';
 
       var badgeHtml = pStr
         ? '<span class="nft-card-price-badge">' + esc(pStr) + '</span>'
