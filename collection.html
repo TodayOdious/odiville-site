@@ -884,9 +884,12 @@
       var listing = getListing(nft);
       var pStr    = listing ? fmtPrice(listing.price, listing.currency) : null;
 
-      var imgHtml = nft.imageUrl
-        ? '<img class="nft-card-img" src="' + esc(nft.imageUrl) + '" alt="' + esc(nft.title) + '" loading="lazy">'
-        : '<div class="nft-card-placeholder"></div>';
+      var cardVideoSrc = nft.displayAnimationUrl && /\.(mp4|webm|mov)(\?|$)/i.test(nft.displayAnimationUrl) ? nft.displayAnimationUrl : null;
+      var imgHtml = cardVideoSrc
+        ? '<video class="nft-card-img" src="' + esc(cardVideoSrc) + '" muted playsinline preload="metadata" onloadedmetadata="this.currentTime=1"></video>'
+        : nft.imageUrl
+          ? '<img class="nft-card-img" src="' + esc(nft.imageUrl) + '" alt="' + esc(nft.title) + '" loading="lazy">'
+          : '<div class="nft-card-placeholder"></div>';
 
       var badgeHtml = pStr
         ? '<span class="nft-card-price-badge">' + esc(pStr) + '</span>'
@@ -923,10 +926,12 @@
     var media   = document.getElementById('panelMedia');
     var body    = document.getElementById('panelBody');
 
-    // Media
-    var isVideo = nft.imageUrl && /\.(mp4|webm|mov)(\?|$)/i.test(nft.imageUrl);
-    if (isVideo) {
-      media.innerHTML = '<video src="' + esc(nft.imageUrl) + '" autoplay loop muted playsinline controls></video>';
+    // Media — prefer displayAnimationUrl (MP4) for panel, fall back to imageUrl
+    var panelVideoSrc = nft.displayAnimationUrl && /\.(mp4|webm|mov)(\?|$)/i.test(nft.displayAnimationUrl)
+      ? nft.displayAnimationUrl
+      : (nft.imageUrl && /\.(mp4|webm|mov)(\?|$)/i.test(nft.imageUrl) ? nft.imageUrl : null);
+    if (panelVideoSrc) {
+      media.innerHTML = '<video src="' + esc(panelVideoSrc) + '" autoplay loop muted playsinline controls></video>';
     } else if (nft.imageUrl) {
       media.innerHTML = '<img src="' + esc(nft.imageUrl) + '" alt="' + esc(nft.title) + '">';
     } else {
