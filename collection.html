@@ -229,13 +229,15 @@
 
     .nft-card-media {
       position: relative;
+      aspect-ratio: 1;
       overflow: hidden;
       background: var(--bg);
     }
 
     .nft-card-img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: contain;
       display: block;
       transition: opacity 0.2s;
     }
