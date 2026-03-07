@@ -884,12 +884,9 @@
       var listing = getListing(nft);
       var pStr    = listing ? fmtPrice(listing.price, listing.currency) : null;
 
-      var cardVideoSrc = nft.displayAnimationUrl && /\.(mp4|webm|mov)(\?|$)/i.test(nft.displayAnimationUrl) ? nft.displayAnimationUrl : null;
-      var imgHtml = cardVideoSrc
-        ? '<video class="nft-card-img" src="' + esc(cardVideoSrc) + '" muted playsinline preload="metadata" onloadedmetadata="this.currentTime=1"></video>'
-        : nft.imageUrl
-          ? '<img class="nft-card-img" src="' + esc(nft.imageUrl) + '" alt="' + esc(nft.title) + '" loading="lazy">'
-          : '<div class="nft-card-placeholder"></div>';
+      var imgHtml = nft.imageUrl
+        ? '<img class="nft-card-img" src="' + esc(nft.imageUrl) + '" alt="' + esc(nft.title) + '" loading="lazy">'
+        : '<div class="nft-card-placeholder"></div>';
 
       var badgeHtml = pStr
         ? '<span class="nft-card-price-badge">' + esc(pStr) + '</span>'
