@@ -48,8 +48,10 @@
     <li><a data-page="duu"      tabindex="0" onclick="navigateTo('duu');closeNav()">The Book</a></li>
     <li><a data-page="whispers" tabindex="0" onclick="navigateTo('whispers');closeNav()">Whispers</a></li>
     <li><a data-page="archive"  tabindex="0" onclick="navigateTo('archive');closeNav()">Archive</a></li>
+    <li><a data-page="market"   tabindex="0" onclick="navigateTo('market');closeNav()">Market</a></li>
     <li><a data-page="press"    tabindex="0" onclick="navigateTo('press');closeNav()">Press</a></li>
     <li><a href="dashboard.html" tabindex="0">Nexus</a></li>
+    <li><a href="https://x.com/todayodious" target="_blank" rel="noopener" class="nav-x" aria-label="X (Twitter)"><svg width="12.5" height="12.5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li>
   </ul>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation" aria-expanded="false">
     <span></span>
@@ -342,18 +344,18 @@
             <linearGradient id="string-fade" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1000" y2="0">
               <stop offset="0%"   stop-color="white" stop-opacity="0"/>
               <stop offset="6%"   stop-color="white" stop-opacity="1"/>
-              <stop offset="94%"  stop-color="white" stop-opacity="1"/>
-              <stop offset="100%" stop-color="white" stop-opacity="0"/>
+              <stop offset="85%"  stop-color="white" stop-opacity="1"/>
+              <stop offset="92%"  stop-color="white" stop-opacity="0"/>
             </linearGradient>
             <mask id="string-mask">
               <rect x="0" y="0" width="1000" height="55" fill="url(#string-fade)"/>
             </mask>
           </defs>
           <g mask="url(#string-mask)">
-            <path class="journey-string s1" d="M -20 8 C 180 52, 380 3, 550 8 C 720 52, 880 8, 1020 8"/>
-            <path class="journey-string s2" d="M -20 48 C 120 5, 260 52, 380 25 C 500 5, 650 50, 820 25 C 920 10, 980 48, 1020 48"/>
-            <path class="journey-string s3" d="M -20 25 C 100 42, 230 10, 350 25 C 470 42, 600 10, 700 25 C 820 42, 930 10, 1020 25"/>
-            <path class="journey-string s4" d="M -20 20 C 300 55, 700 0, 1020 20"/>
+            <path class="journey-string s1" d="M -20 8 C 100 52, 220 3, 340 8 C 460 52, 580 3, 700 8 C 820 52, 940 3, 1020 8"/>
+            <path class="journey-string s2" d="M -20 48 C 80 5, 180 52, 280 25 C 380 5, 480 50, 580 25 C 680 5, 780 50, 880 25 C 950 10, 990 48, 1020 48"/>
+            <path class="journey-string s3" d="M -20 25 C 80 42, 180 10, 280 25 C 380 42, 480 10, 580 25 C 680 42, 780 10, 880 25 C 950 38, 1000 15, 1020 25"/>
+            <path class="journey-string s4" d="M -20 20 C 160 50, 340 0, 520 20 C 700 50, 880 0, 1020 20"/>
           </g>
         </svg>
         <button class="journey-node reveal" data-chapter="1" aria-label="Phase I: The Arrival" aria-expanded="false" aria-controls="chapter-panel"><span class="journey-node-marker"></span><span class="journey-node-label">I</span></button>
@@ -1284,6 +1286,34 @@
 </div>
 
 
+<!-- ========= PAGE: MARKET =========== -->
+<div id="page-market" class="page">
+
+  <section class="market-section">
+
+    <div class="market-header">
+      <h1 class="market-title">Market <em>Map</em></h1>
+      <div class="market-stats">
+        <div class="market-stat">
+          <span class="market-stat-num" id="marketTotal">—</span>
+          <span class="market-stat-label"><span class="market-legend-dot market-legend-dot--unlisted"></span>Dormant</span>
+        </div>
+        <div class="market-stat-divider"></div>
+        <div class="market-stat">
+          <span class="market-stat-num market-stat-num--listed" id="marketListed">—</span>
+          <span class="market-stat-label"><span class="market-legend-dot market-legend-dot--listed"></span>Active</span>
+        </div>
+      </div>
+      <p class="market-subtitle" id="marketSubtitle"></p>
+    </div>
+
+    <canvas id="marketCanvas" class="market-canvas"></canvas>
+
+  </section>
+
+</div>
+
+
 <!-- ========= PAGE: PRESS =========== -->
 <div id="page-press" class="page">
 
@@ -1316,6 +1346,7 @@
 <script src="js/data/inventory.js"></script>
 <script src="js/data/listings.js"></script>
 <script src="js/archive.js"></script>
+<script src="js/market.js"></script>
 <script src="js/data/press.js"></script>
 <script src="js/press.js"></script>
 <script src="js/gate.js"></script>

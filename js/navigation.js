@@ -30,6 +30,11 @@ function navigateTo(pageId) {
       initTorchCards();
     }
 
+    // Init market canvas
+    if (pageId === 'market' && typeof initMarket === 'function') {
+      initMarket();
+    }
+
     // Init particles for the new page
     initParticles();
 
@@ -193,33 +198,28 @@ function initTorchCards() {
       animId = requestAnimationFrame(animate);
     }
 
-    card.addEventListener('mouseenter', () => {
-      isHovering = true;
-      resize();
-      if (!animId) animate();
-    });
-
-    card.addEventListener('mousemove', (e) => {
+    // Track mouse across the whole document — torch fades naturally as mouse drifts away
+    document.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
-      card.style.setProperty('--mx', mouseX + 'px');
-      card.style.setProperty('--my', mouseY + 'px');
-    });
+      const rx = e.clientX - rect.left;
+      const ry = e.clientY - rect.top;
 
-    card.addEventListener('mouseleave', () => {
-      isHovering = false;
-      mouseX = -200;
-      mouseY = -200;
-      card.style.setProperty('--mx', '-100px');
-      card.style.setProperty('--my', '-100px');
-      setTimeout(() => {
-        if (!isHovering && particles.length === 0) {
-          cancelAnimationFrame(animId);
-          animId = null;
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-      }, 2500);
+      // Always update card CSS vars so the radial gradient follows the real cursor
+      torchX = rx;
+      torchY = ry;
+      card.style.setProperty('--mx', rx + 'px');
+      card.style.setProperty('--my', ry + 'px');
+      mouseX = rx;
+      mouseY = ry;
+
+      // Only spawn motes while inside the card bounds
+      const inside = rx >= 0 && ry >= 0 && rx <= rect.width && ry <= rect.height;
+      if (inside && !isHovering) {
+        isHovering = true;
+        resize();
+        if (!animId) animate();
+      }
+      if (!inside) isHovering = false;
     });
 
     window.addEventListener('resize', resize);
@@ -311,4 +311,19 @@ document.addEventListener('DOMContentLoaded', () => {
   initTorchCards();
   initLazyImages();
   initVideoAutoplay();
+  initCustomCursor();
 });
+
+/* ========== CUSTOM CURSOR ========== */
+
+function initCustomCursor() {
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  const cursor = document.createElement('div');
+  cursor.id = 'custom-cursor';
+  document.body.appendChild(cursor);
+
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+  });
+}

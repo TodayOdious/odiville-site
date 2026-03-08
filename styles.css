@@ -2,6 +2,31 @@
    ODIVILLE — The World of Odious
    ============================================ */
 
+/* ========== CUSTOM CURSOR ========== */
+/* Hide default cursor, show custom */
+*, *::before, *::after { cursor: none !important; }
+
+#custom-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 17px; height: 22px;
+  pointer-events: none;
+  z-index: 999999;
+  will-change: transform;
+  background: url('images/Main/DUU Cursor.png') no-repeat top left / contain;
+  /* invert makes it white-on-black; screen blend removes the black bg */
+  filter:
+    invert(1)
+    drop-shadow(0 0 4px rgba(255,255,255,.8))
+    drop-shadow(0 0 10px rgba(255,255,255,.4))
+    drop-shadow(0 0 18px rgba(255,255,255,.15));
+  mix-blend-mode: screen;
+}
+@media (hover: none) {
+  *, *::before, *::after { cursor: auto !important; }
+  #custom-cursor { display: none; }
+}
+
 :root {
   --black: #000000;
   --void: #030304;
@@ -38,6 +63,17 @@ body::after {
 }
 
 h1, h2, h3, h4 { font-family: var(--font); font-weight: 300; }
+
+/* Title glow — light piercing through the void */
+h1, h2, h3, h4,
+.section-heading,
+.section-label,
+.nav-logo {
+  text-shadow:
+    0 0 12px rgba(234,230,222,.18),
+    0 0 30px rgba(234,230,222,.08),
+    0 0 60px rgba(234,230,222,.04);
+}
 ::selection { background: var(--white); color: var(--black); }
 
 /* ========== SKIP LINK ========== */
@@ -122,15 +158,15 @@ h1, h2, h3, h4 { font-family: var(--font); font-weight: 300; }
 
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 300;
-  padding: 1.8rem 3rem; display: flex; justify-content: space-between; align-items: center;
+  padding: 1.8rem 3rem; display: flex; align-items: center; gap: 3rem;
   background: linear-gradient(180deg, rgba(0,0,0,.95) 0%, rgba(0,0,0,.85) 55%, rgba(0,0,0,0) 100%);
   box-shadow: 0 4px 30px rgba(0,0,0,.5);
 }
 .nav-logo {
-  font-size: 1rem; font-weight: 500; letter-spacing: .18em;
+  font-family: var(--font); font-size: 1rem; font-weight: 500; letter-spacing: .18em;
   text-transform: uppercase; color: var(--white); text-decoration: none; cursor: pointer; flex-shrink: 0;
 }
-.nav-links { display: flex; gap: 2.5rem; list-style: none; margin: 0; padding: 0; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; margin: 0 0 0 auto; padding: 0; }
 .nav-links a {
   font-size: .72rem; font-weight: 400; letter-spacing: .15em; text-transform: uppercase;
   color: var(--white); text-decoration: none; position: relative; padding-bottom: 3px;
@@ -150,6 +186,13 @@ nav {
 .nav-links a[data-page="owt"].active::after     { background: var(--accent-owt); }
 .nav-links a[data-page="whispers"]:hover::after,
 .nav-links a[data-page="whispers"].active::after { background: var(--accent-whispers); }
+.nav-links a[data-page="market"]:hover::after,
+.nav-links a[data-page="market"].active::after   { background: var(--accent-duu); }
+
+/* X (Twitter) link */
+.nav-x { display: inline-flex; align-items: center; }
+.nav-x svg { position: relative; top: 2px; }
+.nav-x::after { display: none; }
 
 /* Hamburger button */
 .nav-hamburger {
@@ -306,10 +349,11 @@ section { position: relative; padding: 7rem 3rem; }
   pointer-events: none;
   z-index: 10;
   background: radial-gradient(
-    300px circle at var(--mx, -100px) var(--my, -100px),
-    rgba(234,230,222,.18) 0%,
-    rgba(234,230,222,.04) 35%,
-    transparent 60%
+    380px circle at var(--mx, -100px) var(--my, -100px),
+    rgba(234,230,222,.28) 0%,
+    rgba(234,230,222,.10) 20%,
+    rgba(234,230,222,.03) 45%,
+    transparent 65%
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -348,12 +392,12 @@ section { position: relative; padding: 7rem 3rem; }
 .card-reveal {
   position: absolute; inset: 0; padding: 2rem; z-index: 3; pointer-events: none;
   -webkit-mask-image: radial-gradient(
-    180px circle at var(--mx, -100px) var(--my, -100px),
-    rgba(0,0,0,1) 0%, rgba(0,0,0,.7) 35%, rgba(0,0,0,0) 65%
+    216px circle at var(--mx, -100px) var(--my, -100px),
+    rgba(0,0,0,1) 0%, rgba(0,0,0,.8) 40%, rgba(0,0,0,0) 70%
   );
   mask-image: radial-gradient(
-    180px circle at var(--mx, -100px) var(--my, -100px),
-    rgba(0,0,0,1) 0%, rgba(0,0,0,.7) 35%, rgba(0,0,0,0) 65%
+    216px circle at var(--mx, -100px) var(--my, -100px),
+    rgba(0,0,0,1) 0%, rgba(0,0,0,.8) 40%, rgba(0,0,0,0) 70%
   );
 }
 .card-reveal .project-year {
@@ -373,17 +417,25 @@ section { position: relative; padding: 7rem 3rem; }
   border: 1px solid var(--border); padding: .25rem .6rem;
 }
 .card-reveal .project-arrow {
-  position: absolute; bottom: 2rem; right: 2rem; width: 24px; height: 24px;
+  position: absolute; top: 2rem; right: 2rem;
+  width: 20px; height: 20px;
 }
+/* Horizontal line */
 .card-reveal .project-arrow::before {
-  content: ''; position: absolute; top: 4px; right: 4px;
-  width: 10px; height: 10px;
-  border-top: 1px solid var(--white-faint); border-right: 1px solid var(--white-faint);
+  content: ''; position: absolute;
+  top: 50%; right: 0;
+  width: 16px; height: 1px;
+  background: var(--white-faint);
+  transform: translateY(-50%);
 }
+/* Arrowhead — chevron */
 .card-reveal .project-arrow::after {
-  content: ''; position: absolute; top: 4px; right: 4px;
-  width: 14px; height: 1px; background: var(--white-faint);
-  transform-origin: right top; transform: rotate(45deg);
+  content: ''; position: absolute;
+  top: 50%; right: 0;
+  width: 7px; height: 7px;
+  border-top: 1px solid var(--white-faint);
+  border-right: 1px solid var(--white-faint);
+  transform: translateY(-50%) rotate(45deg);
 }
 
 
@@ -1016,8 +1068,8 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
   justify-content: space-between; min-width: 700px; padding: 2rem 0;
 }
 .journey-path {
-  position: absolute; top: 50%; left: 0; right: 0;
-  height: 55px; transform: translateY(-50%);
+  position: absolute; top: 50%; left: 0;
+  width: 100%; height: 55px; transform: translateY(-50%);
   pointer-events: none; overflow: visible;
 }
 .journey-string {
@@ -1282,7 +1334,9 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
 @media (max-width: 600px) {
   .hero-title { font-size: 2.6rem; }
   .sub-hero-title { font-size: 2.2rem; }
-  .whispers-grid, .projects-grid, .events-grid { grid-template-columns: 1fr; }
+  .whispers-grid, .events-grid { grid-template-columns: 1fr; }
+  .projects-grid { gap: 3rem; }
+  .project-card { min-height: 200px; }
   .residents-grid { grid-template-columns: repeat(2, 1fr); }
   .intro-stat-row, .owt-stat-row { grid-template-columns: 1fr; gap: 1.5rem; }
   .cta-buttons { flex-direction: column; align-items: center; }
@@ -1335,11 +1389,11 @@ img[loading="lazy"].loaded { opacity: 1; }
 @media (hover: none) {
   .project-card::after { display: none; }
   .card-fx { display: none; }
-  .card-reveal { display: none; }
-  .card-ghost .project-year { color: var(--white-faint); }
-  .card-ghost .project-name { color: var(--white); }
-  .card-ghost .project-desc { color: var(--white-dim); }
-  .card-ghost .project-tag { color: var(--white-faint); border-color: var(--border); }
+  .card-reveal {
+    -webkit-mask-image: none; mask-image: none;
+  }
+  .card-reveal .project-name { color: var(--white); }
+  .card-reveal .project-tag { color: var(--white-faint); }
 }
 
 
@@ -1735,6 +1789,170 @@ img[loading="lazy"].loaded { opacity: 1; }
   .atcol--token { font-size: .6rem; }
 }
 
+
+/* ========== MARKET PAGE ========== */
+
+.market-section {
+  position: relative;
+  height: 100vh;
+  background: var(--black);
+  overflow: hidden;
+}
+
+/* Header overlays canvas — whisper-quiet, tucked into top-left */
+.market-header {
+  position: absolute;
+  bottom: 1.8rem; left: 2rem;
+  z-index: 2;
+  text-align: left;
+  pointer-events: none;
+  opacity: 0.45;
+  transition: opacity .5s ease;
+}
+.market-section:hover .market-header { opacity: 0.7; }
+
+.market-title {
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: .08em;
+  color: var(--white-dim);
+  margin: 0 0 .6rem;
+  line-height: 1;
+}
+.market-title em {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.market-stats {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: .4rem;
+}
+
+.market-stat { text-align: left; }
+
+.market-stat-num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  color: var(--white-dim);
+  line-height: 1;
+}
+
+.market-stat-num--listed { color: var(--white); }
+
+.market-stat-label {
+  display: flex;
+  align-items: center;
+  gap: .35em;
+  font-size: .75rem;
+  font-weight: 400;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+  margin-top: .2rem;
+}
+
+.market-stat-divider {
+  width: 1px;
+  height: 1.2rem;
+  background: var(--white-ghost);
+  flex-shrink: 0;
+}
+
+.market-subtitle {
+  font-size: .83rem;
+  font-style: italic;
+  color: var(--white-faint);
+  letter-spacing: .03em;
+  margin: 0 0 .5rem;
+}
+
+.market-legend {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.market-legend-item {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .48rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+}
+
+.market-legend-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.market-legend-dot--unlisted {
+  background: rgba(140, 132, 120, 0.5);
+}
+.market-legend-dot--listed {
+  background: #fff8f0;
+  box-shadow: 0 0 3px rgba(255,250,240,0.6);
+}
+
+/* Canvas fills the entire viewport behind the header */
+.market-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: block;
+  cursor: default;
+}
+
+/* Tooltip */
+.market-tooltip {
+  position: fixed;
+  display: none;
+  pointer-events: none;
+  z-index: 999;
+  background: rgba(8, 7, 6, 0.9);
+  border: 1px solid rgba(154, 197, 194, 0.18);
+  padding: .5rem .8rem;
+  border-radius: 3px;
+  backdrop-filter: blur(10px);
+  max-width: 240px;
+}
+.mtt-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: .82rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mtt-price {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  color: var(--accent-duu);
+  margin-top: .15rem;
+}
+
+@media (max-width: 768px) {
+  .market-header { bottom: 1.2rem; left: 1.2rem; }
+  .market-stats  { gap: .8rem; }
+  .market-stat-divider { height: 1rem; }
+}
 
 /* ========== PRESS PAGE ========== */
 
