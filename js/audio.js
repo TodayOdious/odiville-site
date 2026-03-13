@@ -1,39 +1,57 @@
 (function () {
   'use strict';
 
-  const AUDIO_SRC = 'audio/ambient.mp3';
-  const FADE_MS   = 2500;
-  const MAX_VOL   = 0.28;
+  /* ── Track list — edit names/src freely ──────────────────── */
+  var TRACKS = [
+    { name: '1', src: 'audio/empty-paths.mp3'       },
+    { name: '2', src: 'audio/hidden-towns.mp3'      },
+    { name: '3', src: 'audio/laisse-moi-partir.mp3' },
+    { name: '4', src: 'audio/barren.mp3'            },
+    { name: '5', src: 'audio/beach-walking.mp3'     },
+    { name: '6', src: 'audio/material-light.mp3'    },
+  ];
 
-  const toggle = document.getElementById('audioToggle');
-  if (!toggle) return;
+  var FADE_MS  = 900;
+  var MAX_VOL  = 0.28; // initial volume (0–1), synced with slider value=28
 
-  let audio   = null;
-  let playing = false;
-  let fadeRaf = null;
+  /* ── State ───────────────────────────────────────────────── */
+  var trackIdx = 0;
+  var playing  = false;
+  var audio    = null;
+  var fadeRaf  = null;
+  var targetVol = MAX_VOL;
 
-  function getAudio() {
-    if (!audio) {
-      audio = new Audio(AUDIO_SRC);
-      audio.loop = true;
-      audio.volume = 0;
-      audio.preload = 'none';
-    }
-    return audio;
+  /* ── Elements ────────────────────────────────────────────── */
+  var player   = document.getElementById('voidPlayer');
+  var btnPlay  = document.getElementById('voidPlay');
+  var btnPrev  = document.getElementById('voidPrev');
+  var btnNext  = document.getElementById('voidNext');
+  var numEl    = document.getElementById('voidTrackNum');
+  var volSlider= document.getElementById('voidVol');
+
+  if (!player || !btnPlay) return;
+
+  /* ── Audio helpers ───────────────────────────────────────── */
+
+  function createAudio(src) {
+    var a = new Audio(src);
+    a.loop  = false;
+    a.volume = 0;
+    a.preload = 'auto';
+    a.addEventListener('ended', function () { nextTrack(1); });
+    return a;
   }
 
   function cancelFade() {
     if (fadeRaf) { cancelAnimationFrame(fadeRaf); fadeRaf = null; }
   }
 
-  function fadeTo(target, onDone) {
+  function fadeTo(a, target, ms, onDone) {
     cancelFade();
-    const a = getAudio();
-    const start = performance.now();
-    const from  = a.volume;
-
-    function tick(now) {
-      const t = Math.min((now - start) / FADE_MS, 1);
+    var start = performance.now();
+    var from  = a.volume;
+    (function tick(now) {
+      var t = Math.min((now - start) / ms, 1);
       a.volume = from + (target - from) * t;
       if (t < 1) {
         fadeRaf = requestAnimationFrame(tick);
@@ -41,31 +59,70 @@
         fadeRaf = null;
         if (onDone) onDone();
       }
-    }
-    fadeRaf = requestAnimationFrame(tick);
+    })(performance.now());
   }
+
+  /* ── Track management ────────────────────────────────────── */
+
+  function loadTrack(idx, autoplay) {
+    cancelFade();
+    if (audio) { audio.pause(); audio.src = ''; audio = null; }
+    trackIdx = ((idx % TRACKS.length) + TRACKS.length) % TRACKS.length;
+    audio = createAudio(TRACKS[trackIdx].src);
+    updateUI();
+    if (autoplay) {
+      audio.play().then(function () {
+        fadeTo(audio, targetVol, FADE_MS);
+        setPlaying(true);
+      }).catch(function () { setPlaying(false); });
+    }
+  }
+
+  function nextTrack(dir) {
+    loadTrack(trackIdx + (dir || 1), playing);
+  }
+
+  /* ── UI state ────────────────────────────────────────────── */
 
   function setPlaying(on) {
     playing = on;
-    toggle.classList.toggle('playing', on);
-    toggle.setAttribute('aria-label', on ? 'Mute ambient audio' : 'Play ambient audio');
+    player.classList.toggle('playing', on);
+    btnPlay.setAttribute('aria-label', on ? 'Pause' : 'Play');
   }
 
-  toggle.addEventListener('click', () => {
+  function updateUI() {
+    numEl.textContent = (trackIdx + 1) + ' / ' + TRACKS.length;
+  }
+
+  /* ── Controls ────────────────────────────────────────────── */
+
+  btnPlay.addEventListener('click', function () {
+    if (!audio) audio = createAudio(TRACKS[trackIdx].src);
     if (!playing) {
-      const a = getAudio();
-      setPlaying(true);
-      a.play().then(() => {
-        fadeTo(MAX_VOL);
-      }).catch(() => {
-        // File not available yet — silently revert
-        setPlaying(false);
-      });
+      audio.play().then(function () {
+        fadeTo(audio, targetVol, FADE_MS);
+        setPlaying(true);
+      }).catch(function () { setPlaying(false); });
     } else {
-      fadeTo(0, () => {
-        getAudio().pause();
-        setPlaying(false);
+      setPlaying(false);
+      fadeTo(audio, 0, FADE_MS * 0.35, function () {
+        audio.pause();
       });
     }
   });
+
+  btnPrev.addEventListener('click', function () { nextTrack(-1); });
+  btnNext.addEventListener('click', function () { nextTrack(1);  });
+
+  volSlider.addEventListener('input', function () {
+    targetVol = parseInt(this.value, 10) / 100;
+    if (audio && playing) audio.volume = targetVol;
+    // Update CSS custom property for track fill
+    this.style.setProperty('--val', this.value + '%');
+  });
+
+  /* ── Init ────────────────────────────────────────────────── */
+  updateUI();
+  volSlider.style.setProperty('--val', volSlider.value + '%');
+
 })();

@@ -13,6 +13,13 @@ const { join }        = require('path');
 const OPENSEA_BASE = 'https://api.opensea.io/api/v2';
 const PAGE_LIMIT   = 10;
 
+/* ── Target collections (Shape contracts with active listings) ── */
+
+const TARGET_SLUGS = [
+  'decisions-upsets-and-unknowns-odious',  // 0x63b5be929776dd020281978795b2c3575553d147
+  'tickets-by-odious',                      // 0xa4f02cc7865a3e15134d9b17ab235417bf0482aa
+];
+
 /* ── Inventory helpers ─────────────────────────────────────── */
 
 function getInventory() {
@@ -20,8 +27,7 @@ function getInventory() {
     readFileSync(join(process.cwd(), 'js', 'data', 'inventory.json'), 'utf-8')
   );
   const records = data.records || [];
-  const slugs   = [...new Set(records.map(r => r.openseaCollection).filter(Boolean))].sort();
-  return { records, slugs };
+  return { records, slugs: TARGET_SLUGS };
 }
 
 /* ── OpenSea helpers ───────────────────────────────────────── */

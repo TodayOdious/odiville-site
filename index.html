@@ -14,21 +14,31 @@
 <!-- Skip to main content (screen readers / keyboard) -->
 <a class="skip-link" href="#main-content">Skip to content</a>
 
-<!-- Ambient audio toggle (fixed, always visible) -->
-<button class="audio-toggle" id="audioToggle" aria-label="Play ambient audio" title="Ambient audio">
-  <!-- Muted icon -->
-  <svg class="audio-icon audio-icon--off" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M3 7.5h3l4-3.5v12L6 12.5H3V7.5z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
-    <line x1="14" y1="7" x2="18" y2="13" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-    <line x1="18" y1="7" x2="14" y2="13" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-  </svg>
-  <!-- Playing icon -->
-  <svg class="audio-icon audio-icon--on" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M3 7.5h3l4-3.5v12L6 12.5H3V7.5z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
-    <path d="M13 7.5a4 4 0 0 1 0 5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-    <path d="M15.5 5a7 7 0 0 1 0 10" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-  </svg>
-</button>
+<!-- Void music player (fixed, always visible) -->
+<div class="void-player" id="voidPlayer">
+  <div class="void-controls">
+    <button class="void-ctrl" id="voidPrev" aria-label="Previous track">
+      <svg viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="3" width="2" height="10" rx=".5"/><path d="M13 3.5L6.5 8 13 12.5V3.5z"/></svg>
+    </button>
+    <button class="void-ctrl void-ctrl--play" id="voidPlay" aria-label="Play">
+      <svg class="vp-play" viewBox="0 0 16 16" fill="currentColor"><path d="M4 3l9 5-9 5V3z"/></svg>
+      <svg class="vp-pause" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="3" width="3" height="10" rx=".5"/><rect x="10" y="3" width="3" height="10" rx=".5"/></svg>
+    </button>
+    <button class="void-ctrl" id="voidNext" aria-label="Next track">
+      <svg viewBox="0 0 16 16" fill="currentColor"><rect x="12" y="3" width="2" height="10" rx=".5"/><path d="M3 3.5L9.5 8 3 12.5V3.5z"/></svg>
+    </button>
+  </div>
+  <div class="void-track">
+    <span class="void-track-num" id="voidTrackNum"></span>
+  </div>
+  <div class="void-vol">
+    <svg class="void-vol-icon" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M2 6h2.5L8 3.5v9L4.5 10H2V6z"/>
+      <path d="M10 5.5a3 3 0 0 1 0 5" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    </svg>
+    <input type="range" class="void-vol-slider" id="voidVol" min="0" max="100" value="28" aria-label="Volume">
+  </div>
+</div>
 
 <!-- ========== GATE ========== -->
 <div id="gate" role="button" tabindex="0" aria-label="Enter Odiville">
@@ -45,11 +55,10 @@
   <ul class="nav-links" id="nav-links">
     <li><a data-page="home"     tabindex="0" onclick="navigateTo('home');closeNav()">Home</a></li>
     <li><a data-page="artist"   tabindex="0" onclick="navigateTo('artist');closeNav()">The Artist</a></li>
-    <li><a data-page="duu"      tabindex="0" onclick="navigateTo('duu');closeNav()">The Book</a></li>
+    <li><a data-page="projects" tabindex="0" onclick="navigateTo('projects');closeNav()">Projects</a></li>
     <li><a data-page="whispers" tabindex="0" onclick="navigateTo('whispers');closeNav()">Whispers</a></li>
     <li><a data-page="archive"  tabindex="0" onclick="navigateTo('archive');closeNav()">Archive</a></li>
-    <li><a data-page="market"   tabindex="0" onclick="navigateTo('market');closeNav()">Market</a></li>
-    <li><a data-page="press"    tabindex="0" onclick="navigateTo('press');closeNav()">Press</a></li>
+    <li><a data-page="market"   tabindex="0" onclick="navigateTo('market');closeNav()">Map</a></li>
     <li><a href="dashboard.html" tabindex="0">Nexus</a></li>
     <li><a href="https://x.com/todayodious" target="_blank" rel="noopener" class="nav-x" aria-label="X (Twitter)"><svg width="12.5" height="12.5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li>
   </ul>
@@ -79,7 +88,7 @@
     <div class="hero-scroll"><span>Descend</span><div class="scroll-line"></div></div>
   </section>
 
-  <!-- Projects — Torch Reveal Cards -->
+  <!-- Projects — Featured -->
   <section class="projects-section" id="projects">
     <div class="section-inner">
       <div class="section-label reveal">Body of Work</div>
@@ -93,15 +102,15 @@
         <!-- Card 1: Whispers -->
         <div class="project-card reveal reveal-delay-2" onclick="navigateTo('whispers')">
           <div class="card-ghost">
-            <div class="project-year">2025</div>
+            <div class="project-year">2026</div>
             <div class="project-name">Whispers of Odiville</div>
-            <div class="project-desc">The auction house of Odiville. Six 1/1 artworks paired with bound Resident portraits. The culmination of a three-year journey.</div>
+            <div class="project-desc">The auction house of Odiville. A place to bid on moments from around the village.</div>
             <span class="project-tag">Auction &middot; Ethereum</span>
           </div>
           <div class="card-reveal">
-            <div class="project-year">2025</div>
+            <div class="project-year">2026</div>
             <div class="project-name">Whispers of Odiville</div>
-            <div class="project-desc">The auction house of Odiville. Six 1/1 artworks paired with bound Resident portraits. The culmination of a three-year journey.</div>
+            <div class="project-desc">The auction house of Odiville. A place to bid on moments from around the village.</div>
             <span class="project-tag">Auction &middot; Ethereum</span>
             <div class="project-arrow"></div>
           </div>
@@ -113,37 +122,23 @@
           <div class="card-ghost">
             <div class="project-year">2023 &ndash; 2025</div>
             <div class="project-name">Decisions, Upsets and Unknowns</div>
-            <div class="project-desc">A ten-chapter interactive narrative and art collecting journey. Over 50 artworks, told through audio, text, and on-chain mechanics.</div>
+            <div class="project-desc">An original ten chapter interactive narrative and art collecting journey. Over 50 artworks derived from moments throughout the book.</div>
             <span class="project-tag">Interactive Book &middot; Shape</span>
           </div>
           <div class="card-reveal">
             <div class="project-year">2023 &ndash; 2025</div>
             <div class="project-name">Decisions, Upsets and Unknowns</div>
-            <div class="project-desc">A ten-chapter interactive narrative and art collecting journey. Over 50 artworks, told through audio, text, and on-chain mechanics.</div>
+            <div class="project-desc">An original ten chapter interactive narrative and art collecting journey. Over 50 artworks derived from moments throughout the book.</div>
             <span class="project-tag">Interactive Book &middot; Shape</span>
             <div class="project-arrow"></div>
           </div>
           <canvas class="card-fx"></canvas>
         </div>
 
-        <!-- Card 3: OWT -->
-        <div class="project-card reveal" onclick="navigateTo('owt')">
-          <div class="card-ghost">
-            <div class="project-year">2024</div>
-            <div class="project-name">One-Way Ticket</div>
-            <div class="project-desc">A study in sacrifice. Physical artworks from the Odiville Book were printed, framed, and burned in New York. Their ashes reborn as new work.</div>
-            <span class="project-tag">Physical &middot; Performance</span>
-          </div>
-          <div class="card-reveal">
-            <div class="project-year">2024</div>
-            <div class="project-name">One-Way Ticket</div>
-            <div class="project-desc">A study in sacrifice. Physical artworks from the Odiville Book were printed, framed, and burned in New York. Their ashes reborn as new work.</div>
-            <span class="project-tag">Physical &middot; Performance</span>
-            <div class="project-arrow"></div>
-          </div>
-          <canvas class="card-fx"></canvas>
-        </div>
+      </div>
 
+      <div class="reveal reveal-delay-3" style="margin-top:2.5rem;">
+        <a class="btn btn-ghost" onclick="navigateTo('projects')" style="cursor:pointer;">View all projects <span class="btn-arrow">&rarr;</span></a>
       </div>
     </div>
   </section>
@@ -162,7 +157,185 @@
   </section>
 
   <footer>
-    <div class="footer-left">&copy; Odious, 2025</div>
+    <div class="footer-left">&copy; Odiville, 2025</div>
+    <ul class="footer-links">
+      <li><a href="https://whispers.odiville.com" target="_blank">Whispers</a></li>
+      <li><a href="https://echoes.odiville.com" target="_blank">Echoes</a></li>
+      <li><a href="https://www.x.com/todayodious" target="_blank">X</a></li>
+      <li><a href="/cdn-cgi/l/email-protection#e3808c8d97828097a38c878a958a8f8f86cd808c8e">Contact</a></li>
+    </ul>
+  </footer>
+</div>
+
+
+<!-- =============================================================
+     PAGE: PROJECTS
+     ============================================================= -->
+<div id="page-projects" class="page">
+
+  <div class="sub-hero">
+    <div class="hero-void"></div>
+    <div class="hero-glow"></div>
+    <div class="particles" id="particles-projects"></div>
+    <div class="sub-hero-content">
+      <p class="sub-hero-eyebrow">Body of Work</p>
+      <h1 class="sub-hero-title">The <em>Projects</em></h1>
+    </div>
+  </div>
+
+  <section class="projects-section">
+    <div class="section-inner">
+      <div class="section-body reveal">
+        <p>A timeline of work spanning five years, from early experiments to fully realised worlds. Each project marks a chapter in the evolution of Odiville and my practice as an artist.</p>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- Card 1: Whispers -->
+        <div class="project-card reveal reveal-delay-1" onclick="navigateTo('whispers')">
+          <div class="card-ghost">
+            <div class="project-year">2026</div>
+            <div class="project-name">Whispers of Odiville</div>
+            <div class="project-desc">The auction house of Odiville. A place to bid on moments from around the village.</div>
+            <span class="project-tag">Auction &middot; Ethereum</span>
+          </div>
+          <div class="card-reveal">
+            <div class="project-year">2026</div>
+            <div class="project-name">Whispers of Odiville</div>
+            <div class="project-desc">The auction house of Odiville. A place to bid on moments from around the village.</div>
+            <span class="project-tag">Auction &middot; Ethereum</span>
+            <div class="project-arrow"></div>
+          </div>
+          <canvas class="card-fx"></canvas>
+        </div>
+
+        <!-- Card 2: DUU -->
+        <div class="project-card reveal reveal-delay-2" onclick="navigateTo('duu')">
+          <div class="card-ghost">
+            <div class="project-year">2023 &ndash; 2025</div>
+            <div class="project-name">Decisions, Upsets and Unknowns</div>
+            <div class="project-desc">An original ten chapter interactive narrative and art collecting journey. Over 50 artworks derived from moments throughout the book.</div>
+            <span class="project-tag">Interactive Book &middot; Shape</span>
+          </div>
+          <div class="card-reveal">
+            <div class="project-year">2023 &ndash; 2025</div>
+            <div class="project-name">Decisions, Upsets and Unknowns</div>
+            <div class="project-desc">An original ten chapter interactive narrative and art collecting journey. Over 50 artworks derived from moments throughout the book.</div>
+            <span class="project-tag">Interactive Book &middot; Shape</span>
+            <div class="project-arrow"></div>
+          </div>
+          <canvas class="card-fx"></canvas>
+        </div>
+
+        <!-- Card 3: OWT -->
+        <div class="project-card reveal reveal-delay-3" onclick="navigateTo('owt')">
+          <div class="card-ghost">
+            <div class="project-year">2024</div>
+            <div class="project-name">One-Way Ticket</div>
+            <div class="project-desc">A study in sacrifice. Physical artworks from Decisions, Upsets and Unknowns were printed, framed, and burned in New York, before being reborn from the ashes as a new collection.</div>
+            <span class="project-tag">Physical &middot; Performance</span>
+          </div>
+          <div class="card-reveal">
+            <div class="project-year">2024</div>
+            <div class="project-name">One-Way Ticket</div>
+            <div class="project-desc">A study in sacrifice. Physical artworks from Decisions, Upsets and Unknowns were printed, framed, and burned in New York, before being reborn from the ashes as a new collection.</div>
+            <span class="project-tag">Physical &middot; Performance</span>
+            <div class="project-arrow"></div>
+          </div>
+          <canvas class="card-fx"></canvas>
+        </div>
+
+        <!-- Card 4: The Ferryman's Promise -->
+        <div class="project-card reveal reveal-delay-1">
+          <div class="card-ghost">
+            <div class="project-year">&mdash;</div>
+            <div class="project-name">The Ferryman&rsquo;s Promise</div>
+            <div class="project-desc">Coming soon.</div>
+            <span class="project-tag">Coming Soon</span>
+          </div>
+          <div class="card-reveal">
+            <div class="project-year">&mdash;</div>
+            <div class="project-name">The Ferryman&rsquo;s Promise</div>
+            <div class="project-desc">Coming soon.</div>
+            <span class="project-tag">Coming Soon</span>
+          </div>
+          <canvas class="card-fx"></canvas>
+        </div>
+
+        <!-- Card 5: This is Reality by Odious -->
+        <div class="project-card reveal reveal-delay-2">
+          <div class="card-ghost">
+            <div class="project-year">&mdash;</div>
+            <div class="project-name">This is Reality by Odious</div>
+            <div class="project-desc">Coming soon.</div>
+            <span class="project-tag">Coming Soon</span>
+          </div>
+          <div class="card-reveal">
+            <div class="project-year">&mdash;</div>
+            <div class="project-name">This is Reality by Odious</div>
+            <div class="project-desc">Coming soon.</div>
+            <span class="project-tag">Coming Soon</span>
+          </div>
+          <canvas class="card-fx"></canvas>
+        </div>
+
+        <!-- Card 6: Keys of the Collective -->
+        <div class="project-card reveal reveal-delay-3">
+          <div class="card-ghost">
+            <div class="project-year">&mdash;</div>
+            <div class="project-name">Keys of the Collective</div>
+            <div class="project-desc">Coming soon.</div>
+            <span class="project-tag">Coming Soon</span>
+          </div>
+          <div class="card-reveal">
+            <div class="project-year">&mdash;</div>
+            <div class="project-name">Keys of the Collective</div>
+            <div class="project-desc">Coming soon.</div>
+            <span class="project-tag">Coming Soon</span>
+          </div>
+          <canvas class="card-fx"></canvas>
+        </div>
+
+        <!-- Card 7: RECEIPTS -->
+        <div class="project-card reveal reveal-delay-1">
+          <div class="card-ghost">
+            <div class="project-year">&mdash;</div>
+            <div class="project-name">RECEIPTS</div>
+            <div class="project-desc">Coming soon.</div>
+            <span class="project-tag">Coming Soon</span>
+          </div>
+          <div class="card-reveal">
+            <div class="project-year">&mdash;</div>
+            <div class="project-name">RECEIPTS</div>
+            <div class="project-desc">Coming soon.</div>
+            <span class="project-tag">Coming Soon</span>
+          </div>
+          <canvas class="card-fx"></canvas>
+        </div>
+
+        <!-- Card 8: This Place Remembers -->
+        <div class="project-card reveal reveal-delay-2">
+          <div class="card-ghost">
+            <div class="project-year">&mdash;</div>
+            <div class="project-name">This Place Remembers</div>
+            <div class="project-desc">Coming soon.</div>
+            <span class="project-tag">Coming Soon</span>
+          </div>
+          <div class="card-reveal">
+            <div class="project-year">&mdash;</div>
+            <div class="project-name">This Place Remembers</div>
+            <div class="project-desc">Coming soon.</div>
+            <span class="project-tag">Coming Soon</span>
+          </div>
+          <canvas class="card-fx"></canvas>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-left">&copy; Odiville, 2025</div>
     <ul class="footer-links">
       <li><a href="https://whispers.odiville.com" target="_blank">Whispers</a></li>
       <li><a href="https://echoes.odiville.com" target="_blank">Echoes</a></li>
@@ -196,8 +369,9 @@
           <h2 class="section-heading reveal reveal-delay-1">I found art in the<br>same year I <em>lost myself</em></h2>
           <div class="section-body reveal reveal-delay-2">
             <p>I'm Odious, a British artist who first minted on Ethereum in 2020. My work explores unsettling atmospheres and restrained psychological tension rooted in the unknown, expressed through shifting visual styles and recurring motifs.</p>
-            <p>My practice has been documented online from my very first painting. Every experiment, every evolution, now spread across thousands of wallets and championing collectors. Odiville is the world that emerged from that journey: an evolving creative village that serves as both armature and anchor for everything I create.</p>
-            <p>The work has always been world-first. Odiville isn't a container for projects — it's the reason they exist. Every series, from the Book to Whispers to the ashes of New York, was built to deepen the same place. The world now holds over five years of decisions, most of them irreversible.</p>
+            <p>My practice has been documented online from my very first painting. Every experiment, every evolution, now spread across thousands of wallets and championing collectors. Odiville is the world that emerged from that journey: an evolving creative village that serves as both armature and anchor for my practice.</p>
+            <p>Creating and collecting have always run together. Since my first mint I've supported other artists, watched them grow, and knowing I played even a small part in that has always meant as much to me as making my own work.</p>
+            <p>Before Odiville, the work was more personal, shaped by trauma, memory, and my own story. Since 2023, those ideas have been drawn into Odiville, a world that has grown with each series. From the Book to Whispers to the ashes of New York, every release has expanded and deepened the soil of Odiville, and now exists as the permanent result of one decision leading to the next.</p>
           </div>
         </div>
         <div>
@@ -211,49 +385,10 @@
               <div class="stat-label">Wallets Reached</div>
             </div>
             <div class="intro-stat">
-              <div class="stat-value">50+</div>
-              <div class="stat-label">Book Artworks</div>
-            </div>
-            <div class="intro-stat">
-              <div class="stat-value">275</div>
-              <div class="stat-label">OWT Edition</div>
+              <div class="stat-value">1M+</div>
+              <div class="stat-label">Supporting Artists</div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Journey Timeline -->
-  <section class="artist-journey">
-    <div class="section-inner">
-      <div class="section-label reveal">The Journey</div>
-      <h2 class="section-heading reveal reveal-delay-1">Five years.<br>One <em>world.</em></h2>
-      <div class="artist-timeline reveal reveal-delay-2">
-        <div class="artist-timeline-entry">
-          <div class="artist-timeline-year">2020</div>
-          <div class="artist-timeline-title">First Mint on Ethereum</div>
-          <div class="artist-timeline-desc">Early paintings. Unsettling atmospheres, unknown motifs. The practice begins in public, from day one.</div>
-        </div>
-        <div class="artist-timeline-entry">
-          <div class="artist-timeline-year">2021 – 2022</div>
-          <div class="artist-timeline-title">Odiville Takes Shape</div>
-          <div class="artist-timeline-desc">The world emerges. A village, a mythology, a system of recurring characters and places. The Book concept crystallises.</div>
-        </div>
-        <div class="artist-timeline-entry">
-          <div class="artist-timeline-year">2023</div>
-          <div class="artist-timeline-title">The Book Launches</div>
-          <div class="artist-timeline-desc">Decisions, Upsets and Unknowns. A ten-chapter interactive narrative on-chain. Fifty artworks, audio, sacrifice mechanics. Chapter I drops.</div>
-        </div>
-        <div class="artist-timeline-entry">
-          <div class="artist-timeline-year">2024</div>
-          <div class="artist-timeline-title">One-Way Ticket — New York</div>
-          <div class="artist-timeline-desc">Every artwork from the Book is printed, framed, and burned in a single night. 275 fragments from the ash become a new collection. The Book completes.</div>
-        </div>
-        <div class="artist-timeline-entry artist-timeline-entry--current">
-          <div class="artist-timeline-year">2025</div>
-          <div class="artist-timeline-title">Whispers of Odiville</div>
-          <div class="artist-timeline-desc">Six 1/1 artworks. Six bound Residents. The auction house of Odiville opens. The next chapter of the world begins.</div>
         </div>
       </div>
     </div>
@@ -264,21 +399,21 @@
     <div class="section-inner">
       <div class="section-label reveal">Find the Work</div>
       <div class="artist-links reveal reveal-delay-1">
-        <a href="https://echoes.odiville.com" class="artist-link" target="_blank">
-          <span class="artist-link-label">The Book</span>
-          <span class="artist-link-sub">echoes.odiville.com</span>
+        <a onclick="navigateTo('whispers')" class="artist-link" style="cursor:pointer;">
+          <span class="artist-link-label">Whispers of Odiville</span>
+          <span class="artist-link-sub">The Auction House</span>
         </a>
-        <a href="https://whispers.odiville.com" class="artist-link" target="_blank">
-          <span class="artist-link-label">Whispers</span>
-          <span class="artist-link-sub">whispers.odiville.com</span>
+        <a onclick="navigateTo('duu')" class="artist-link" style="cursor:pointer;">
+          <span class="artist-link-label">Decisions, Upsets and Unknowns</span>
+          <span class="artist-link-sub">The Interactive Book</span>
         </a>
-        <a href="https://opensea.io/todayodious" class="artist-link" target="_blank">
-          <span class="artist-link-label">OpenSea</span>
-          <span class="artist-link-sub">Collection history</span>
+        <a onclick="navigateTo('owt')" class="artist-link" style="cursor:pointer;">
+          <span class="artist-link-label">One-Way Ticket</span>
+          <span class="artist-link-sub">The Burn</span>
         </a>
-        <a href="https://www.x.com/todayodious" class="artist-link" target="_blank">
-          <span class="artist-link-label">X / Twitter</span>
-          <span class="artist-link-sub">@todayodious</span>
+        <a onclick="navigateTo('archive')" class="artist-link" style="cursor:pointer;">
+          <span class="artist-link-label">The Archive</span>
+          <span class="artist-link-sub">Every artwork, every project</span>
         </a>
       </div>
     </div>
@@ -296,7 +431,7 @@
   </section>
 
   <footer>
-    <div class="footer-left">&copy; Odious, 2025</div>
+    <div class="footer-left">&copy; Odiville, 2025</div>
     <ul class="footer-links">
       <li><a href="https://whispers.odiville.com" target="_blank">Whispers</a></li>
       <li><a href="https://echoes.odiville.com" target="_blank">Echoes</a></li>
@@ -319,7 +454,7 @@
     <div class="sub-hero-content">
       <p class="sub-hero-eyebrow" style="color:var(--accent-duu);">The Interactive Book of Odiville</p>
       <h1 class="sub-hero-title"><em>Decisions, Upsets</em><br>and Unknowns</h1>
-      <p class="sub-hero-subtitle">A ten-chapter interactive narrative and art collecting journey. Over 50 artworks told through audio, text, and on-chain mechanics.</p>
+      <p class="sub-hero-subtitle">A ten chapter interactive narrative and art collecting journey. Over 50 artworks to discover and collect.</p>
       <a href="https://echoes.odiville.com" class="btn btn-primary btn-sm" target="_blank">Read the Book <span class="btn-arrow">&rarr;</span></a>
     </div>
   </div>
@@ -414,19 +549,18 @@
     <div class="section-inner">
       <div class="duu-echoes-text">
         <div class="section-label reveal">The Artworks</div>
-        <h2 class="section-heading reveal reveal-delay-1">Not every Echo can<br>be <em>captured</em></h2>
+        <h2 class="section-heading reveal reveal-delay-1">Every artwork echoes<br>a <em>moment.</em></h2>
         <div class="section-body reveal reveal-delay-2">
-          <p>Echoes are the artworks of Odiville. Impressions of what happened, what's coming, what won't come back. They appear across the ten chapters without warning, and most of them won't wait.</p>
-          <p>Some can be captured. All can be burned. Over fifty have surfaced so far. None of them behave the same way twice.</p>
+          <p>More than fifty are spread across ten chapters, each tied to a specific moment in the story. Some were released through auctions, others through timed claims, puzzles, or community votes. Every artwork carries a Shade value and a Shade cost to collect, the currency at the heart of the experience.</p>
         </div>
         <div class="duu-fact-chips reveal-stagger reveal-delay-2">
-          <div class="duu-fact-chip" style="--i:0"><span class="duu-fact-chip-num">01</span>Over 50 Echoes hidden across the ten-chapter narrative</div>
-          <div class="duu-fact-chip" style="--i:1"><span class="duu-fact-chip-num">02</span>Each one carries a Shade cost to collect and a Shade value within</div>
-          <div class="duu-fact-chip" style="--i:2"><span class="duu-fact-chip-num">03</span>Availability varies. Some are timed, some permanent, some auctioned</div>
+          <div class="duu-fact-chip" style="--i:0"><span class="duu-fact-chip-num">01</span>Over 50 artworks are hidden throughout the ten chapter narrative</div>
+          <div class="duu-fact-chip" style="--i:1"><span class="duu-fact-chip-num">02</span>Each artwork before Chapter 6 has a Shade cost to collect and a Shade value</div>
+          <div class="duu-fact-chip" style="--i:2"><span class="duu-fact-chip-num">03</span>Six works that depict key moments from the book were reserved for the final auction</div>
         </div>
       </div>
       <div class="duu-echoes-image reveal-from-right reveal-delay-2">
-        <img src="images/Book/DUU_04_Final.png" alt="DUU Echo Artwork">
+        <img src="images/Book/Markings/Echoes-Grid_Black_web.png" alt="Echoes Grid — DUU Artworks">
       </div>
     </div>
   </section>
@@ -440,8 +574,7 @@
       <h2 class="section-heading reveal reveal-delay-1">Everything runs<br>on <em>Shade</em></h2>
       <div class="duu-shade-rule reveal reveal-delay-1"></div>
       <div class="section-body reveal reveal-delay-2">
-        <p>Shade is what Odiville runs on. It arrives in your ticket and waits inside every Echo you collect. It flows in both directions — the cost of entry, and the yield of letting go.</p>
-        <p>Each Echo carries two figures: what it takes to <span class="shade-term">capture</span>, and what it holds in <span class="shade-term">return</span>. The two numbers rarely match. You won't know which way it fell until the act is already done.</p>
+        <p>Shade is the currency of Odiville. Up to Chapter 6, each artwork holds a Shade value between 0 and 44, and all artworks carry a Shade cost to collect.</p>
       </div>
     </div>
   </section>
@@ -452,29 +585,29 @@
   <section class="duu-section duu-section--capture duu-ghost-num" id="capture">
     <div class="section-inner">
       <div class="section-label reveal">The Mechanics</div>
-      <h2 class="section-heading reveal reveal-delay-1">To collect is to hold.<br>To sacrifice is to <em>become.</em></h2>
+      <h2 class="section-heading reveal reveal-delay-1">To collect is to hold.<br>To sacrifice is to <em>create.</em></h2>
 
       <div class="duu-split">
         <div class="duu-split-divider"></div>
         <div class="duu-split-col reveal-from-left reveal-delay-2">
           <div class="section-body">
             <span class="duu-split-heading">Capture</span>
-            <p>Echoes don't announce themselves. When one surfaces, you can mint it — pulling it from the current and into your wallet. Once taken, it belongs to you. Hold it, move it, or spend it. That part is yours to decide.</p>
+            <p>Artworks can be found throughout the book. They look like small markings. Clicking on them brings up a window that enables you to mint. Once minted, it belongs to you. Hold it, move it, or spend what lies below. That part is yours to decide.</p>
           </div>
         </div>
         <div class="duu-split-col reveal-from-right reveal-delay-2">
           <div class="section-body">
             <span class="duu-split-heading">Sacrifice</span>
-            <p>Shade lives beneath the surface of every Echo. To reach it, the artwork burns. The act is permanent. What it unlocks next is the real question — and Odiville remembers what you chose to do with it.</p>
+            <p>Shade lives beneath the surface of every artwork. To reach it, the artwork must burn. The act itself is permanent.</p>
           </div>
         </div>
       </div>
 
       <div class="duu-mechanics-grid reveal-stagger reveal-delay-3">
-        <div class="duu-mechanic-item" style="--i:0">Captured Echoes appear in your inventory and wallet immediately</div>
-        <div class="duu-mechanic-item" style="--i:1">Every Echo is connected, bound by the Shade that flows between them</div>
+        <div class="duu-mechanic-item" style="--i:0">Captured artworks appear in your inventory and wallet immediately</div>
+        <div class="duu-mechanic-item" style="--i:1">Every artwork is connected, bound by the Shade that flows between them</div>
         <div class="duu-mechanic-item" style="--i:2">The collection is always shifting, shaped by the choices of those within it</div>
-        <div class="duu-mechanic-item" style="--i:3">What the community preserves and what it burns tells its own story</div>
+        <div class="duu-mechanic-item" style="--i:3">What is preserved, and what burns, tells its own story.</div>
       </div>
     </div>
   </section>
@@ -503,7 +636,7 @@
         <div class="section-label reveal" style="border-bottom:none; text-align:center; padding-bottom:0;">A Living Record</div>
         <h2 class="section-heading reveal reveal-delay-1" style="text-align:center;">What actually<br><em>happened</em></h2>
         <div class="section-body reveal reveal-delay-2" style="max-width:580px; margin:0 auto; text-align:center;">
-          <p>Decisions, Upsets and Unknowns was never a static project. It unfolded in real time across years — shaped by auctions, burns, puzzles, social experiments, and the cascading consequences of choices made by the community and two appointed figures at the centre of it all.</p>
+          <p>Decisions, Upsets and Unknowns was never a static project. It unfolded in real time over years, shaped by sacrifice, puzzles, social experiments, and the cascading consequences of choices made by its players and the two appointed figures at the centre of it all.</p>
         </div>
       </div>
     </div>
@@ -527,7 +660,7 @@
         <h3 class="duu-event-title">The Invite</h3>
         <div class="duu-event-body">
           <p>An auction was held to determine who would assume the role of Game Master — a position of real power over the direction of the experience. Bidders could use both ETH and tickets, with each ticket carrying a weighted value of $44 in the auction.</p>
-          <p>A collector known as Mooncat was crowned the winner, spending 888 tickets — the equivalent of $39,072 — to claim the seat. From this point forward, Mooncat's decisions would carry consequences for every other participant in the book.</p>
+          <p>A collector that goes by Mooncat was crowned the winner, spending 888 tickets, the equivalent of $39,072, to claim the seat. From this point forward, Mooncat's decisions would carry consequences for every other participant in the book.</p>
         </div>
       </div>
     </section>
@@ -538,8 +671,8 @@
         <div class="duu-event-phase">Before the Book</div>
         <h3 class="duu-event-title">The Apprentice</h3>
         <div class="duu-event-body">
-          <p>Mooncat was presented with two sealed boxes and asked to choose one blind. Inside each was the name of a participant — one was the last minter of the ticket mint, the other a randomly selected minter. The box Mooncat selected revealed the random minter: phillipTheFirst.</p>
-          <p>Together, the Game Master and the Apprentice would serve as the book's two central decision-makers — granted immunity from certain unknowns, but burdened with choices that would cascade across the entire community.</p>
+          <p>Mooncat was presented with two sealed boxes and asked to choose one blind. Inside each was the name of a participant. One was the last minter of the ticket mint, the other a randomly selected minter. The box Mooncat selected revealed the name of the random minter: phillipTheFirst.</p>
+          <p>Together, the Game Master and the Apprentice would serve as the book's two central decision makers, granted immunity from certain unknowns, but burdened with choices that would cascade across the rest of the players.</p>
         </div>
       </div>
     </section>
@@ -550,9 +683,9 @@
         <div class="duu-event-phase">Phase III</div>
         <h3 class="duu-event-title">The First Burn</h3>
         <div class="duu-event-body">
-          <p>Holders were asked to pick between four balloons, trading one ticket for one balloon of their choice. It was then revealed that one of the four was not safe — and would pop.</p>
-          <p>Both storytellers were asked to make their selections. phillipTheFirst chose the blue balloon. Mooncat chose black. A verifiable random function was run on-chain to determine which balloon would be marked. The black balloon was chosen.</p>
-          <p>phillipTheFirst had selected correctly. As a reward, ten balloons were sent to the Apprentice, and Mooncat received forty — ten of each colour. This was the first real consequence. The first indication that the choices being made were not hypothetical.</p>
+          <p>Holders were asked to pick between four balloons, trading one ticket for one balloon of their choice. It was then revealed that one of the four was not safe and would pop.</p>
+          <p>Both storytellers were asked to make their selections. Phillip chose the blue balloon. Mooncat chose black. A verifiable random function was run on-chain to determine which balloon would be marked. The black balloon was chosen.</p>
+          <p>Philip had selected correctly. As a reward, ten balloons were sent to the himself, and Mooncat received forty, ten of each colour. This was the first real consequence. The first indication that the choices being made were real.</p>
         </div>
       </div>
     </section>
@@ -563,9 +696,9 @@
         <div class="duu-event-phase">Phase III</div>
         <h3 class="duu-event-title">The Redemption Event</h3>
         <div class="duu-event-body">
-          <p>phillipTheFirst was asked to pick a number from three options: 420, 690, or 1337. The Apprentice chose 1337. For a second decision, a choice was presented: accept 40 balloons, or unlock a mystery event. The mystery event was chosen.</p>
-          <p>The event went live later that night and ran for exactly 1,337 seconds — a duration determined entirely by the Apprentice's earlier choice. It became an event of redemption. Holders of the marked black balloon were given a window to swap it for a safe one. In total, 1,010 balloons were exchanged before the clock ran out.</p>
-          <p>The black balloon's metadata was then swapped to reveal a single phrase: <em>"play to learn."</em></p>
+          <p>Phillip was asked to pick a number from three options: 420, 690, or 1337. He chose 1337. For a second decision, a choice was presented: accept 40 balloons, or unlock a mystery event. The mystery event was chosen.</p>
+          <p>The event went live later that night and ran for exactly 1,337 seconds, a duration determined entirely by Phillip's earlier choice. It became an event of redemption. Holders of the marked black balloon were given a window to swap for a safe one. In total, 1,010 balloons were exchanged before the clock ran out.</p>
+          <p>The black balloon's metadata was then swapped to reveal <em>"play to learn"</em> the first artwork in the series.</p>
         </div>
       </div>
     </section>
@@ -576,7 +709,7 @@
         <div class="duu-event-phase">Phase III</div>
         <h3 class="duu-event-title">Royalty</h3>
         <div class="duu-event-body">
-          <p>Mooncat's earlier decision to select the black balloon carried a hidden consequence. A prior instruction had been given: <em>"Treat them like royalty."</em> As a result of the Game Master's incorrect choice, the creator royalties for the entire collection were permanently increased from 5% to 6%.</p>
+          <p>Mooncat's earlier decision to select the black balloon carried a hidden consequence. A prior instruction had been given: <em>"Treat the game master like royalty."</em> As a result of the Game Master's incorrect choice, the creator royalties for the entire collection were permanently increased from 5% to 6%.</p>
           <p>This was a defining moment. A single choice, made by one person, had altered the economic structure of the project for everyone involved.</p>
         </div>
       </div>
@@ -588,8 +721,8 @@
         <div class="duu-event-phase">Phase III</div>
         <h3 class="duu-event-title">The Second Burn</h3>
         <div class="duu-event-body">
-          <p>With the next artworks in the series completed, Mooncat was asked to choose the fate of the new works. For the Game Master and the Apprentice, the selection was <em>"play to burn"</em> — an edition of two. For the remaining balloon holders, the selection was <em>"cyclone."</em> The next artwork to burn for was decided to be <em>"whispers in the glade."</em></p>
-          <p>Before the burn went live, the other balloons had their metadata swapped to reveal <em>"cyclone"</em> — the outcome of the decision. The second burn mechanic required exchanging two cyclones to receive one <em>"whispers in the glade."</em></p>
+          <p>With the next artworks in the series completed, Mooncat was asked to choose the fate of the new works. For himself and Phillip the selection was <em>"play to burn"</em> an edition of two. For the remaining balloon holders, the selection was <em>"cyclone"</em> Leaving the final artwork <em>"whispers in the glade"</em> for the next burn.</p>
+          <p>Before the burn went live, the other balloons had their metadata swapped to reveal <em>"cyclone"</em>. The second burn required exchanging two cyclones to receive one <em>"whispers in the glade"</em></p>
         </div>
       </div>
     </section>
@@ -600,10 +733,10 @@
         <div class="duu-event-phase">The Book</div>
         <h3 class="duu-event-title">The Book Launches</h3>
         <div class="duu-event-body">
-          <p>Over the following two years, the project was refined into a full experience — a ten-chapter interactive art-collecting narrative with a fully developed ecosystem running beneath it. The underlying currency was formalised as Shade, with one ticket equalling one Shade.</p>
-          <p>The book launched with four chapters. The first choice presented was a timed exchange: pick one of three paths — Barn, Carnival, or Forest — each asking for 12 Shade. After the mint window closed, the true Shade values were revealed. Barn remained at 12. Carnival and Forest were adjusted to 16.</p>
-          <p>This was the first decision in the book that returned a positive adjustment for selecting the correct path. The Barn path also unlocked a unique opportunity — a 24-hour mint for an artwork called <em>"uninvited,"</em> available only to those who held a Barn piece.</p>
-          <p>phillipTheFirst was then asked to answer a question blind. The Apprentice chose to answer yes. As a result, the Shade value of the <em>"uninvited"</em> artwork was reduced to zero.</p>
+          <p>Over the following two years, the project was refined into a full experience, a ten chapter interactive art collecting narrative with a fully developed ecosystem running beneath it. The underlying currency was formalised as Shade, with one ticket equalling one Shade.</p>
+          <p>The book launched on Base with four chapters. The first choice presented was a timed exchange: pick one of three paths, Barn, Carnival, or Forest, each asking for 12 Shade. After the mint window closed, the true Shade values were revealed. Barn remained at 12. Carnival and Forest were adjusted to 16.</p>
+          <p>This was the first decision in the book that returned a positive adjustment for selecting the correct path. The Barn path also unlocked a unique opportunity, a 24 hour mint for an artwork called <em>"uninvited,"</em> available only to those who held a Barn piece.</p>
+          <p>Phillip was then asked to answer a question blind. Of which he chose to answer yes. As a result, the Shade value of the <em>"uninvited"</em> artwork was reduced to 0.</p>
         </div>
       </div>
     </section>
@@ -614,7 +747,7 @@
         <div class="duu-event-phase">Chapter V</div>
         <h3 class="duu-event-title">Stone Tiles</h3>
         <div class="duu-event-body">
-          <p>Chapter 5 opened with a coded image. The task was straightforward: decipher the code, and a Key would be reserved. The community resolved the code, revealing the phrase <em>"chorus of the collective."</em></p>
+          <p>Chapter 5 opened with a coded image. The task was straightforward: decipher the code, and a Key would be reserved. Eventually one player resolved the code, revealing the phrase <em>"chorus of the collective."</em></p>
           <p>Completing the event also unlocked a new artwork to mint — <em>"stone tiles."</em></p>
         </div>
       </div>
@@ -626,9 +759,9 @@
         <div class="duu-event-phase">Chapter V</div>
         <h3 class="duu-event-title">The Light Keepers Puzzle</h3>
         <div class="duu-event-body">
-          <p>A puzzle was opened to all participants for seven days. The fastest time to complete it would win a Key. When the initial difficulty proved too steep — with very few able to finish — the threshold was lowered, and the puzzle was reopened with a 20-minute reset timer.</p>
-          <p>The fastest recorded solve was one minute and four seconds. With the puzzle concluded, the remainder of Chapter 5 was unlocked: pages 40 through 45, revealing six new artworks to mint, three of which were limited-time offerings.</p>
-          <p>Shade values were then adjusted after mint: <em>"foreboding tree"</em> was reduced to 12 Shade, <em>"mutual pact"</em> remained untouched at 32, and <em>"marked"</em> was increased from 32 to 40.</p>
+          <p>A puzzle was opened to all participants for seven days. The fastest time to complete it was reserved a Key. When the initial difficulty proved too steep, with very few able to finish, a key was set aside, the threshold was lowered, and the puzzle reopened.</p>
+          <p>The fastest recorded solve was one minute and four seconds. With the puzzle concluded, the remainder of Chapter 5 was unlocked: pages 40 through 45, revealing six new artworks to mint, three of which were limited time offerings; foreboding tree, mutual pact, and marked.</p>
+          <p>Shade values of these works were then revealed after mint: <em>"foreboding tree"</em> was reduced to 12, <em>"mutual pact"</em> remained untouched at 32, and <em>"marked"</em> was increased from 32 to 40.</p>
         </div>
       </div>
     </section>
@@ -640,9 +773,9 @@
         <h3 class="duu-event-title">Keys of the Collective</h3>
         <div class="duu-event-body">
           <p>During Chapter 5, three participants emerged as victors from the events. Their Keys were set aside. It was then revealed that holders of the <em>"marked"</em> artwork had also been selected for a Key. A search began for 50 additional names to fill the remaining seats.</p>
-          <p>Mooncat and phillipTheFirst were given the power to invite between them — eight names from the Game Master, four from the Apprentice. The rest were curated through a social experiment. Cryptic direct messages were sent containing nothing but an envelope and a phrase: <em>"Sealed with an offering, not a promise."</em></p>
-          <p>Anyone who reacted or replied was sent a follow-up link to a Discord server — a waiting room. While the group assembled, a vote was held to decide which Ferryman artwork would make it into the final collection. The vote closed after 24 hours, and anyone who participated received a gift: <em>"blue vow"</em> from the Ferryman's Promise collection.</p>
-          <p>One seat remained. The community was asked publicly how it should be filled. The decision was made: the final Key holder would be determined through auction. The moment was marked with a 1/1 artwork — <em>"All Time High Beneath The Sky"</em> — <a href="https://superrare.com/artwork/eth/0x8ef59800a6751305fe26a2F6eA4A401411567a7E/1" target="_blank">sold on SuperRare</a>. The winning bidder received the final invite.</p>
+          <p>Mooncat and Phillip were given the power to invite between them, eight names from the Mooncat, four from Phillip. The rest were curated through a social experiment. Cryptic messages were sent containing nothing but an envelope and a hidden phrase: <em>"Sealed with an offering, not a promise."</em></p>
+          <p>Anyone who reacted or replied was sent a follow up link to a Discord server, a waiting room. While the group assembled, a vote was held to decide which Ferryman artwork would make it into the final collection. The vote closed after 24 hours, and anyone who participated received a gift: <em>"blue vow"</em> from the Ferryman's Promise collection.</p>
+          <p>One seat remained. The players were asked publicly how it should be filled. The decision was made: the final Key holder would be determined through auction. The moment was marked with a 1/1 artwork, <em>"All Time High Beneath The Sky,"</em> <a href="https://superrare.com/artwork/eth/0x8ef59800a6751305fe26a2F6eA4A401411567a7E/1" target="_blank">sold on SuperRare</a>. The winning bidder received the final invite.</p>
         </div>
       </div>
     </section>
@@ -653,12 +786,12 @@
         <div class="duu-event-phase">Chapter VI</div>
         <h3 class="duu-event-title">The Cloister Rooms</h3>
         <div class="duu-event-body">
-          <p>Once all 60 participants were present, a video was shared introducing the Cloister Rooms — a social experiment built around participation and betrayal. Each name would be assigned a room. Inside each room: five other people.</p>
-          <p>The group was asked how assignments should be handled — curated or random. The vote closed and the group chose random. A sorting machine was built to determine the groupings. Each of the eight Cloisters was named in the theme of betrayal: Crossed Lines, False Friend, Trust Fall, Two Masks, Silent Blade, Red Hands, Bitter End, Painted Smile.</p>
-          <p>Each room was given seven days to decide who should be removed. If no name was given, the burden would transfer to the artist. Nine names were needed. Every room successfully put forward a name.</p>
-          <p>A follow-up video was then shared, revealing one final detail: those who did not speak during the seven days had been automatically moved to the top of the removal list — replacing the names put forward. The book called for 14 removals in total, but only nine had been asked of the rooms. The remaining five were divided: Mooncat was given the power to remove three, the Apprentice one, and the final decision fell to a community-wide vote.</p>
-          <p>The 14 names were finalised. Those who remained could claim a Key of the Collective. Those removed did not leave empty-handed — each received <em>"etched,"</em> an artwork marking their time in the waiting room and the betrayal that accompanied it. Three variants of the piece were shared; the group selected the final version.</p>
-          <p>One highlight from the vote: a member who had been leading in removal votes changed their profile picture, Discord name, and posted a message designed to look as though it was from the artist. The impersonation was allowed to stand on the grounds of its creative audacity — and it worked. The votes redirected.</p>
+          <p>Once all 60 participants were present, a video was shared introducing the Cloister Rooms, a social experiment built around participation and betrayal. Each name would be assigned a room. Inside each room, five people would stand.</p>
+          <p>The group was asked how assignments should be handled, curated or random. The vote closed and the group chose random. A sorting machine was built to determine the groupings. Each of the eight Cloisters were named in the theme of betrayal: Crossed Lines, False Friend, Trust Fall, Two Masks, Silent Blade, Red Hands, Bitter End, Painted Smile.</p>
+          <p>Each room was given seven days to decide who should be removed. If no name was given, the burden would transfer to the artist. Nine were needed. Every room successfully put forward a name.</p>
+          <p>A follow up video was then shared, revealing one final detail: those who did not speak during the seven days had been automatically moved to the top of the removal list, replacing the names put forward with those that were silent. The book called for 14 removals in total, but only nine had been asked of the rooms. The remaining five were divided: Mooncat was given the power to remove three, Phillip one, and the final decision fell to a group wide vote.</p>
+          <p>The 14 names were finalised. Those who remained could claim a Key of the Collective. Those removed did not leave empty handed. Each received <em>"etched,"</em> an artwork marking their time in the waiting room and the betrayal that accompanied. Three variants of the piece were shared, and the group selected the final version.</p>
+          <p>One highlight from the vote: a member who had been leading in removal votes changed their profile picture, Discord name, and posted a message designed to look as though it was from the artist. The impersonation was allowed to stand on the grounds of its creative audacity, and it worked. The votes were redirected.</p>
         </div>
       </div>
     </section>
@@ -670,8 +803,8 @@
         <h3 class="duu-event-title">The Move to Shape</h3>
         <div class="duu-event-body">
           <p>A decision was made to relocate the experience to Shape. The previous chain was moving in a direction that no longer aligned with the project's values. Shape offered a permanent home.</p>
-          <p>With the migration complete, the Collective was presented with a new choice: three sealed boxes, each containing six artworks — eighteen in total, but only one box could be selected. The box chosen would determine the pages for Chapter 6, making the Collective co-authors in the process.</p>
-          <p>The vote ran for seven days. The final result was Box C, labelled <em>"Extract."</em> The narrative would travel to the Whispering Well, and the accompanying artworks would be created in a classic neo-expressionist style — a deliberate return to the roots of the practice.</p>
+          <p>With the migration complete, the Collective was presented with a new choice: three sealed boxes, each containing six artworks, eighteen in total, but only one box could be selected. The box chosen would determine the pages for Chapter 6, making the Collective co authors in the process.</p>
+          <p>The vote ran for seven days. The final result was Box C, labelled <em>"Extract."</em> Which took the players to the Whispering Well. The accompanying artworks were created in a classic neo expressionist style, a deliberate return to the roots of the artist's past work.</p>
         </div>
       </div>
     </section>
@@ -685,7 +818,7 @@
           <p>Chapter 7 presented two paths in the book. A green door and a white door. The catch: only one could be minted. The choice was final.</p>
           <p>Before the mint opened, Mooncat was asked a question blind — with no knowledge of what it pertained to. <em>"Do you want to swap the doors?"</em> The Game Master answered yes.</p>
           <p>The doors swapped in the story. The artwork metadata followed — green became white, white became green. Every holder's piece transformed overnight, the meaning of their choice quietly rewritten beneath them.</p>
-          <p>This traced back to a work minted in 2024, before the book experience had even launched: <em>"you're wrong about them"</em> — a piece depicting two figures, one green and one white, seated and tied to opposite chairs. Its description read: <em>"the room you seek is occupied, try the other lock."</em> A hint, planted long before anyone knew what it pointed to.</p>
+          <p>This traced back to a work minted in 2024, before the book experience had even launched: <em>"you're wrong about them"</em> — a piece depicting two figures, one green and one white, seated and tied to opposite chairs. Its description read: <em>"the room you seek is occupied, try the other lock."</em> A foreshadowing, planted long before anyone knew what it pointed to.</p>
         </div>
       </div>
     </section>
@@ -696,8 +829,8 @@
         <div class="duu-event-phase">Chapter VIII</div>
         <h3 class="duu-event-title">Pool of Doubt</h3>
         <div class="duu-event-body">
-          <p>Two works were made available: <em>"pool of doubt"</em> and <em>"garden of reflection."</em> After seven chapters of burns, betrayals, and blind decisions, Chapter 8 was a deliberate shift in register. A break from the chaos. An entry into calm.</p>
-          <p>There were no tricks here. No hidden consequences. Just a shedding of doubt and an unexpected cleansing — a rare moment in the book where the act of collecting carried no risk at all.</p>
+          <p>Two works were made available: <em>"pool of doubt"</em> and <em>"garden of reflection."</em> After seven chapters of burns, betrayals, and blind decisions, Chapter 8 was a deliberate shift. A break from the chaos. An entry into calm.</p>
+          <p>There were no tricks here. No hidden consequences, or decisions to be made. Just a shedding of doubt and an unexpected cleansing — a rare moment in the book where the act of collecting carried no risk at all.</p>
         </div>
       </div>
     </section>
@@ -708,7 +841,7 @@
         <div class="duu-event-phase">Chapter IX</div>
         <h3 class="duu-event-title">The Final Decision</h3>
         <div class="duu-event-body">
-          <p>Chapter 9 is where the last choice was made. Two endings were offered — <em>"Farewell to Odiville"</em> or <em>"The Final Sacrifice"</em> — and the decision had to be made blind, based on nothing but instinct.</p>
+          <p>Chapter 9 is where the last choice was made. Two endings were offered, <em>"Farewell to Odiville"</em> or <em>"Final Sacrifice,"</em> and the decision had to be made blind, based on nothing but instinct.</p>
           <p>The artworks revealed only abstract textures. One dark-toned. One light. That was the only clue. No explanation, no guidance, no second chance. One path led out. The other led deeper in. Nobody knew which was which.</p>
         </div>
       </div>
@@ -731,7 +864,7 @@
     <section class="duu-event duu-event--closing" id="evt-closing">
       <div class="section-inner" style="text-align:center;">
         <div class="duu-event-body" style="max-width:600px; margin:0 auto;">
-          <p>Decisions, Upsets and Unknowns ran for exactly one year — from book launch to book close. Ten chapters. Over fifty artworks. 37,294 tickets minted on the first night. Auctions, burns, puzzles, social experiments, betrayals, blind decisions, and a currency that moved through every act. Two storytellers whose choices shaped the fate of thousands. A community that voted, deciphered, sacrificed, and survived.</p>
+          <p>Decisions, Upsets and Unknowns ran for exactly one year — from book launch to book close. Ten chapters. Over fifty artworks. 37,294 tickets minted on the first night. Auctions, burns, puzzles, social experiments, betrayals, blind decisions, and a currency that move through every act. Two storytellers whose choices shaped the fate of thousands. A community that voted, deciphered, sacrificed, and survived.</p>
           <p>Every decision was real. Every consequence was permanent. And the ones who gave everything up were the ones who were welcomed home.</p>
         </div>
       </div>
@@ -753,7 +886,7 @@
   </section>
 
   <footer>
-    <div class="footer-left">&copy; Odious, 2025</div>
+    <div class="footer-left">&copy; Odiville, 2025</div>
     <ul class="footer-links">
       <li><a href="https://whispers.odiville.com" target="_blank">Whispers</a></li>
       <li><a href="https://echoes.odiville.com" target="_blank">Echoes</a></li>
@@ -776,7 +909,7 @@
     <div class="sub-hero-content">
       <p class="sub-hero-eyebrow" style="color:var(--accent-owt);">A Study in Sacrifice</p>
       <h1 class="sub-hero-title"><em>One-Way</em> Ticket</h1>
-      <p class="sub-hero-subtitle">Fifty artworks printed, framed, and burned. 275 remnants collected from the ash. A body of work built from what remained.</p>
+      <p class="sub-hero-subtitle">Fifty artworks printed, framed, and burned. 275 remnants collected from the ash, and a body of work built from what remained.</p>
       <a href="https://opensea.io/collection/one-way-ticket" class="btn btn-primary btn-sm" target="_blank">View Collection <span class="btn-arrow">&rarr;</span></a>
     </div>
   </div>
@@ -785,11 +918,11 @@
   <section class="owt-section" id="concept">
     <div class="section-inner">
       <div class="section-label reveal">The Concept</div>
-      <h2 class="section-heading reveal reveal-delay-1">The book was never meant<br>to stay <em>digital</em></h2>
+      <h2 class="section-heading reveal reveal-delay-1">The book called<br>for <em>more.</em></h2>
       <div class="owt-feature">
         <div>
           <div class="section-body reveal reveal-delay-2">
-            <p>The Odiville Book is built on a cycle of creation and destruction. Artworks discovered, collected, and sacrificed to create new ones. One-Way Ticket takes that same principle and strips it bare. No screens. No wallets. Just fire.</p>
+            <p>The Odiville Book is built on a cycle of creation and destruction. Artworks discovered, collected, and sacrificed to create new ones. One-Way Ticket takes that same principle and strips it bare. No screens. No wallets. Just a roaring fire.</p>
             <p>Every artwork from the book was printed and framed. Then, during a single night in New York, all of them were fed to a fire. The fragments that survived were photographed, curated, and digitally refined into a final collection of 275 pieces, each one carrying the residue of what came before.</p>
           </div>
           <div class="owt-stat-row reveal reveal-delay-2">
@@ -826,7 +959,7 @@
       <h2 class="section-heading reveal reveal-delay-1">A single night.<br>An irreversible <em>act.</em></h2>
       <div class="section-body section-body--wide reveal reveal-delay-2">
         <p>What began as a visit to New York for an exhibition became something else entirely. The opportunity to elevate the project presented itself, and the decision was made quickly. Print everything, frame everything, burn everything.</p>
-        <p>The fire was deliberate. Each piece was held, acknowledged, and released. Two years of work reduced to heat and ash in a matter of hours. The feeling mirrored the sacrifice mechanic at the heart of the book. A moment of unease, wrapped in renewal.</p>
+        <p>The fire was deliberate. Each piece was held, acknowledged, and released. Two years of work reduced to heat and ash in a matter of hours. The feeling mirrored the sacrifice mechanic at the heart of the book. A moment of unease, wrapped in a cathartic sense of renewal.</p>
       </div>
       <div class="owt-x-embed owt-x-embed--full reveal reveal-delay-3">
         <blockquote class="twitter-tweet" data-media-max-width="1200" data-chrome="noborder transparent"><p lang="en" dir="ltr">&quot;One-way Ticket&quot; <br>Monday Oct, 13th<a href="https://twitter.com/opensea?ref_src=twsrc%5Etfw">@opensea</a> x @Shape_L2 <a href="https://t.co/Xwkcm0wTAg">pic.twitter.com/Xwkcm0wTAg</a></p>&mdash; odious (@todayodious) <a href="https://twitter.com/todayodious/status/1975939963280888168?ref_src=twsrc%5Etfw">October 8, 2025</a></blockquote>
@@ -852,8 +985,8 @@
           <div class="section-label reveal">Rebirth</div>
           <h2 class="section-heading reveal reveal-delay-1">New work from<br>what <em>remained</em></h2>
           <div class="section-body reveal reveal-delay-2">
-            <p>The charcoal was transported back at 3am, still warm. Over 500 fragments were individually photographed, then hand-selected down to 275. Each one was digitally refined, composed to feel abstract while preserving the raw texture of what it once was.</p>
-            <p>A single physical piece was also created using the rescued charcoal, scraped directly across the surface by hand. A figure emerged. Taker of all, forgiver of none. It remains unnamed.</p>
+            <p>The charcoal was transported back at 3am, still warm. More than 500 fragments were individually photographed, then hand selected down to 275. Each was digitally refined and composed to feel abstract, while preserving the raw texture of what it once was. Every work was designed to feel like a heartbeat.</p>
+            <p>A single physical piece was also created using the rescued charcoal, scraped directly across the surface by hand. Eventually a figure emerged. Taker of all, forgiver of none. It remains unnamed.</p>
           </div>
         </div>
       </div>
@@ -891,7 +1024,7 @@
   </section>
 
   <footer>
-    <div class="footer-left">&copy; Odious, 2025</div>
+    <div class="footer-left">&copy; Odiville, 2025</div>
     <ul class="footer-links">
       <li><a href="https://whispers.odiville.com" target="_blank">Whispers</a></li>
       <li><a href="https://echoes.odiville.com" target="_blank">Echoes</a></li>
@@ -925,7 +1058,7 @@
       <div class="section-label reveal">The Auction House</div>
       <h2 class="section-heading reveal reveal-delay-1">Where moments from<br>the world are <em>offered</em></h2>
       <div class="section-body reveal reveal-delay-2">
-        <p>Whispers is the auction house of Odiville and the first building ever constructed within its borders. The inaugural six lots are drawn from chapters of the book, each distilled into a single image. Every artwork is paired with a bound Resident portrait through a first of its kind twin token format on Ethereum.</p>
+        <p>Whispers is the auction house of Odiville and the first building ever constructed within its borders. It opened with the inaugural six lots, drawn from chapters of the book, each distilled into a single image. Every artwork is paired with a bound Resident portrait through a first of its kind twin token format on Ethereum.</p>
       </div>
 
       <div class="whispers-hero-block reveal reveal-delay-3">
@@ -1074,13 +1207,13 @@
         <div>
           <div class="section-body reveal reveal-delay-2">
             <p>After finishing an artwork, I assess whether it calls for a counterpart. When it does, I begin the process of reinterpreting as a Resident. Not portraits in the conventional sense, but personifications of their paired works, shaped by atmosphere and intent.</p>
-            <p>The artworks live on <a href="https://opensea.io/collection/whispers-of-odiville" target="_blank" class="contract-link"><em>Whispers of Odiville</em></a>. The Residents on <a href="https://opensea.io/collection/residents-of-odiville" target="_blank" class="contract-link"><em>Residents of Odiville</em></a>. Two contracts on Ethereum, connected through on-chain logic.</p>
+            <p>The 1/1 lives on <a href="https://opensea.io/collection/whispers-of-odiville" target="_blank" class="contract-link"><em>Whispers of Odiville</em></a>. The Residents on <a href="https://opensea.io/collection/residents-of-odiville" target="_blank" class="contract-link"><em>Residents of Odiville</em></a>. Two contracts on Ethereum, connected through on-chain logic.</p>
           </div>
           <ul class="mechanic-list reveal reveal-delay-2">
             <li><span class="mechanic-icon"></span>Each 1/1 artwork is paired with a bound Resident portrait as a single release</li>
             <li><span class="mechanic-icon"></span>When an artwork transfers, its Resident is burned and reborn into the new owner's wallet</li>
             <li><span class="mechanic-icon"></span>Every passing is marked on-chain. History preserved, traceable back to birth</li>
-            <li><span class="mechanic-icon"></span>Dual contract architecture: ownership as ritual, not transaction</li>
+            <li><span class="mechanic-icon"></span>Dual contract architecture: ownership is a ritual not just transaction</li>
           </ul>
         </div>
 
@@ -1175,7 +1308,7 @@
   </section>
 
   <footer>
-    <div class="footer-left">&copy; Odious, 2025</div>
+    <div class="footer-left">&copy; Odiville, 2025</div>
     <ul class="footer-links">
       <li><a href="https://whispers.odiville.com" target="_blank">Whispers</a></li>
       <li><a href="https://echoes.odiville.com" target="_blank">Echoes</a></li>
@@ -1235,22 +1368,24 @@
   <section class="archive-section">
 
     <div class="archive-controls">
-      <div class="archive-filter-tabs" id="archiveFilters">
-        <button class="archive-filter-tab active" data-filter="all">All</button>
-        <button class="archive-filter-tab" data-filter="duu">Echoes by Odious</button>
-        <button class="archive-filter-tab" data-filter="whispers">Whispers</button>
-        <button class="archive-filter-tab" data-filter="residents">Residents</button>
-        <button class="archive-filter-tab" data-filter="owt">One-Way Ticket</button>
-        <button class="archive-filter-tab" data-filter="this-place-remembers">This Place Remembers</button>
-        <button class="archive-filter-tab" data-filter="ferrymanspromise">Ferryman's Promise</button>
-        <button class="archive-filter-tab" data-filter="this-is-reality">This is Reality</button>
-        <button class="archive-filter-tab" data-filter="editions">Editions</button>
-        <button class="archive-filter-tab" data-filter="game-master">Game Master</button>
-        <button class="archive-filter-tab" data-filter="originals">Originals</button>
-        <button class="archive-filter-tab" data-filter="receipts">RECEIPTS</button>
-        <button class="archive-filter-tab archive-filter-tab--sale" data-filter="for-sale">For Sale</button>
+      <div class="archive-filters-left">
+        <select class="archive-year-filter" id="archiveYearFilter">
+          <option value="">All Years</option>
+        </select>
+        <div class="archive-era-toggle" id="archiveFilters">
+          <button class="archive-era-btn active" data-filter="all">All</button>
+          <button class="archive-era-btn" data-filter="prologue">Prologue</button>
+          <button class="archive-era-btn" data-filter="odiville">Odiville</button>
+          <button class="archive-era-btn archive-era-btn--sale" data-filter="for-sale">For Sale</button>
+        </div>
       </div>
       <div class="archive-controls-right">
+        <select class="archive-sort-select" id="archiveSortSelect">
+          <option value="date-desc">Most Recent</option>
+          <option value="date-asc">Oldest</option>
+          <option value="name-asc">A — Z</option>
+          <option value="name-desc">Z — A</option>
+        </select>
         <div class="archive-view-toggle">
           <button class="archive-view-btn active" data-view="table" title="Table view">&#9776;</button>
           <button class="archive-view-btn" data-view="grid" title="Grid view">&#9635;</button>
@@ -1265,7 +1400,7 @@
 
     <div class="archive-table" id="archiveTable">
       <div class="archive-thead">
-        <span class="atcol atcol--token    sortable" data-sort="token">ID</span>
+        <span class="atcol atcol--token    sortable" data-sort="token">Editions</span>
         <span class="atcol atcol--title    sortable" data-sort="name">Title</span>
         <span class="atcol atcol--series   sortable" data-sort="project">Collection</span>
         <span class="atcol atcol--date     sortable" data-sort="date">Date</span>
@@ -1292,7 +1427,6 @@
   <section class="market-section">
 
     <div class="market-header">
-      <h1 class="market-title">Market <em>Map</em></h1>
       <div class="market-stats">
         <div class="market-stat">
           <span class="market-stat-num" id="marketTotal">—</span>
@@ -1345,6 +1479,7 @@
 <script src="js/data/artworks.js"></script>
 <script src="js/data/inventory.js"></script>
 <script src="js/data/listings.js"></script>
+<script src="js/data/local-files.js"></script>
 <script src="js/archive.js"></script>
 <script src="js/market.js"></script>
 <script src="js/data/press.js"></script>

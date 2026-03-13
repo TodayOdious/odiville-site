@@ -23,6 +23,21 @@ CONTRACTS = [
     "0xf65c302e0aee68843af2c5324fbc49ba322d970f",
     "0xa3e8fe3a0e82947bfc505ba83f2967408fc568bf",
     "0x7957acfae47695c341c40f5a3f7474f1af13397c",
+    "0x068f74749c24a42058563035f8c786362fc96494",  # Fabricated Fairytales open editions (250 + 22)
+    "0x1c233a2676bd7ec4f83b78962712fb66350f7d26",  # Fabricated Fairytales 1/1s
+    "0x60f80121c31a0d46b5279700f9df786054aa5ee5",  # Rarible — shared (3 Odious 1/1s)
+    "0xd07dc4262bcdbf85190c01c996b4c06a461d2430",  # Rarible 1155 — shared (1 Odious)
+    "0x2a46f2ffd99e19a89476e2f62270e0a35bbf0756",  # MakersPlace — shared (2 Odious 1/1s)
+    "0xfbeef911dc5821886e1dda71586d90ed28174b7d",  # KnownOrigin — shared (1 Odious)
+    "0x8b86b0259922507cf2bcb08a5e4c04c7e8d17508",  # Nifty Gateway — preserve my legacy (66)
+    "0xa383103f2e1b6f5c2bc2691ec92fc931446771e2",  # Nifty Gateway — i did this for us (75) + far from home (205)
+    "0x9059fc9499026022009b85cda8fc55614204a366",  # Nifty Gateway — can i auction my feelings please (128)
+    "0xc1d0c1e46a5801f0721ebc1d56ddfe5c97b1af22",  # Nifty Gateway — wen't missing (8) + happy thoughts (1) + universe friend (10)
+    "0x2d820afb710681580a55ca8077b57fba6dd9fd72",  # Nifty Gateway — Artifex (100) + friends with broken past (1)
+    "0x99cc8526e06789539bfa0e22a6da17cd0139a105",  # Nifty Gateway — big blue (20) + sleepless medic (15) + sky secrets (10)
+    "0xa432c41c54435f67d292794f409ad7e18bafa2ae",  # Nifty Gateway — triplets (7)
+    "0x33fd426905f149f8376e227d0c9d3340aad17af1",  # 6529 Memes — Skull Season (1)
+    "0xc22616e971a670e72f35570337e562c3e515fbfe",  # CryptoEdition — King of Hearts (150)
     "0x54cba79fd1ccc5658b2a9abe7b5bf19a39172421",
     "0x67a931807e871c09d1af4d3062ec85562908efcd",
     "0xdaa19c2c091575bf4fcdb7a63f794fdb2aa3eabb",

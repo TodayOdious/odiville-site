@@ -25,8 +25,8 @@ function navigateTo(pageId) {
     // Re-observe reveals on new page
     observeReveals();
 
-    // Re-init torch cards if navigating to home
-    if (pageId === 'home') {
+    // Re-init torch cards if navigating to home or projects
+    if (pageId === 'home' || pageId === 'projects') {
       initTorchCards();
     }
 

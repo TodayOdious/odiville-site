@@ -36,11 +36,11 @@
       artworks: [
         { name: 'Ticket Booth',     src: 'images/Book/Chapter 2/Ticket-Booth-Jitter_v3.gif',  tokenId: 1,  contract: 'DUU',     shadeCost: 1,    shadeValue: 1    },
         { name: 'Blend In',         src: 'images/Book/Chapter 2/Blend-In-Jitter.gif',          tokenId: 2,  contract: 'DUU',     shadeCost: 1,    shadeValue: 1    },
-        { name: 'Ticket',           src: 'images/Book/Chapter 2/ticket.png',                   tokenId: 3,  contract: 'Tickets', shadeCost: null, shadeValue: 1    },
-        { name: 'The Apprentice',   src: 'images/Book/Chapter 2/the-apprentice.png',           tokenId: 4,  contract: 'DUU',     shadeCost: null, shadeValue: null },
+        { name: 'Ticket',           src: 'images/Archive Imgs/Ticket.png',                     tokenId: 3,  contract: 'Tickets', shadeCost: null, shadeValue: 1    },
+        { name: 'The Apprentice',   src: 'images/Archive Imgs/Box B.mp4',                      tokenId: 4,  contract: 'DUU',     shadeCost: null, shadeValue: null },
         { name: 'Meet The Puppets', src: 'images/Book/Chapter 2/Meet-The-Puppets.gif',         tokenId: 5,  contract: 'DUU',     shadeCost: 1,    shadeValue: 1    },
         { name: 'The Invite',       src: 'images/Book/Chapter 2/the invite.png',               tokenId: 53, contract: 'DUU',     shadeCost: null, shadeValue: null },
-        { name: 'Inescapable End',  src: 'images/Book/Chapter 2/inescapable-end.png',          tokenId: 52, contract: 'DUU',     shadeCost: 1,    shadeValue: 1    }
+        { name: 'Inescapable End',  src: 'images/Archive Imgs/inescapable end.png',            tokenId: 52, contract: 'DUU',     shadeCost: 1,    shadeValue: 1    }
       ]
     },
     '3': {
@@ -52,10 +52,10 @@
         { name: 'Green Balloon',        src: 'images/Book/Chapter 3/Green_Balloon.png',             tokenId: 9,  contract: 'DUU', shadeCost: 1,    shadeValue: 2    },
         { name: 'Cyclone',              src: 'images/Book/Chapter 3/cyclone.png',                   tokenId: 10, contract: 'DUU', shadeCost: 2,    shadeValue: 2    },
         { name: 'Play to Learn',        src: 'images/Book/Chapter 3/play-to-learn.png',             tokenId: 11, contract: 'DUU', shadeCost: 1,    shadeValue: 0.1  },
-        { name: 'The Rose Petal Garden',src: 'images/Book/Chapter 3/The Rose Petal Garden.gif',     tokenId: 12, contract: 'DUU', shadeCost: 2,    shadeValue: 2    },
-        { name: 'The Verdant Veil',     src: 'images/Book/Chapter 3/The Verdant Veil.gif',          tokenId: 13, contract: 'DUU', shadeCost: 2,    shadeValue: 2    },
-        { name: 'The Lost Lagoon',      src: 'images/Book/Chapter 3/The Lost Lagoon.gif',           tokenId: 14, contract: 'DUU', shadeCost: 2,    shadeValue: 2    },
-        { name: 'The Abyssal Void',     src: 'images/Book/Chapter 3/The Abyssal Void.gif',          tokenId: 15, contract: 'DUU', shadeCost: 2,    shadeValue: 2    },
+        { name: 'The Rose Petal Garden',src: 'images/Book/Chapter 3/The-Rose-Petal-Garden-Resized-(5-Frames).gif', tokenId: 12, contract: 'DUU', shadeCost: 2,    shadeValue: 2    },
+        { name: 'The Verdant Veil',     src: 'images/Book/Chapter 3/The-Verdant-Veil-Resized-(5-Frames).gif',    tokenId: 13, contract: 'DUU', shadeCost: 2,    shadeValue: 2    },
+        { name: 'The Lost Lagoon',      src: 'images/Book/Chapter 3/The-Lost-Lagoon-Resized-(5-Frames).gif',     tokenId: 14, contract: 'DUU', shadeCost: 2,    shadeValue: 2    },
+        { name: 'The Abyssal Void',     src: 'images/Book/Chapter 3/The-Abyssal-Void-Resized-(5-Frames).gif',   tokenId: 15, contract: 'DUU', shadeCost: 2,    shadeValue: 2    },
         { name: 'Redemption',           src: 'images/Book/Chapter 3/Copy of Redemption-Event-Jitter.gif', tokenId: 16, contract: 'DUU', shadeCost: 2, shadeValue: 2 },
         { name: 'Blue Reverie',         src: 'images/Book/Chapter 3/Blue Reverie.png',              tokenId: 17, contract: 'DUU', shadeCost: null, shadeValue: null },
         { name: 'Hush',                 src: 'images/Book/Chapter 3/Copy of Hush_v2.png',           tokenId: 18, contract: 'DUU', shadeCost: 2,    shadeValue: 2    },
@@ -70,7 +70,7 @@
         { name: 'Barn',                  src: 'images/Book/Chapter 4/Barn.png',                     tokenId: 22, contract: 'DUU', shadeCost: 12, shadeValue: 12   },
         { name: 'Carnival',              src: 'images/Book/Chapter 4/Carnival.png',                 tokenId: 23, contract: 'DUU', shadeCost: 12, shadeValue: 16   },
         { name: 'Forest',                src: 'images/Book/Chapter 4/Forest.png',                   tokenId: 24, contract: 'DUU', shadeCost: 12, shadeValue: 16   },
-        { name: 'Uninvited',             src: 'images/Book/Chapter 4/Unwanted_Guest v2.png',        tokenId: 25, contract: 'DUU', shadeCost: 16, shadeValue: 0    },
+        { name: 'Uninvited',             src: 'images/Book/Chapter 4/Unwanted_Guest v2.png',        tokenId: 25, contract: 'DUU', shadeCost: 16, shadeValue: null },
         { name: 'A Gift',                src: 'images/Book/Chapter 4/a-gift-v4.gif',                tokenId: 26, contract: 'DUU', shadeCost: 16, shadeValue: null },
         { name: 'No Air',                src: 'images/Book/Chapter 4/no air.png',                   tokenId: 27, contract: 'DUU', shadeCost: 16, shadeValue: 16   }
       ]
@@ -79,13 +79,13 @@
       label: 'V', title: 'A Gift',
       artworks: [
         { name: 'Broken',            src: 'images/Book/Chapter 5/Broken-Shards.png',                    tokenId: 28, contract: 'DUU', shadeCost: 16, shadeValue: 16 },
-        { name: 'Light Keeper',      src: 'images/Book/Chapter 5/light-keeper-v3.gif',                  tokenId: 29, contract: 'DUU', shadeCost: 16, shadeValue: 16 },
+        { name: 'Light Keeper',      src: 'images/Book/Chapter 5/light keeper part 2.png',              tokenId: 29, contract: 'DUU', shadeCost: 16, shadeValue: 16 },
         { name: 'Foreboding Tree',   src: 'images/Book/Chapter 5/Forboding Tree.png',                   tokenId: 30, contract: 'DUU', shadeCost: 16, shadeValue: 12 },
         { name: 'Wasteland',         src: 'images/Book/Chapter 5/Wasteland_V6_Final_V4.gif',            tokenId: 31, contract: 'DUU', shadeCost: 16, shadeValue: 16 },
         { name: 'The Maw is Starving',src: 'images/Book/Chapter 5/the-maw-is-starving-final_small.gif', tokenId: 32, contract: 'DUU', shadeCost: 16, shadeValue: 16 },
         { name: 'Mutual Pact',       src: 'images/Book/Chapter 5/Mutual Pact_v4.png',                   tokenId: 33, contract: 'DUU', shadeCost: 32, shadeValue: 32 },
         { name: 'Marked',            src: 'images/Book/Chapter 5/Marked.png',                           tokenId: 34, contract: 'DUU', shadeCost: 32, shadeValue: 40 },
-        { name: 'Stone Tiles',       src: 'images/Book/Chapter 5/stone-tiles.gif',                      tokenId: 54, contract: 'DUU', shadeCost: 16, shadeValue: 16 }
+        { name: 'Stone Tiles',       src: 'images/Book/Chapter 5/stone tiles part 2.png',              tokenId: 54, contract: 'DUU', shadeCost: 16, shadeValue: 16 }
       ]
     },
     '6': {
@@ -93,20 +93,35 @@
       artworks: [
         { name: 'A Choice in the Clouds', src: 'images/Book/Chapter 6/1-1/a choice in the clouds.png',           tokenId: 35, contract: 'DUU', shadeCost: null, shadeValue: null },
         { name: 'Key of the Collective',  src: 'images/Book/Chapter 6/The Collective/Keys of the Collective.gif', tokenId: 36, contract: 'Key', shadeCost: null, shadeValue: null },
-        { name: 'Empty',                  src: 'images/Book/Chapter 6/Empty/Empty.png',                          tokenId: 37, contract: 'DUU', shadeCost: null, shadeValue: 0    },
-        { name: 'Error',                  src: 'images/Book/Chapter 6/Error/Ch6_Error.gif',                      tokenId: 38, contract: 'DUU', shadeCost: null, shadeValue: 0    },
-        { name: 'Extract',                src: 'images/Book/Chapter 6/Extract/Ch6_Extract.png',                  tokenId: 39, contract: 'DUU', shadeCost: null, shadeValue: 0    },
-        { name: 'Etched',                 src: 'images/Book/Chapter 6/The Collective/etched_v9.gif',             tokenId: 40, contract: 'DUU', shadeCost: null, shadeValue: 0    }
-      ]
+        { name: 'Extract',                src: 'images/Book/Chapter 6/Extract/Ch6_Extract.png',                  tokenId: 39, contract: 'DUU', shadeCost: null, shadeValue: null },
+        { name: 'Etched',                 src: 'images/Book/Chapter 6/The Collective/etched_v9.gif',             tokenId: 40, contract: 'DUU', shadeCost: null, shadeValue: null }
+      ],
+      unreleased: {
+        label: 'The Forgotten',
+        artworks: [
+          { name: 'Empty',                   src: 'images/Book/Chapter 6/Empty/Empty.png',                               unreleased: true, tokenId: null, contract: null, shadeCost: null, shadeValue: null },
+          { name: 'Error',                   src: 'images/Book/Chapter 6/Error/Ch6_Error.gif',                           unreleased: true, tokenId: null, contract: null, shadeCost: null, shadeValue: null },
+          { name: 'Green Door — Empty',      src: 'images/Book/Chapter 7/Ch7_Empty/green door.png',                     unreleased: true, tokenId: null, contract: null, shadeCost: null, shadeValue: null },
+          { name: 'Green Door — Error',      src: 'images/Book/Chapter 7/Ch7_Error/Ch7_Green_Door_Error.gif',           unreleased: true, tokenId: null, contract: null, shadeCost: null, shadeValue: null },
+          { name: 'White Door — Empty',      src: 'images/Book/Chapter 7/Ch7_Empty/white door.png',                     unreleased: true, tokenId: null, contract: null, shadeCost: null, shadeValue: null },
+          { name: 'White Door — Error',      src: 'images/Book/Chapter 7/Ch7_Error/Ch7_White_Door_Error.gif',           unreleased: true, tokenId: null, contract: null, shadeCost: null, shadeValue: null },
+          { name: 'Antithesis — Empty',      src: 'images/Book/Chapter 7/Ch7_Empty/antithesis.png',                     unreleased: true, tokenId: null, contract: null, shadeCost: null, shadeValue: null },
+          { name: 'Antithesis — Error',      src: 'images/Book/Chapter 7/Ch7_Error/Ch7_antithesis_error.gif',           unreleased: true, tokenId: null, contract: null, shadeCost: null, shadeValue: null },
+          { name: 'Room of Lights — Empty',  src: 'images/Book/Chapter 7/Ch7_Empty/room of lights b v2.png',            unreleased: true, tokenId: null, contract: null, shadeCost: null, shadeValue: null },
+          { name: 'Room of Lights — Error',  src: 'images/Book/Chapter 7/Ch7_Error/Ch7_error-room-of-lights.gif',       unreleased: true, tokenId: null, contract: null, shadeCost: null, shadeValue: null },
+          { name: 'Room of Shadows — Empty', src: 'images/Book/Chapter 7/Ch7_Empty/Room of shadows b v2.png',           unreleased: true, tokenId: null, contract: null, shadeCost: null, shadeValue: null },
+          { name: 'Room of Shadows — Error', src: 'images/Book/Chapter 7/Ch7_Error/Ch7_error-room-of-shadows.gif',      unreleased: true, tokenId: null, contract: null, shadeCost: null, shadeValue: null }
+        ]
+      }
     },
     '7': {
       label: 'VII', title: 'Crossroads',
       artworks: [
-        { name: 'Green Door',      src: 'images/Book/Chapter 7/Ch7_Empty/green door.png',          tokenId: 41, contract: 'DUU', shadeCost: 11,   shadeValue: null },
-        { name: 'White Door',      src: 'images/Book/Chapter 7/Ch7_Empty/white door.png',          tokenId: 42, contract: 'DUU', shadeCost: 11,   shadeValue: null },
-        { name: 'Antithesis',      src: 'images/Book/Chapter 7/Ch7_Empty/antithesis.png',          tokenId: 43, contract: 'DUU', shadeCost: null, shadeValue: null },
-        { name: 'Room of Lights',  src: 'images/Book/Chapter 7/Ch7_Empty/room of lights b v2.png', tokenId: 44, contract: 'DUU', shadeCost: 11,   shadeValue: null },
-        { name: 'Room of Shadows', src: 'images/Book/Chapter 7/Ch7_Empty/Room of shadows b v2.png',tokenId: 45, contract: 'DUU', shadeCost: 11,   shadeValue: null }
+        { name: 'Green Door',      src: 'images/Book/Chapter 7/Ch7_Extract/Green_Door_Extract_1.png',    tokenId: 41, contract: 'DUU', shadeCost: 11,   shadeValue: null },
+        { name: 'White Door',      src: 'images/Book/Chapter 7/Ch7_Extract/White_Door_Extract_v2.png',   tokenId: 42, contract: 'DUU', shadeCost: 11,   shadeValue: null },
+        { name: 'Antithesis',      src: 'images/Book/Chapter 7/Ch7_Extract/antithesis extract.png',      tokenId: 43, contract: 'DUU', shadeCost: null, shadeValue: null },
+        { name: 'Room of Lights',  src: 'images/Book/Chapter 7/Ch7_Extract/extract room of lights.png',  tokenId: 44, contract: 'DUU', shadeCost: 11,   shadeValue: null },
+        { name: 'Room of Shadows', src: 'images/Book/Chapter 7/Ch7_Extract/Extract_Room_Of_Shadows.png', tokenId: 45, contract: 'DUU', shadeCost: 11,   shadeValue: null }
       ]
     },
     '8': {
@@ -195,27 +210,55 @@
   function buildMasonry(ch, chKey) {
     masonryEl.innerHTML = '';
 
-    ch.artworks.forEach(function(art) {
+    // Build flat combined array (main + unreleased) for prev/next navigation
+    var combined = ch.artworks.slice();
+    if (ch.unreleased) {
+      ch.unreleased.artworks.forEach(function(a) { combined.push(a); });
+    }
+    ch._combined = combined;
+
+    ch.artworks.forEach(function(art, idx) {
       var btn = document.createElement('button');
       btn.className = 'artwork-list-btn';
       btn.textContent = art.name;
       btn.setAttribute('aria-label', art.name);
 
-      (function(a, c, k) {
-        btn.addEventListener('click', function() { openLightbox(a, c, k); });
-      }(art, ch, chKey));
+      (function(a, flatIdx) {
+        btn.addEventListener('click', function() { openLightbox(a, combined, flatIdx, ch, chKey); });
+      }(art, idx));
 
       masonryEl.appendChild(btn);
     });
+
+    if (ch.unreleased && ch.unreleased.artworks.length) {
+      var divider = document.createElement('div');
+      divider.className = 'artwork-section-divider';
+      divider.textContent = ch.unreleased.label;
+      masonryEl.appendChild(divider);
+
+      var offset = ch.artworks.length;
+      ch.unreleased.artworks.forEach(function(art, idx) {
+        var btn = document.createElement('button');
+        btn.className = 'artwork-list-btn artwork-list-btn--unreleased';
+        btn.textContent = art.name;
+        btn.setAttribute('aria-label', art.name);
+
+        (function(a, flatIdx) {
+          btn.addEventListener('click', function() { openLightbox(a, combined, flatIdx, ch, chKey); });
+        }(art, offset + idx));
+
+        masonryEl.appendChild(btn);
+      });
+    }
   }
 
   /* ========== LIGHTBOX ========== */
-  function openLightbox(art, ch, chKey) {
+  function openLightbox(art, artworks, artIdx, ch, chKey) {
     if (!lbOpen) triggerEl = document.activeElement;
 
-    // Track position within the chapter's artworks
-    currentArtworks = ch.artworks;
-    currentArtIdx = ch.artworks.indexOf(art);
+    // Track position within the combined artworks array
+    currentArtworks = artworks;
+    currentArtIdx = artIdx;
 
     // Mark active text button
     var listBtns = masonryEl ? masonryEl.querySelectorAll('.artwork-list-btn') : [];
@@ -226,11 +269,17 @@
     if (!lb) return;
 
     // Populate media
-    media.innerHTML = '<img src="' + art.src + '" alt="' + art.name + '" decoding="async">';
+    var ext = (art.src || '').split('.').pop().toLowerCase();
+    if (ext === 'mp4' || ext === 'webm') {
+      media.innerHTML = '<video src="' + art.src + '" autoplay muted loop playsinline></video>';
+    } else {
+      media.innerHTML = '<img src="' + art.src + '" alt="' + art.name + '" decoding="async">';
+    }
 
     // Populate info
     document.getElementById('duuLightboxChapter').textContent = ch.label + ' \u2014 ' + ch.title;
-    document.getElementById('duuLightboxName').textContent = art.name;
+    var nameEl = document.getElementById('duuLightboxName');
+    nameEl.innerHTML = art.name + (art.unreleased ? ' <span class="unreleased-badge">The Forgotten</span>' : '');
     document.getElementById('duuLightboxTokenId').textContent = art.tokenId !== null ? art.tokenId : '\u2014';
 
     var contractEl = document.getElementById('duuLightboxContract');
@@ -338,13 +387,13 @@
   if (prevBtn) prevBtn.addEventListener('click', function() {
     if (currentArtIdx > 0) {
       var ch = CHAPTERS[activeChapter];
-      openLightbox(currentArtworks[currentArtIdx - 1], ch, activeChapter);
+      openLightbox(currentArtworks[currentArtIdx - 1], currentArtworks, currentArtIdx - 1, ch, activeChapter);
     }
   });
   if (nextBtn) nextBtn.addEventListener('click', function() {
     if (currentArtIdx < currentArtworks.length - 1) {
       var ch = CHAPTERS[activeChapter];
-      openLightbox(currentArtworks[currentArtIdx + 1], ch, activeChapter);
+      openLightbox(currentArtworks[currentArtIdx + 1], currentArtworks, currentArtIdx + 1, ch, activeChapter);
     }
   });
 

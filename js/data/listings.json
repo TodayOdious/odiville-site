@@ -1,37 +1,369 @@
 {
-  "fetchedAt": "2026-03-06T22:10:32Z",
-  "listingCount": 1,
+  "fetchedAt": "2026-03-12T20:37:05Z",
+  "listingCount": 35,
   "floors": {
-    "game-master-1": {
-      "price": 0.0,
-      "currency": ""
+    "artifex-odious": {
+      "price": 0,
+      "currency": "ETH"
     },
-    "keys-of-the-collective": {
-      "price": 0.0,
-      "currency": ""
+    "cryptocubes-creators": {
+      "price": 0,
+      "currency": "ETH"
+    },
+    "cryptoedition": {
+      "price": 0.0021,
+      "currency": "ETH"
+    },
+    "dear-holders-by-odious": {
+      "price": 0,
+      "currency": "ETH"
+    },
+    "decisions-upsets-and-unknowns-odious": {
+      "price": 0.00339,
+      "currency": "ETH"
+    },
+    "digitalaxnft": {
+      "price": 0.015,
+      "currency": "ETH"
+    },
+    "fabricated-fairytales-by-fewocious-x-parrott-ism-x": {
+      "price": 0.09,
+      "currency": "ETH"
+    },
+    "fake-rares-curated": {
+      "price": 0.00588,
+      "currency": "ETH"
+    },
+    "fnd": {
+      "price": 0.006798,
+      "currency": "ETH"
+    },
+    "game-master-1": {
+      "price": 0,
+      "currency": "ETH"
+    },
+    "iconsnftcollection": {
+      "price": 0,
+      "currency": "ETH"
+    },
+    "known-origin": {
+      "price": 0.000259,
+      "currency": "ETH"
+    },
+    "makersplace": {
+      "price": 0.000999,
+      "currency": "ETH"
+    },
+    "meme-ltd": {
+      "price": 0.00011,
+      "currency": "ETH"
+    },
+    "odious-collection": {
+      "price": 3,
+      "currency": "ETH"
     },
     "odiouseditions": {
       "price": 0.69,
       "currency": "ETH"
     },
     "odiousoriginals": {
-      "price": 0.0,
-      "currency": ""
+      "price": 0,
+      "currency": "ETH"
+    },
+    "one-way-ticket": {
+      "price": 0.075,
+      "currency": "ETH"
+    },
+    "rarible": {
+      "price": 0,
+      "currency": "ETH"
+    },
+    "receipts-by-odious": {
+      "price": 0,
+      "currency": "ETH"
+    },
+    "residents-of-odiville": {
+      "price": 0,
+      "currency": "ETH"
+    },
+    "sad-love": {
+      "price": 0.2,
+      "currency": "ETH"
+    },
+    "seasons-reward-by-odious": {
+      "price": 0,
+      "currency": "ETH"
     },
     "the-ferrymans-promise": {
-      "price": 0.0,
-      "currency": ""
+      "price": 0,
+      "currency": "ETH"
     },
     "the-whispering-well": {
-      "price": 0.0,
-      "currency": ""
+      "price": 0,
+      "currency": "ETH"
+    },
+    "thememes6529": {
+      "price": 0.0151,
+      "currency": "ETH"
+    },
+    "this-is-reality-by-odious": {
+      "price": 420,
+      "currency": "APE"
     },
     "this-place-remembers": {
-      "price": 0.0,
-      "currency": ""
+      "price": 0,
+      "currency": "ETH"
+    },
+    "tickets-by-odious": {
+      "price": 0.012,
+      "currency": "ETH"
+    },
+    "whispers-of-odiville": {
+      "price": 0,
+      "currency": "ETH"
     }
   },
   "listings": {
+    "0xc22616e971a670e72f35570337e562c3e515fbfe:1009": {
+      "contract": "0xc22616e971a670e72f35570337e562c3e515fbfe",
+      "tokenId": "1009",
+      "price": 0.0021,
+      "priceWei": "2099980000000000",
+      "currency": "ETH",
+      "seller": "0xd6b94674b2b2c4adbc51ffcc8da0a7e3cac48ab1",
+      "orderHash": "0xa8d3b891c621caa133a6444eab29ee767c1a5e5abef8ffd8e9c7bfcf26e420cc",
+      "collection": "cryptoedition"
+    },
+    "0xc22616e971a670e72f35570337e562c3e515fbfe:5890": {
+      "contract": "0xc22616e971a670e72f35570337e562c3e515fbfe",
+      "tokenId": "5890",
+      "price": 0.00218,
+      "priceWei": "2179919000000000",
+      "currency": "ETH",
+      "seller": "0x107b2e855528f344556f8c766a6187326a2c2fa6",
+      "orderHash": "0xe9d6b56f6f2732057dd671a95588d4d641334b4e5f83225215f5ea31cafcca95",
+      "collection": "cryptoedition"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:52": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "52",
+      "price": 0.01356,
+      "priceWei": "13560000000000000",
+      "currency": "ETH",
+      "seller": "0x4bac941342ff30d03ae7589ce45fc0e9e3b12831",
+      "orderHash": "0xe4889f89b2bc80fc55b7003270501e766b8d4af19fa0682e215cb275a4493994",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:2": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "2",
+      "price": 0.00678,
+      "priceWei": "6780000000000000",
+      "currency": "ETH",
+      "seller": "0x4bac941342ff30d03ae7589ce45fc0e9e3b12831",
+      "orderHash": "0x01e288502daa5ffac411d44c706cab82ffe8e7094c6e69206b65580a1caa4bb1",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:1": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "1",
+      "price": 0.00349,
+      "priceWei": "3490000000000000",
+      "currency": "ETH",
+      "seller": "0x4bac941342ff30d03ae7589ce45fc0e9e3b12831",
+      "orderHash": "0x0670f68966caaa4dca3c3d0754a3a3113c4027508fe0da1acb4208ea7e6dcdcd",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:5": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "5",
+      "price": 0.00349,
+      "priceWei": "3490000000000000",
+      "currency": "ETH",
+      "seller": "0x4bac941342ff30d03ae7589ce45fc0e9e3b12831",
+      "orderHash": "0xe64b101548ca8b526407ac4bdbf38357a588193c944bebf09c8409e63929f776",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:9": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "9",
+      "price": 0.0067,
+      "priceWei": "6700000000000000",
+      "currency": "ETH",
+      "seller": "0xe6da4a4930e896c7e1ff590779b4046d7587b802",
+      "orderHash": "0x8f1c7afb14d539cb5bf1ae2eda1f4153f31c11d59e53eaaf6020baabee0f34bf",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:11": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "11",
+      "price": 0.008,
+      "priceWei": "8000000000000000",
+      "currency": "ETH",
+      "seller": "0x5eeea3635ddb624f53de31256372abe871c10ff2",
+      "orderHash": "0x4d427f40bf7357d427ccf79b7f47710be0c1896b0a9011917d7d5e73fce7ebb1",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:7": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "7",
+      "price": 0.01,
+      "priceWei": "10000000000000000",
+      "currency": "ETH",
+      "seller": "0xe5f6b0d624158acec793664d6c96da36e7a6910e",
+      "orderHash": "0x33e130538b0852c85cd5eb0fd312cd46d4affa5352ed5fca2eb2166c0997440f",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:6": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "6",
+      "price": 0.0123,
+      "priceWei": "12300000000000000",
+      "currency": "ETH",
+      "seller": "0xf0a387046743bb2c54b3610972fe3caff65bcc8b",
+      "orderHash": "0x8237580e54732fd83c42f43cfadedb33a03065e2d82c566fa9f1a778e58ebae1",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:8": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "8",
+      "price": 0.0738,
+      "priceWei": "73800000000000000",
+      "currency": "ETH",
+      "seller": "0x34f5c36dfd35ef66c996eca754bc5e38165f31f4",
+      "orderHash": "0xe33e93b707ac515d76aaf5d2e7ff5aa1fe3514fbdac220324c0f0d4ea2e92bd5",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:41": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "41",
+      "price": 0.1,
+      "priceWei": "100000000000000000",
+      "currency": "ETH",
+      "seller": "0x96612d11511d57dba6705d43381dbbf6662783eb",
+      "orderHash": "0xc5937475debf7eb48ef34efdab9b08c879667cdff4dd5a0c2ec0e3fb2d151e87",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:15": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "15",
+      "price": 0.1,
+      "priceWei": "100000000000000000",
+      "currency": "ETH",
+      "seller": "0x5eeea3635ddb624f53de31256372abe871c10ff2",
+      "orderHash": "0x7e4941a1c8ffbd6631ff4cf2ff202d1fc919c46e962eb175380a825d8ffd2339",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:16": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "16",
+      "price": 0.1,
+      "priceWei": "100000000000000000",
+      "currency": "ETH",
+      "seller": "0x5eeea3635ddb624f53de31256372abe871c10ff2",
+      "orderHash": "0xffa7e771e7303009a29bd9ddf02c116a6cf4b1de44ef2f4629ad6f48d776d358",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:20": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "20",
+      "price": 0.5,
+      "priceWei": "500000000000000000",
+      "currency": "ETH",
+      "seller": "0xb6d089f0b4865f922fe92815a1c90b53598e5aae",
+      "orderHash": "0x6dc072c51faaddcb7dd47b267601aa42866cff6f69416cf8ae3ccea36dba0ca5",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:14": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "14",
+      "price": 2.69,
+      "priceWei": "2690000000000000000",
+      "currency": "ETH",
+      "seller": "0x34f5c36dfd35ef66c996eca754bc5e38165f31f4",
+      "orderHash": "0x0691c26fcef784d156ea8c9821e3dccc0c02329800754f7eeddbe770a85387c3",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x63b5be929776dd020281978795b2c3575553d147:26": {
+      "contract": "0x63b5be929776dd020281978795b2c3575553d147",
+      "tokenId": "26",
+      "price": 3.69,
+      "priceWei": "3690000000000000000",
+      "currency": "ETH",
+      "seller": "0x34f5c36dfd35ef66c996eca754bc5e38165f31f4",
+      "orderHash": "0xc6eab232629d01be16ded0f829a13dbf8706e2622d584961ce19c48b62e2870d",
+      "collection": "decisions-upsets-and-unknowns-odious"
+    },
+    "0x068f74749c24a42058563035f8c786362fc96494:12900020168": {
+      "contract": "0x068f74749c24a42058563035f8c786362fc96494",
+      "tokenId": "12900020168",
+      "price": 0.09,
+      "priceWei": "89999999990000000",
+      "currency": "ETH",
+      "seller": "0x28358cef6f55f9746c9c26c62e5728036b4f64b8",
+      "orderHash": "0x8ac1a38b0fca016d059f07efee8c35c8a679d9b836acee7465a083a2e27eb7a3",
+      "collection": "fabricated-fairytales-by-fewocious-x-parrott-ism-x"
+    },
+    "0x068f74749c24a42058563035f8c786362fc96494:12900020031": {
+      "contract": "0x068f74749c24a42058563035f8c786362fc96494",
+      "tokenId": "12900020031",
+      "price": 0.25,
+      "priceWei": "250000000000000000",
+      "currency": "ETH",
+      "seller": "0x906835e688744623f746f694fdd061b070b366d9",
+      "orderHash": "0x8b99e28188f721465435c74a079823849b47fdb7961bde2d1d520bef53681df3",
+      "collection": "fabricated-fairytales-by-fewocious-x-parrott-ism-x"
+    },
+    "0x068f74749c24a42058563035f8c786362fc96494:12900020179": {
+      "contract": "0x068f74749c24a42058563035f8c786362fc96494",
+      "tokenId": "12900020179",
+      "price": 0.69,
+      "priceWei": "690000000000000000",
+      "currency": "ETH",
+      "seller": "0xc5e19aafa1cf229a29c2bb81c1061068b34b989d",
+      "orderHash": "0x00a615931f0ab9f31e2e409767b2ba2a05295a24f902e1414201449dc46fdda1",
+      "collection": "fabricated-fairytales-by-fewocious-x-parrott-ism-x"
+    },
+    "0x1c233a2676bd7ec4f83b78962712fb66350f7d26:28200050009": {
+      "contract": "0x1c233a2676bd7ec4f83b78962712fb66350f7d26",
+      "tokenId": "28200050009",
+      "price": 5.95,
+      "priceWei": "5950000000000000000",
+      "currency": "ETH",
+      "seller": "0xed448df17e36397e8760d36f920ebfd24128f3fa",
+      "orderHash": "0x33eb9bab24092b04d8c241853b1688cfcbb793700eda7240fda90ca474ef2df5",
+      "collection": "fabricated-fairytales-by-fewocious-x-parrott-ism-x"
+    },
+    "0x1c233a2676bd7ec4f83b78962712fb66350f7d26:28200050005": {
+      "contract": "0x1c233a2676bd7ec4f83b78962712fb66350f7d26",
+      "tokenId": "28200050005",
+      "price": 6,
+      "priceWei": "6000000000000000000",
+      "currency": "ETH",
+      "seller": "0xafbd31cc79ec47cb87d5d8abd3f7a96d4a58d53f",
+      "orderHash": "0x1dc3556c354397e32d78c39a9ac23690bf67976068199f95297eef22db6f70fd",
+      "collection": "fabricated-fairytales-by-fewocious-x-parrott-ism-x"
+    },
+    "0x2a46f2ffd99e19a89476e2f62270e0a35bbf0756:39770": {
+      "contract": "0x2a46f2ffd99e19a89476e2f62270e0a35bbf0756",
+      "tokenId": "39770",
+      "price": 0.2,
+      "priceWei": "200000000000000000",
+      "currency": "ETH",
+      "seller": "0x9926933dead344d4fa4d99935236bdd61be5428f",
+      "orderHash": "0xddcc199d7e01a6b5b4932ab40245be14db3ea37f6cfbda578983338a12e693be",
+      "collection": "makersplace"
+    },
+    "0x99cc8526e06789539bfa0e22a6da17cd0139a105:21000200006": {
+      "contract": "0x99cc8526e06789539bfa0e22a6da17cd0139a105",
+      "tokenId": "21000200006",
+      "price": 3,
+      "priceWei": "3000000000000000000",
+      "currency": "ETH",
+      "seller": "0xafbd31cc79ec47cb87d5d8abd3f7a96d4a58d53f",
+      "orderHash": "0x4b0b92cdf405c83b5667994dd8a4a17759c88d0091c2148aae2209ee5870b9f8",
+      "collection": "odious-collection"
+    },
     "0x7957acfae47695c341c40f5a3f7474f1af13397c:2": {
       "contract": "0x7957acfae47695c341c40f5a3f7474f1af13397c",
       "tokenId": "2",
@@ -40,8 +372,107 @@
       "currency": "ETH",
       "seller": "0x34f5c36dfd35ef66c996eca754bc5e38165f31f4",
       "orderHash": "0x7c1b68929e92e1f0a4b63fa892c3d05dc14a6883deffdaa8f35b6397f0228ce9",
-      "expiration": "",
       "collection": "odiouseditions"
+    },
+    "0x45c03cef4bac4ee37f22bd2081bd931fec2716c2:87": {
+      "contract": "0x45c03cef4bac4ee37f22bd2081bd931fec2716c2",
+      "tokenId": "87",
+      "price": 0.075,
+      "priceWei": "75000000000000000",
+      "currency": "ETH",
+      "seller": "0x270b43c8e8f1082f9784e9046d4db50d55d64eeb",
+      "orderHash": "0x759ebbc98aafdb8c4799454a7f622092240b2e693063568bdc741485de4bed11",
+      "collection": "one-way-ticket"
+    },
+    "0x45c03cef4bac4ee37f22bd2081bd931fec2716c2:136": {
+      "contract": "0x45c03cef4bac4ee37f22bd2081bd931fec2716c2",
+      "tokenId": "136",
+      "price": 0.1,
+      "priceWei": "100000000000000000",
+      "currency": "ETH",
+      "seller": "0x57b835d43007eb1c6d6fb15af769eda300c2acab",
+      "orderHash": "0x3d4de10b849277b9f602670c3f40d2acfd7b4acb2327fc0fe3a3e044fb8fdb22",
+      "collection": "one-way-ticket"
+    },
+    "0x45c03cef4bac4ee37f22bd2081bd931fec2716c2:22": {
+      "contract": "0x45c03cef4bac4ee37f22bd2081bd931fec2716c2",
+      "tokenId": "22",
+      "price": 0.15,
+      "priceWei": "150000000000000000",
+      "currency": "ETH",
+      "seller": "0x288457ac35bbdf035845acb7f2a310bbf7a74c52",
+      "orderHash": "0xb7d9110def58da28852999ef00882dfd5d51b18f7c64580a87f323bdbe37bc2f",
+      "collection": "one-way-ticket"
+    },
+    "0x45c03cef4bac4ee37f22bd2081bd931fec2716c2:184": {
+      "contract": "0x45c03cef4bac4ee37f22bd2081bd931fec2716c2",
+      "tokenId": "184",
+      "price": 2.5,
+      "priceWei": "2500000000000000000",
+      "currency": "ETH",
+      "seller": "0x9c362d99afa3723ced2bc6f9597da1264e03a48b",
+      "orderHash": "0x3c130b1e2f4cfdea330966278d6efa0d502a125747c5da091aa1906cb33e0b9a",
+      "collection": "one-way-ticket"
+    },
+    "0x45c03cef4bac4ee37f22bd2081bd931fec2716c2:188": {
+      "contract": "0x45c03cef4bac4ee37f22bd2081bd931fec2716c2",
+      "tokenId": "188",
+      "price": 4.9,
+      "priceWei": "4900000000000000000",
+      "currency": "ETH",
+      "seller": "0xea28405a52c38c6bcd954bd7833de3e5c2a5dc75",
+      "orderHash": "0x9a9da283535cb422d66822b2eae25b8272ad8839c1f13caa0315f45215ee0ac5",
+      "collection": "one-way-ticket"
+    },
+    "0x45c03cef4bac4ee37f22bd2081bd931fec2716c2:117": {
+      "contract": "0x45c03cef4bac4ee37f22bd2081bd931fec2716c2",
+      "tokenId": "117",
+      "price": 5,
+      "priceWei": "5000000000000000000",
+      "currency": "ETH",
+      "seller": "0x1041f39762b17804daba9076a5c97607d478159f",
+      "orderHash": "0x6c87e6ab5de979a5e1104f589ed5b0fb79001de7b588a92f24db5ecf97833daf",
+      "collection": "one-way-ticket"
+    },
+    "0x0daaa0d0b75e4c0572a57e7f1f7692e20f3ed7c8:3": {
+      "contract": "0x0daaa0d0b75e4c0572a57e7f1f7692e20f3ed7c8",
+      "tokenId": "3",
+      "price": 0.2,
+      "priceWei": "200000000000000000",
+      "currency": "ETH",
+      "seller": "0xb756a8a4e0c827a7ddb151085c26fc11717cfc1b",
+      "orderHash": "0xfec42e9c98a243acf88dd7815d2cdfe79579303192a2b48d797d0aa1c44f80d8",
+      "collection": "sad-love"
+    },
+    "0x33fd426905f149f8376e227d0c9d3340aad17af1:387": {
+      "contract": "0x33fd426905f149f8376e227d0c9d3340aad17af1",
+      "tokenId": "387",
+      "price": 0.085,
+      "priceWei": "85000000000000000",
+      "currency": "ETH",
+      "seller": "0xb5629e105c28425e5f6e76db57b2cb601cc58581",
+      "orderHash": "0x5bf877e356ba2147247ee2053074235200e6e71ccc12f790dbb3ee494ddd37aa",
+      "collection": "thememes6529"
+    },
+    "0xf65c302e0aee68843af2c5324fbc49ba322d970f:37": {
+      "contract": "0xf65c302e0aee68843af2c5324fbc49ba322d970f",
+      "tokenId": "37",
+      "price": 420,
+      "priceWei": "420000000000000000000",
+      "currency": "APE",
+      "seller": "0x3d6a89c8751a45dd577a4c1f3b34e71c58236193",
+      "orderHash": "0xd6190088c03bbb774a5a30dcce1535f8d6dc50d60f083111e4e41747c48257fb",
+      "collection": "this-is-reality-by-odious"
+    },
+    "0xa4f02cc7865a3e15134d9b17ab235417bf0482aa:3": {
+      "contract": "0xa4f02cc7865a3e15134d9b17ab235417bf0482aa",
+      "tokenId": "3",
+      "price": 0.012,
+      "priceWei": "11999999999990000",
+      "currency": "ETH",
+      "seller": "0x26dd8c07cf666502f729daf1825268aaf964d2e3",
+      "orderHash": "0x4f46fbe8205d1286027dce5f5bed7e473d8caf2bc8ebe827027ad8ecdb1534cc",
+      "collection": "tickets-by-odious"
     }
   }
 }
