@@ -265,6 +265,14 @@
   function enrichEditions() {
     var map = {};
     inventory.forEach(function (rec) {
+      // ERC-1155 tokens are self-contained (editions live within one token) —
+      // never group them with other records
+      var std = (rec.tokenStandard || '').toLowerCase();
+      if (std === 'erc-1155') {
+        rec._editionNum = null;
+        rec._editionTotal = null;
+        return;
+      }
       var key = groupKey(rec.title);
       if (!map[key]) map[key] = [];
       map[key].push(rec);
@@ -309,7 +317,11 @@
     var map = {};
     var order = [];
     items.forEach(function (rec) {
-      var key = groupKey(rec.title);
+      // ERC-1155 tokens always stand alone — use a unique key
+      var std = (rec.tokenStandard || '').toLowerCase();
+      var key = std === 'erc-1155'
+        ? '__erc1155__' + rec.contract + '|' + rec.tokenId
+        : groupKey(rec.title);
       if (!(key in map)) {
         map[key] = [];
         order.push(key);
