@@ -753,10 +753,10 @@
     var proj = rec.project || '';
     var cfg  = PROJECT_CONFIG[proj] || { label: rec.projectName || proj, color: 'var(--white-dim)' };
 
-    // Prefer local full-res file, fall back to CDN animation, then thumbnail
+    // Prefer local full-res file, fall back to CDN animation, CDN image, then thumbnail
     var local = getLocalFile(rec);
     var localFull = local ? local.full : null;
-    var src = localFull || rec.displayAnimationUrl || thumb || '';
+    var src = localFull || rec.displayAnimationUrl || rec.imageUrl || thumb || '';
     var isVideo = src && /\.(mp4|webm|mov)(\?|$)/i.test(src);
 
     if (isVideo) {
