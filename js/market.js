@@ -241,24 +241,37 @@
     }
   }
 
+  /* ── Theme helper ────────────────────────────────────────── */
+
+  function isLight() {
+    return document.documentElement.getAttribute('data-theme') === 'light';
+  }
+
   /* ── Rendering ───────────────────────────────────────────── */
 
   function drawBlackHole() {
-    // Hard black void
+    if (isLight()) return; // invisible — particles just vanish into nothing
+
+    // Dark mode: read the actual background color so the hole always matches
+    var bg = getComputedStyle(canvas.parentElement || document.body).backgroundColor || 'rgb(0,0,0)';
+
     ctx.beginPath();
     ctx.arc(centerX, centerY, BH_VIS_R, 0, Math.PI * 2);
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = bg;
     ctx.fill();
 
-    // Atmospheric darkness fading outward
+    // Parse bg for gradient stops
+    var m = bg.match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+    var br = m ? +m[1] : 0, bgg = m ? +m[2] : 0, bb = m ? +m[3] : 0;
+
     var gr = ctx.createRadialGradient(
       centerX, centerY, BH_VIS_R * 0.6,
       centerX, centerY, BH_VIS_R * 4
     );
-    gr.addColorStop(0,   'rgba(0,0,0,0.92)');
-    gr.addColorStop(0.3, 'rgba(2,2,5,0.55)');
-    gr.addColorStop(0.6, 'rgba(4,4,8,0.18)');
-    gr.addColorStop(1,   'rgba(5,5,10,0)');
+    gr.addColorStop(0,   'rgba(' + br + ',' + bgg + ',' + bb + ',0.92)');
+    gr.addColorStop(0.3, 'rgba(' + br + ',' + bgg + ',' + bb + ',0.55)');
+    gr.addColorStop(0.6, 'rgba(' + br + ',' + bgg + ',' + bb + ',0.18)');
+    gr.addColorStop(1,   'rgba(' + br + ',' + bgg + ',' + bb + ',0)');
     ctx.beginPath();
     ctx.arc(centerX, centerY, BH_VIS_R * 4, 0, Math.PI * 2);
     ctx.fillStyle = gr;
@@ -268,33 +281,45 @@
   function drawDormant(p, now, hovered) {
     var x = p.x, y = p.y;
     var d = p.depth;
+    var light = isLight();
 
     var baseR  = 0.4 + d * 1.0;
     var baseOp = 0.15 + d * 0.55;
-    var r = Math.round(140 + d * 50);
-    var g = Math.round(145 + d * 50);
-    var b = Math.round(170 + d * 55);
+    var r, g, b;
+    if (light) {
+      r = Math.round(80 + d * 40);
+      g = Math.round(70 + d * 35);
+      b = Math.round(55 + d * 30);
+    } else {
+      r = Math.round(140 + d * 50);
+      g = Math.round(145 + d * 50);
+      b = Math.round(170 + d * 55);
+    }
 
     var twinkle = Math.sin(now * p.driftSpeed * 1.5 + p.phase) * 0.15;
     if (Math.sin(now * 7.9 + p.phase * 17) > 0.95) twinkle += 0.3;
     var op = Math.min(1, baseOp + twinkle);
 
-    var glowR  = 4 + d * 5;
-    var glowOp = op * 0.12;
-    var glow = ctx.createRadialGradient(x, y, 0, x, y, glowR);
-    glow.addColorStop(0,   'rgba(' + r + ',' + g + ',' + b + ',' + glowOp + ')');
-    glow.addColorStop(0.4, 'rgba(' + r + ',' + g + ',' + b + ',' + (glowOp * 0.4) + ')');
-    glow.addColorStop(1,   'rgba(' + r + ',' + g + ',' + b + ',0)');
-    ctx.beginPath();
-    ctx.arc(x, y, glowR, 0, Math.PI * 2);
-    ctx.fillStyle = glow;
-    ctx.fill();
+    if (!light) {
+      // Dark mode: radial glow halo
+      var glowR  = 4 + d * 5;
+      var glowOp = op * 0.12;
+      var glow = ctx.createRadialGradient(x, y, 0, x, y, glowR);
+      glow.addColorStop(0,   'rgba(' + r + ',' + g + ',' + b + ',' + glowOp + ')');
+      glow.addColorStop(0.4, 'rgba(' + r + ',' + g + ',' + b + ',' + (glowOp * 0.4) + ')');
+      glow.addColorStop(1,   'rgba(' + r + ',' + g + ',' + b + ',0)');
+      ctx.beginPath();
+      ctx.arc(x, y, glowR, 0, Math.PI * 2);
+      ctx.fillStyle = glow;
+      ctx.fill();
+    }
 
     if (hovered) {
+      var hr = light ? '80,70,55' : '200,205,220';
       var hGlow = ctx.createRadialGradient(x, y, 0, x, y, 12);
-      hGlow.addColorStop(0,   'rgba(200,205,220,0.25)');
-      hGlow.addColorStop(0.5, 'rgba(180,185,200,0.08)');
-      hGlow.addColorStop(1,   'rgba(160,165,180,0)');
+      hGlow.addColorStop(0,   'rgba(' + hr + ',0.25)');
+      hGlow.addColorStop(0.5, 'rgba(' + hr + ',0.08)');
+      hGlow.addColorStop(1,   'rgba(' + hr + ',0)');
       ctx.beginPath();
       ctx.arc(x, y, 12, 0, Math.PI * 2);
       ctx.fillStyle = hGlow;
@@ -310,44 +335,50 @@
   function drawAvailable(p, now, hovered) {
     var x = p.x, y = p.y;
     var pulse = 0.85 + Math.sin(now * 1.3 + p.phase) * 0.15;
+    var light = isLight();
 
-    var outerR = 20;
-    var outer  = ctx.createRadialGradient(x, y, 0, x, y, outerR);
-    outer.addColorStop(0,   'rgba(255,255,255,' + (pulse * 0.25) + ')');
-    outer.addColorStop(0.3, 'rgba(240,245,255,' + (pulse * 0.10) + ')');
-    outer.addColorStop(0.6, 'rgba(220,230,255,' + (pulse * 0.03) + ')');
-    outer.addColorStop(1,   'rgba(200,215,255,0)');
-    ctx.beginPath();
-    ctx.arc(x, y, outerR, 0, Math.PI * 2);
-    ctx.fillStyle = outer;
-    ctx.fill();
+    if (!light) {
+      // Dark mode: full glow halos
+      var outerR = 20;
+      var outer  = ctx.createRadialGradient(x, y, 0, x, y, outerR);
+      outer.addColorStop(0,   'rgba(255,255,255,' + (pulse * 0.25) + ')');
+      outer.addColorStop(0.3, 'rgba(240,245,255,' + (pulse * 0.10) + ')');
+      outer.addColorStop(0.6, 'rgba(220,230,255,' + (pulse * 0.03) + ')');
+      outer.addColorStop(1,   'rgba(200,215,255,0)');
+      ctx.beginPath();
+      ctx.arc(x, y, outerR, 0, Math.PI * 2);
+      ctx.fillStyle = outer;
+      ctx.fill();
 
-    var innerR = 8;
-    var inner  = ctx.createRadialGradient(x, y, 0, x, y, innerR);
-    inner.addColorStop(0,   'rgba(255,255,255,' + (pulse * 0.8) + ')');
-    inner.addColorStop(0.3, 'rgba(255,252,248,' + (pulse * 0.4) + ')');
-    inner.addColorStop(0.7, 'rgba(245,248,255,' + (pulse * 0.1) + ')');
-    inner.addColorStop(1,   'rgba(235,240,255,0)');
-    ctx.beginPath();
-    ctx.arc(x, y, innerR, 0, Math.PI * 2);
-    ctx.fillStyle = inner;
-    ctx.fill();
+      var innerR = 8;
+      var inner  = ctx.createRadialGradient(x, y, 0, x, y, innerR);
+      inner.addColorStop(0,   'rgba(255,255,255,' + (pulse * 0.8) + ')');
+      inner.addColorStop(0.3, 'rgba(255,252,248,' + (pulse * 0.4) + ')');
+      inner.addColorStop(0.7, 'rgba(245,248,255,' + (pulse * 0.1) + ')');
+      inner.addColorStop(1,   'rgba(235,240,255,0)');
+      ctx.beginPath();
+      ctx.arc(x, y, innerR, 0, Math.PI * 2);
+      ctx.fillStyle = inner;
+      ctx.fill();
+    }
 
     if (hovered) {
+      var hc = light ? '58,125,121' : '255,255,255';
       var hGlow = ctx.createRadialGradient(x, y, 0, x, y, 28);
-      hGlow.addColorStop(0,   'rgba(255,255,255,0.3)');
-      hGlow.addColorStop(0.3, 'rgba(240,245,255,0.1)');
-      hGlow.addColorStop(0.6, 'rgba(220,230,255,0.03)');
-      hGlow.addColorStop(1,   'rgba(200,215,255,0)');
+      hGlow.addColorStop(0,   'rgba(' + hc + ',0.3)');
+      hGlow.addColorStop(0.3, 'rgba(' + hc + ',0.1)');
+      hGlow.addColorStop(0.6, 'rgba(' + hc + ',0.03)');
+      hGlow.addColorStop(1,   'rgba(' + hc + ',0)');
       ctx.beginPath();
       ctx.arc(x, y, 28, 0, Math.PI * 2);
       ctx.fillStyle = hGlow;
       ctx.fill();
     }
 
+    // Core dot — larger in light mode for visibility
     ctx.beginPath();
-    ctx.arc(x, y, 1.8, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffffff';
+    ctx.arc(x, y, light ? 2.5 : 1.8, 0, Math.PI * 2);
+    ctx.fillStyle = light ? '#1a1815' : '#ffffff';
     ctx.fill();
   }
 

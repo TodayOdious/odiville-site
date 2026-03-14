@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>(function(){var t=localStorage.getItem('odiville-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light')})()</script>
 </head>
 <body>
 
@@ -52,6 +53,10 @@
 <!-- ========== NAV ========== -->
 <nav id="site-nav">
   <a class="nav-logo" onclick="navigateTo('home')">Odiville</a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light mode" title="Toggle theme">
+    <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+  </button>
   <ul class="nav-links" id="nav-links">
     <li><a data-page="home"     tabindex="0" onclick="navigateTo('home');closeNav()">Home</a></li>
     <li><a data-page="artist"   tabindex="0" onclick="navigateTo('artist');closeNav()">The Artist</a></li>
@@ -59,7 +64,6 @@
     <li><a data-page="whispers" tabindex="0" onclick="navigateTo('whispers');closeNav()">Whispers</a></li>
     <li><a data-page="archive"  tabindex="0" onclick="navigateTo('archive');closeNav()">Archive</a></li>
     <li><a data-page="market"   tabindex="0" onclick="navigateTo('market');closeNav()">Map</a></li>
-    <li><a href="dashboard.html" tabindex="0">Nexus</a></li>
     <li><a href="https://x.com/todayodious" target="_blank" rel="noopener" class="nav-x" aria-label="X (Twitter)"><svg width="12.5" height="12.5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li>
   </ul>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation" aria-expanded="false">
@@ -103,13 +107,13 @@
         <div class="project-card reveal reveal-delay-2" onclick="navigateTo('whispers')">
           <div class="card-ghost">
             <div class="project-year">2026</div>
-            <div class="project-name">Whispers of Odiville</div>
+            <div class="project-name">Whispers }{ Residents of Odiville</div>
             <div class="project-desc">The auction house of Odiville. A place to bid on moments from around the village.</div>
             <span class="project-tag">Auction &middot; Ethereum</span>
           </div>
           <div class="card-reveal">
             <div class="project-year">2026</div>
-            <div class="project-name">Whispers of Odiville</div>
+            <div class="project-name">Whispers }{ Residents of Odiville</div>
             <div class="project-desc">The auction house of Odiville. A place to bid on moments from around the village.</div>
             <span class="project-tag">Auction &middot; Ethereum</span>
             <div class="project-arrow"></div>
@@ -195,13 +199,13 @@
         <div class="project-card reveal reveal-delay-1" onclick="navigateTo('whispers')">
           <div class="card-ghost">
             <div class="project-year">2026</div>
-            <div class="project-name">Whispers of Odiville</div>
+            <div class="project-name">Whispers }{ Residents of Odiville</div>
             <div class="project-desc">The auction house of Odiville. A place to bid on moments from around the village.</div>
             <span class="project-tag">Auction &middot; Ethereum</span>
           </div>
           <div class="card-reveal">
             <div class="project-year">2026</div>
-            <div class="project-name">Whispers of Odiville</div>
+            <div class="project-name">Whispers }{ Residents of Odiville</div>
             <div class="project-desc">The auction house of Odiville. A place to bid on moments from around the village.</div>
             <span class="project-tag">Auction &middot; Ethereum</span>
             <div class="project-arrow"></div>
@@ -363,32 +367,26 @@
 
   <section class="intro" id="about">
     <div class="section-inner">
-      <div class="intro-grid">
-        <div>
-          <div class="section-label reveal">The Artist</div>
-          <h2 class="section-heading reveal reveal-delay-1">I found art in the<br>same year I <em>lost myself</em></h2>
-          <div class="section-body reveal reveal-delay-2">
-            <p>I'm Odious, a British artist who first minted on Ethereum in 2020. My work explores unsettling atmospheres and restrained psychological tension rooted in the unknown, expressed through shifting visual styles and recurring motifs.</p>
-            <p>My practice has been documented online from my very first painting. Every experiment, every evolution, now spread across thousands of wallets and championing collectors. Odiville is the world that emerged from that journey: an evolving creative village that serves as both armature and anchor for my practice.</p>
-            <p>Creating and collecting have always run together. Since my first mint I've supported other artists, watched them grow, and knowing I played even a small part in that has always meant as much to me as making my own work.</p>
-            <p>Before Odiville, the work was more personal, shaped by trauma, memory, and my own story. Since 2023, those ideas have been drawn into Odiville, a world that has grown with each series. From the Book to Whispers to the ashes of New York, every release has expanded and deepened the soil of Odiville, and now exists as the permanent result of one decision leading to the next.</p>
-          </div>
+      <div class="section-label reveal">The Artist</div>
+      <h2 class="section-heading reveal reveal-delay-1">I found art in the<br>same year I <em>lost myself</em></h2>
+      <div class="section-body section-body--wide reveal reveal-delay-2">
+        <p>I'm Odious, a British artist who first minted on Ethereum in 2020. My work explores unsettling atmospheres and restrained psychological tension rooted in the unknown, expressed through shifting visual styles and recurring motifs.</p>
+        <p>My practice has been documented online from my very first painting. Every experiment, every evolution, now spread across thousands of wallets and championing collectors. Odiville is the world that emerged from that journey: an evolving creative village that serves as both armature and anchor for my practice.</p>
+        <p>Creating and collecting have always run together. Since my first mint I've supported other artists, watched them grow, and knowing I played even a small part in that has always meant as much to me as making my own work.</p>
+        <p>Before Odiville, the work was more personal, shaped by trauma, memory, and my own story. Since 2023, those ideas have been drawn into Odiville, a world that has grown with each series. From the Book to Whispers to the ashes of New York, every release has expanded and deepened the soil of Odiville, and now exists as the permanent result of one decision leading to the next.</p>
+      </div>
+      <div class="intro-stat-row reveal reveal-delay-3">
+        <div class="intro-stat">
+          <div class="stat-value">2020</div>
+          <div class="stat-label">First Mint</div>
         </div>
-        <div>
-          <div class="intro-stat-row reveal reveal-delay-2">
-            <div class="intro-stat">
-              <div class="stat-value">2020</div>
-              <div class="stat-label">First Mint</div>
-            </div>
-            <div class="intro-stat">
-              <div class="stat-value">3,000+</div>
-              <div class="stat-label">Wallets Reached</div>
-            </div>
-            <div class="intro-stat">
-              <div class="stat-value">1M+</div>
-              <div class="stat-label">Supporting Artists</div>
-            </div>
-          </div>
+        <div class="intro-stat">
+          <div class="stat-value">3,000+</div>
+          <div class="stat-label">Wallets Reached</div>
+        </div>
+        <div class="intro-stat">
+          <div class="stat-value">1M+</div>
+          <div class="stat-label">Supporting Artists</div>
         </div>
       </div>
     </div>
@@ -400,7 +398,7 @@
       <div class="section-label reveal">Find the Work</div>
       <div class="artist-links reveal reveal-delay-1">
         <a onclick="navigateTo('whispers')" class="artist-link" style="cursor:pointer;">
-          <span class="artist-link-label">Whispers of Odiville</span>
+          <span class="artist-link-label">Whispers }{ Residents of Odiville</span>
           <span class="artist-link-sub">The Auction House</span>
         </a>
         <a onclick="navigateTo('duu')" class="artist-link" style="cursor:pointer;">
@@ -1045,9 +1043,9 @@
     <div class="hero-glow"></div>
     <div class="particles" id="particles-whispers"></div>
     <div class="sub-hero-content">
-      <p class="sub-hero-eyebrow">The Auction House of Odiville</p>
-      <h1 class="sub-hero-title"><em>Whispers</em> of Odiville</h1>
-      <p class="sub-hero-subtitle">Six pieces. Six whispers from a world unseen. The crescendo of a three-year artistic journey.</p>
+      <p class="sub-hero-eyebrow">A first of its kind bound twin token pairing</p>
+      <h1 class="sub-hero-title"><em>Whispers }{ Residents</em> of Odiville</h1>
+      <p class="sub-hero-subtitle">Six pieces, Six portraits from a world unseen. The crescendo of a three-year artistic journey.</p>
       <a href="https://whispers.odiville.com" class="btn btn-primary btn-sm" target="_blank">Enter Auction House <span class="btn-arrow">&rarr;</span></a>
     </div>
   </div>
@@ -1058,7 +1056,7 @@
       <div class="section-label reveal">The Auction House</div>
       <h2 class="section-heading reveal reveal-delay-1">Where moments from<br>the world are <em>offered</em></h2>
       <div class="section-body reveal reveal-delay-2">
-        <p>Whispers is the auction house of Odiville and the first building ever constructed within its borders. It opened with the inaugural six lots, drawn from chapters of the book, each distilled into a single image. Every artwork is paired with a bound Resident portrait through a first of its kind twin token format on Ethereum.</p>
+        <p>Whispers is Odiville's auction house, and the first building ever constructed within its borders. It opened with six lots drawn from pivotal chapters of the Book, each artwork distilled from the chapter it came from. Every lot consists of two parts of a whole: the artwork, and its bound Resident pairing, connected through a first of its kind twin token format on Ethereum.</p>
       </div>
 
       <div class="whispers-hero-block reveal reveal-delay-3">
@@ -1182,16 +1180,20 @@
   <!-- The Sacrifice -->
   <section class="sacrifice-section" id="sacrifice">
     <div class="section-inner">
-      <div class="section-label reveal">The Ritual</div>
-      <div class="sacrifice-artwork reveal">
-        <img loading="lazy" src="images/Whispers/Whispers_Art/you_re_wrong_about_them.gif" alt="You're Wrong About Them">
+      <div class="sacrifice-left">
+        <div class="sacrifice-artwork reveal">
+          <img loading="lazy" src="images/Whispers/Whispers_Art/you_re_wrong_about_them.gif" alt="You're Wrong About Them">
+        </div>
+        <div class="burn-address reveal reveal-delay-3">0x000000000000000000000000000000000000dEaD</div>
       </div>
-      <h2 class="section-heading reveal reveal-delay-1">It began with<br>a <em>sacrifice.</em></h2>
-      <div class="section-body reveal reveal-delay-2">
-        <p>A single transaction carrying the weight of a three-year personal journey. The conscious release of everything I had become while making this work, and a final removal before stepping into a new arena.</p>
-        <p><span style="color:var(--white);font-style:italic;">You're Wrong About Them</span>, minted in 2024 on SuperRare, was created to hold a moment that hadn't yet arrived. On March 2nd, this work was sent to the <a href="https://etherscan.io/tx/0x8fc7e00136eab5dc0bea90350cab483575b07eca40426b08a731be76fd309bea" target="_blank" class="contract-link" style="text-decoration:underline;text-underline-offset:3px;">dead address</a>, concluding the ritual and clearing the ground for the first public auction inside Odiville.</p>
+      <div class="sacrifice-right">
+        <div class="section-label reveal">The Ritual</div>
+        <h2 class="section-heading reveal reveal-delay-1">It began with<br>a <em>sacrifice.</em></h2>
+        <div class="section-body reveal reveal-delay-2">
+          <p>A single transaction carrying the weight of a three-year personal journey. The conscious release of everything I had become while making this work, and a final removal before stepping into a new arena.</p>
+          <p><span style="color:var(--white);font-style:italic;">You're Wrong About Them</span>, minted in 2024 on SuperRare, was created to hold a moment that hadn't yet arrived. On March 2nd, this work was sent to the <a href="https://etherscan.io/tx/0x8fc7e00136eab5dc0bea90350cab483575b07eca40426b08a731be76fd309bea" target="_blank" class="contract-link" style="text-decoration:underline;text-underline-offset:3px;">dead address</a>, concluding the ritual and clearing the ground for the first public auction inside Odiville.</p>
+        </div>
       </div>
-      <div class="burn-address reveal reveal-delay-3">0x000000000000000000000000000000000000dEaD</div>
     </div>
   </section>
 
@@ -1238,26 +1240,32 @@
           <div class="resident-card" data-resident="the-end">
             <div class="resident-card-img"><img loading="lazy" src="images/Whispers/Residents/The End.gif" alt="The End"></div>
             <div class="resident-card-info"><div class="resident-card-name">The End</div><div class="resident-card-type">Resident</div></div>
+            <button class="resident-info-btn" aria-label="View details">View</button>
           </div>
           <div class="resident-card" data-resident="neverwas">
             <div class="resident-card-img"><img loading="lazy" src="images/Whispers/Residents/Neverwas.gif" alt="Neverwas"></div>
             <div class="resident-card-info"><div class="resident-card-name">Neverwas</div><div class="resident-card-type">Resident</div></div>
+            <button class="resident-info-btn" aria-label="View details">View</button>
           </div>
           <div class="resident-card" data-resident="one-lie">
             <div class="resident-card-img"><img loading="lazy" src="images/Whispers/Residents/One Lie.gif" alt="One Lie"></div>
             <div class="resident-card-info"><div class="resident-card-name">One Lie</div><div class="resident-card-type">Resident</div></div>
+            <button class="resident-info-btn" aria-label="View details">View</button>
           </div>
           <div class="resident-card" data-resident="one-truth">
             <div class="resident-card-img"><img loading="lazy" src="images/Whispers/Residents/One Truth.gif" alt="One Truth"></div>
             <div class="resident-card-info"><div class="resident-card-name">One Truth</div><div class="resident-card-type">Resident</div></div>
+            <button class="resident-info-btn" aria-label="View details">View</button>
           </div>
           <div class="resident-card" data-resident="inbetween">
             <div class="resident-card-img"><img loading="lazy" src="images/Whispers/Residents/Inbetween.gif" alt="Inbetween"></div>
             <div class="resident-card-info"><div class="resident-card-name">Inbetween</div><div class="resident-card-type">Resident</div></div>
+            <button class="resident-info-btn" aria-label="View details">View</button>
           </div>
           <div class="resident-card" data-resident="ferryman">
             <div class="resident-card-img"><img loading="lazy" src="images/Whispers/Residents/Ferryman_resized.gif" alt="Ferryman"></div>
             <div class="resident-card-info"><div class="resident-card-name">Ferryman</div><div class="resident-card-type">Resident</div></div>
+            <button class="resident-info-btn" aria-label="View details">View</button>
           </div>
         </div>
       </div>
@@ -1484,6 +1492,8 @@
 <script src="js/market.js"></script>
 <script src="js/data/press.js"></script>
 <script src="js/press.js"></script>
+<script src="js/void-transition.js"></script>
+<script src="js/theme.js"></script>
 <script src="js/gate.js"></script>
 <script src="js/audio.js"></script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

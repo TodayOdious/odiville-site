@@ -317,13 +317,5 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ========== CUSTOM CURSOR ========== */
 
 function initCustomCursor() {
-  if (window.matchMedia('(hover: none)').matches) return;
-
-  const cursor = document.createElement('div');
-  cursor.id = 'custom-cursor';
-  document.body.appendChild(cursor);
-
-  document.addEventListener('mousemove', (e) => {
-    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-  });
+  // Custom cursor removed — using default browser cursor
 }
