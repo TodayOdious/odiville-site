@@ -16,6 +16,15 @@ function navigateTo(pageId) {
 
   setTimeout(() => {
     currentPage.classList.remove('exiting');
+
+    // Reset reveals on the old page (now hidden) so they replay on return
+    const revealResetSelectors = '.reveal, .reveal-from-left, .reveal-from-right, .reveal-contract, .reveal-stagger, .reveal-breathe, .reveal-drift, .reveal-emerge, .reveal-pulse';
+    currentPage.querySelectorAll(':is(' + revealResetSelectors + ').visible').forEach(el => {
+      el.classList.remove('visible');
+    });
+    currentPage.querySelectorAll('.duu-section.in-view').forEach(el => {
+      el.classList.remove('in-view');
+    });
     targetPage.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'instant' });
 
@@ -65,7 +74,7 @@ function closeNav() {
 
 function observeReveals() {
   // Element-level reveals (fade/slide in once)
-  const revealSelectors = '.reveal, .reveal-from-left, .reveal-from-right, .reveal-contract, .reveal-stagger, .duu-shade-bleed-reveal';
+  const revealSelectors = '.reveal, .reveal-from-left, .reveal-from-right, .reveal-contract, .reveal-stagger, .reveal-breathe, .reveal-drift, .reveal-emerge, .reveal-pulse, .duu-shade-bleed-reveal';
   const reveals = document.querySelectorAll('.page.active :is(' + revealSelectors + ')');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -137,9 +146,28 @@ function initParticles() {
 
 /* ========== TORCH CARD EFFECT ========== */
 
+function isLightMode() {
+  return document.documentElement.getAttribute('data-theme') === 'light';
+}
+
 function initTorchCards() {
   if (window.matchMedia('(hover: none)').matches) return;
   const cards = document.querySelectorAll('.page.active .project-card');
+
+  // In light mode, hide all torch canvases and skip init
+  if (isLightMode()) {
+    cards.forEach(card => {
+      const fx = card.querySelector('.card-fx');
+      if (fx) fx.style.display = 'none';
+      card.classList.remove('torch-active');
+    });
+    return;
+  }
+  // Restore canvases when back in dark mode
+  cards.forEach(card => {
+    const fx = card.querySelector('.card-fx');
+    if (fx) fx.style.display = '';
+  });
 
   cards.forEach(card => {
     if (card._torchInit) return;

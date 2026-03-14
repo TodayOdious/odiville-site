@@ -18,8 +18,8 @@
       return document.documentElement.getAttribute('data-theme') || 'dark';
     }
 
-    function flipTheme(theme) {
-      document.documentElement.classList.add('theme-transition');
+    function flipTheme(theme, instant) {
+      if (!instant) document.documentElement.classList.add('theme-transition');
       if (theme === 'light') {
         document.documentElement.setAttribute('data-theme', 'light');
       } else {
@@ -27,16 +27,20 @@
       }
       localStorage.setItem(KEY, theme);
       btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
-      setTimeout(function () {
-        document.documentElement.classList.remove('theme-transition');
-      }, 500);
+      if (!instant) {
+        setTimeout(function () {
+          document.documentElement.classList.remove('theme-transition');
+        }, 500);
+      }
+      // Re-init torch cards so they hide/show based on theme
+      if (typeof initTorchCards === 'function') initTorchCards();
     }
 
     function apply(theme) {
       if (typeof window.voidTransition === 'function') {
-        window.voidTransition(theme, function () { flipTheme(theme); });
+        window.voidTransition(theme, function () { flipTheme(theme, true); });
       } else {
-        flipTheme(theme);
+        flipTheme(theme, false);
       }
     }
 

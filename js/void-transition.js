@@ -191,13 +191,15 @@
   /* ── Wavefront — noise-distorted expanding/contracting circle ── */
   function drawWavefront(t, toDark) {
     /*
-      The wavefront is a noise-distorted circle that expands from center.
-      Behind it: a translucent wash of the target theme's color.
-      The edge is turbulent and organic, not a clean circle.
+      The wavefront is a noise-distorted circle.
+      toDark (light→dark): collapses from outside in.
+      toLight (dark→light): expands from center out.
     */
     var progress = easeInOut(Math.min(t * 1.3, 1));
     var maxR = diag * 1.5;
-    var baseR = progress * maxR;
+    var baseR = toDark
+      ? maxR * (1 - progress)   // shrinks inward
+      : maxR * progress;        // expands outward
 
     if (baseR < 1) return;
 
@@ -224,11 +226,35 @@
     if (t > 0.55) washFade *= 1 - easeOut((t - 0.55) / 0.45);
 
     if (toDark) {
+      // Inward collapse: fill the OUTSIDE of the shrinking circle
+      ctx.save();
+      ctx.clip();                               // clip to the wavefront shape
+      ctx.fillStyle = 'rgba(3,3,4,0)';          // clear inside (noop)
+      ctx.restore();
+      // Draw full-screen wash, then cut out the wavefront interior
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(0, 0, W, H);
+      // Re-trace the wavefront path (counter-clockwise) for even-odd cutout
+      for (var j = steps; j >= 0; j--) {
+        var a2 = (j / steps) * TAU;
+        var nn1 = fbm(Math.cos(a2) * 2 + t * 1.5, Math.sin(a2) * 2 + t * 1.5, 4);
+        var nn2 = fbm(Math.cos(a2) * 5 + t * 3, Math.sin(a2) * 5 + 10, 3);
+        var d2 = nn1 * 0.25 + nn2 * 0.12;
+        var r2 = baseR * (1 + d2);
+        var px2 = cx + Math.cos(a2) * r2;
+        var py2 = cy + Math.sin(a2) * r2;
+        if (j === steps) ctx.moveTo(px2, py2);
+        else ctx.lineTo(px2, py2);
+      }
+      ctx.closePath();
       ctx.fillStyle = 'rgba(3,3,4,' + (0.35 * washFade) + ')';
+      ctx.fill('evenodd');
+      ctx.restore();
     } else {
       ctx.fillStyle = 'rgba(250,246,238,' + (0.3 * washFade) + ')';
+      ctx.fill();
     }
-    ctx.fill();
 
     // Luminous edge glow along the wavefront
     if (progress > 0.05 && progress < 0.9) {
@@ -271,10 +297,14 @@
   /* ── Draw wisps ───────────────────────────────────────────────── */
   function drawWisps(t, toDark) {
     var progress = easeInOut(Math.min(t * 1.4, 1));
-    // Wisps fade in quickly, linger, then fade out gently
+    // Wisps fade in, linger, then fade out gently
+    // For inward collapse, delay appearance until wavefront is moving
+    var fadeStart = toDark ? 0.12 : 0;
     var wispAlpha;
-    if (t < 0.3) {
-      wispAlpha = easeIn(t / 0.3) * 0.18;
+    if (t < fadeStart) {
+      wispAlpha = 0;
+    } else if (t < 0.3) {
+      wispAlpha = easeIn((t - fadeStart) / (0.3 - fadeStart)) * 0.18;
     } else if (t < 0.55) {
       wispAlpha = 0.18;
     } else {
@@ -296,43 +326,77 @@
         var frac = p / (ws.points - 1);
         var along = reach * frac;
 
-        // Base position radiating from center
-        var bx = cx + Math.cos(ws.angle) * along;
-        var by = cy + Math.sin(ws.angle) * along;
+        // Base position — inward from edge (toDark) or outward from center (toLight)
+        var edgeDist = diag * (0.8 + ws.offset);
+        var bx, by;
+        if (toDark) {
+          bx = cx + Math.cos(ws.angle) * (edgeDist - along);
+          by = cy + Math.sin(ws.angle) * (edgeDist - along);
+        } else {
+          bx = cx + Math.cos(ws.angle) * along;
+          by = cy + Math.sin(ws.angle) * along;
+        }
 
-        // Noise displacement — increases toward tip, varies over time
-        var amp = 30 + frac * 80;
+        // Two layers of displacement:
+        // 1. Large slow drift — tightens over time so wisps don't scatter
+        // 2. Small fast wiggle — persists throughout for organic life
+        var driftScale = t > 0.4 ? 0.25 + 0.75 * (1 - easeOut((t - 0.4) / 0.6)) : 1;
+        var driftAmp = (25 + frac * 70) * driftScale;
         var nx = fbm(ws.seed + frac * 3, t * 2 + w * 0.5, 3);
         var ny = fbm(ws.seed + 50 + frac * 3, t * 2 + w * 0.5 + 30, 3);
-        bx += nx * amp;
-        by += ny * amp;
+
+        // Fast wiggle — higher frequency noise, smaller amplitude, always alive
+        var wiggleAmp = 12 + frac * 25;
+        var wx = noise(ws.seed + frac * 8 + t * 6, w * 2.3) * wiggleAmp;
+        var wy = noise(ws.seed + 80 + frac * 8 + t * 6, w * 2.3 + 50) * wiggleAmp;
+
+        bx += nx * driftAmp + wx;
+        by += ny * driftAmp + wy;
+
+        // Gently pull points toward center as animation ends (converge)
+        if (!toDark && t > 0.5) {
+          var pullStrength = easeOut((t - 0.5) / 0.5) * 0.5;
+          bx = bx + (cx - bx) * pullStrength * frac;
+          by = by + (cy - by) * pullStrength * frac;
+        }
 
         pts.push({ x: bx, y: by });
       }
 
-      // Draw as smooth quadratic bezier chain
+      // Draw as segments with alpha fading near center
       if (pts.length < 2) continue;
 
       // Multiple passes at different widths for glow depth
       for (var pass = 0; pass < 3; pass++) {
         var passWidth = pass === 0 ? ws.width * 12 : pass === 1 ? ws.width * 4 : ws.width;
-        var passAlpha = pass === 0 ? wispAlpha * 0.15 : pass === 1 ? wispAlpha * 0.4 : wispAlpha;
+        var basePassAlpha = pass === 0 ? wispAlpha * 0.15 : pass === 1 ? wispAlpha * 0.4 : wispAlpha;
 
-        ctx.beginPath();
-        ctx.moveTo(pts[0].x, pts[0].y);
-        for (var p = 1; p < pts.length - 1; p++) {
-          var midX = (pts[p].x + pts[p + 1].x) / 2;
-          var midY = (pts[p].y + pts[p + 1].y) / 2;
-          ctx.quadraticCurveTo(pts[p].x, pts[p].y, midX, midY);
-        }
-        var last = pts[pts.length - 1];
-        ctx.lineTo(last.x, last.y);
-
-        ctx.strokeStyle = hsl(ws.hue, ws.sat, ws.lit, passAlpha);
-        ctx.lineWidth = passWidth;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
-        ctx.stroke();
+        ctx.lineWidth = passWidth;
+
+        for (var p = 0; p < pts.length - 1; p++) {
+          var segFrac = p / (pts.length - 1);
+          // Fade based on distance to center — tips near center go transparent
+          var dx = pts[p].x - cx, dy = pts[p].y - cy;
+          var distFromCenter = Math.sqrt(dx * dx + dy * dy);
+          var fadeZone = diag * 0.15;
+          var centerFade = Math.min(distFromCenter / fadeZone, 1);
+          var segAlpha = basePassAlpha * centerFade;
+          if (segAlpha < 0.003) continue;
+
+          ctx.beginPath();
+          ctx.moveTo(pts[p].x, pts[p].y);
+          if (p < pts.length - 2) {
+            var midX = (pts[p + 1].x + pts[p + 2].x) / 2;
+            var midY = (pts[p + 1].y + pts[p + 2].y) / 2;
+            ctx.quadraticCurveTo(pts[p + 1].x, pts[p + 1].y, midX, midY);
+          } else {
+            ctx.lineTo(pts[p + 1].x, pts[p + 1].y);
+          }
+          ctx.strokeStyle = hsl(ws.hue, ws.sat, ws.lit, segAlpha);
+          ctx.stroke();
+        }
       }
     }
 
@@ -356,7 +420,15 @@
 
         // Particle becomes active as wavefront passes over it
         var origDist = Math.sqrt((p.ox - cx) * (p.ox - cx) + (p.oy - cy) * (p.oy - cy));
-        var waveProx = (waveR - origDist) / 120;
+        var waveProx;
+        if (toDark) {
+          // Inward: activate from edges, but delay until collapse is underway (t>0.1)
+          // and use a wider ramp (200px) for a gentler fade-in
+          var delayFade = t < 0.15 ? easeIn(t / 0.15) : 1;
+          waveProx = ((origDist - waveR) / 200) * delayFade;
+        } else {
+          waveProx = (waveR - origDist) / 120;
+        }
         waveProx = Math.max(0, Math.min(1, waveProx));
 
         // Gentle fade out over the final 45% of the animation
@@ -373,10 +445,19 @@
           p.vy += c.y * p.speed * depthScale * 1.5;
         }
 
-        // Gentle pull toward center during first half, outward during second
-        var centerForce = t < 0.45
-          ? 0.15 * easeIn(t / 0.45)
-          : -0.08 * easeOut((t - 0.45) / 0.55);
+        // Gentle radial force — direction depends on collapse vs expand
+        var centerForce;
+        if (toDark) {
+          // Inward collapse: pull toward center
+          centerForce = t < 0.45
+            ? -0.08 * easeIn(t / 0.45)
+            : 0.15 * easeOut((t - 0.45) / 0.55);
+        } else {
+          // Outward expand: pull toward center first, then push out
+          centerForce = t < 0.45
+            ? 0.15 * easeIn(t / 0.45)
+            : -0.08 * easeOut((t - 0.45) / 0.55);
+        }
         p.vx += (cx - p.x) / dist * centerForce * depthScale;
         p.vy += (cy - p.y) / dist * centerForce * depthScale;
 
@@ -539,6 +620,26 @@
     ctx.restore();
   }
 
+  /* ── Full-screen flash to mask the theme flip ────────────────── */
+  function drawFlash(t, toDark) {
+    // Ramp up 0.28→0.42 (peak), ramp down 0.42→0.58
+    if (t < 0.28 || t > 0.58) return;
+    var alpha;
+    if (t < 0.42) {
+      alpha = easeIn((t - 0.28) / 0.14);
+    } else {
+      alpha = 1 - easeOut((t - 0.42) / 0.16);
+    }
+    if (alpha < 0.01) return;
+    ctx.save();
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = toDark
+      ? 'rgba(3,3,4,' + alpha + ')'
+      : 'rgba(250,246,238,' + alpha + ')';
+    ctx.fillRect(0, 0, W, H);
+    ctx.restore();
+  }
+
   /* ── Screen vignette overlay ──────────────────────────────────── */
   function drawVignette(t, toDark) {
     var vigAlpha;
@@ -579,7 +680,8 @@
         if (onFlip) onFlip();
       }
 
-      // Layer order: vignette → wavefront → back particles → wisps → mid → burst → front
+      // Layer order: flash → vignette → wavefront → back particles → wisps → mid → burst → front
+      drawFlash(t, toDark);
       drawVignette(t, toDark);
       drawWavefront(t, toDark);
       drawParticles(t, toDark);
@@ -610,7 +712,6 @@
     }
 
     if (animating) {
-      if (onFlip) onFlip();
       return;
     }
 
