@@ -489,7 +489,10 @@
       <p class="sub-hero-eyebrow" style="color:var(--accent-duu);">The Interactive Book of Odiville</p>
       <h1 class="sub-hero-title"><em>Decisions, Upsets</em><br>and Unknowns</h1>
       <p class="sub-hero-subtitle">A ten chapter interactive narrative and art collecting journey. Over 50 artworks to discover and collect.</p>
-      <a href="https://echoes.odiville.com" class="btn btn-primary btn-sm" target="_blank">Read the Book <span class="btn-arrow">&rarr;</span></a>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="https://echoes.odiville.com" class="btn btn-primary btn-sm" target="_blank">Read the Book <span class="btn-arrow">&rarr;</span></a>
+        <a class="btn btn-primary btn-sm" style="cursor:pointer;" onclick="navigateTo('duu-timeline')">Explore Timeline <span class="btn-arrow">&rarr;</span></a>
+      </div>
     </div>
   </div>
 
@@ -1492,6 +1495,47 @@
 </div>
 
 
+<!-- ========= PAGE: DUU TIMELINE =========== -->
+<div id="page-duu-timeline" class="page">
+
+  <div class="dt-chapter-rail" id="dt-chapterRail">
+    <button class="dt-rail-back" onclick="navigateTo('duu')" title="Back to DUU">
+      <img class="dt-rail-logo" src="images/Main/Dark%20Mediumm%20Odiville%20Logo%20Mark.png" alt="Odiville" />
+    </button>
+    <button class="dt-rail-nav-toggle" id="dt-railNavToggle" title="Show navigation bar">
+      <svg class="dt-nav-icon-show" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="18 15 12 9 6 15"/></svg>
+      <svg class="dt-nav-icon-hide" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <button class="dt-rail-toggle" id="dt-railToggle" title="Expand chapters">
+      <svg class="dt-rail-toggle-expand" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="8 4 14 12 8 20"/><polyline points="14 4 20 12 14 20"/></svg>
+      <svg class="dt-rail-toggle-collapse" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="14 4 8 12 14 20"/><polyline points="20 4 14 12 20 20"/></svg>
+    </button>
+    <div class="dt-rail-chapters" id="dt-railChapters"></div>
+  </div>
+
+  <div class="dt-info-drawer" id="dt-infoDrawer">
+    <button class="dt-info-drawer-close" id="dt-infoDrawerClose">&times;</button>
+    <div class="dt-info-drawer-label">Chapter</div>
+    <div class="dt-info-drawer-numeral" id="dt-drawerNumeral"></div>
+    <div class="dt-info-drawer-title" id="dt-drawerTitle"></div>
+    <div class="dt-info-drawer-sub" id="dt-drawerSub"></div>
+    <div class="dt-info-drawer-artworks" id="dt-drawerArtworks"></div>
+    <div class="dt-info-drawer-artwork-detail" id="dt-drawerArtDetail">
+      <div class="dt-info-drawer-art-thumb" id="dt-drawerArtThumb"></div>
+      <div class="dt-info-drawer-art-name" id="dt-drawerArtName"></div>
+      <div class="dt-info-drawer-art-chapter" id="dt-drawerArtChapter"></div>
+    </div>
+    <div class="dt-info-drawer-count" id="dt-drawerCount"></div>
+  </div>
+
+  <div class="dt-world" id="dt-world">
+    <div class="dt-world-canvas" id="dt-worldCanvas"></div>
+    <div class="dt-zoom-indicator" id="dt-zoomIndicator">100%</div>
+  </div>
+
+</div>
+
+
 <!-- ========= PAGE: PRESS =========== -->
 <div id="page-press" class="page">
 
@@ -1526,6 +1570,7 @@
 <script src="js/data/local-files.js"></script>
 <script src="js/archive.js"></script>
 <script src="js/market.js"></script>
+<script src="js/duu-timeline.js"></script>
 <script src="js/data/press.js"></script>
 <script src="js/press.js"></script>
 <script src="js/void-transition.js"></script>

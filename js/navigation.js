@@ -44,6 +44,14 @@ function navigateTo(pageId) {
       initMarket();
     }
 
+    // Init DUU timeline — hide nav for immersive view
+    if (pageId === 'duu-timeline' && typeof initDuuTimeline === 'function') {
+      document.body.classList.add('nav-hidden');
+      initDuuTimeline();
+    } else {
+      document.body.classList.remove('nav-hidden');
+    }
+
     // Init particles for the new page
     initParticles();
 
@@ -115,19 +123,42 @@ function observeReveals() {
 function initParticles() {
   document.querySelectorAll('.page.active .particles').forEach(container => {
     if (container.children.length > 0) return;
-    const count = 33;
+    const count = 40;
     for (let i = 0; i < count; i++) {
       const p = document.createElement('div');
-      const isLarge = Math.random() < 0.3;
-      p.className = 'particle' + (isLarge ? ' particle--large' : '');
-      const size = isLarge ? (Math.random() * 4 + 4) : (Math.random() * 3 + 1.5);
+
+      // Three depth tiers: far (40%), mid (35%), near (25%)
+      const roll = Math.random();
+      let tier, size, opacity, durationBase;
+      if (roll < 0.4) {
+        tier = 'far';
+        size = Math.random() * 3.2 + 2.4;       // 2.4–5.6px element
+        opacity = Math.random() * 0.10 + 0.05;  // dim
+        durationBase = 14;                        // slow drift
+      } else if (roll < 0.75) {
+        tier = 'mid';
+        size = Math.random() * 4.8 + 4;         // 4–8.8px element
+        opacity = Math.random() * 0.18 + 0.12;  // moderate
+        durationBase = 10;                        // medium drift
+      } else {
+        tier = 'near';
+        size = Math.random() * 8 + 6.4;         // 6.4–14.4px element
+        opacity = Math.random() * 0.22 + 0.18;  // brightest
+        durationBase = 7;                         // faster drift
+      }
+
+      p.className = 'particle particle--' + tier;
       const left = Math.random() * 100;
-      const top = Math.random() * 100;
-      const duration = Math.random() * 5.2 + 3.9;
+      const top = 85 + Math.random() * 15;      // spawn near bottom (85–100%)
+      const duration = durationBase + Math.random() * 3;
       const delay = -(Math.random() * duration);
       const drift = (Math.random() - 0.5) * 120;
-      const rise = -(Math.random() * 300 + 150);
-      const opacity = isLarge ? (Math.random() * 0.18 + 0.14) : (Math.random() * 0.22 + 0.12);
+      const rise = -(Math.random() * 500 + 300); // rise further to reach top
+
+      const wx1 = (Math.random() - 0.5) * 60;
+      const wy1 = (Math.random() - 0.5) * 30;
+      const wx2 = (Math.random() - 0.5) * 50;
+      const wy2 = (Math.random() - 0.5) * 25;
 
       p.style.cssText = `
         width: ${size}px; height: ${size}px;
@@ -137,6 +168,10 @@ function initParticles() {
         --p-drift: ${drift}px;
         --p-rise: ${rise}px;
         --p-opacity: ${opacity};
+        --p-wx1: ${wx1}px;
+        --p-wy1: ${wy1}px;
+        --p-wx2: ${wx2}px;
+        --p-wy2: ${wy2}px;
       `;
       container.appendChild(p);
     }
