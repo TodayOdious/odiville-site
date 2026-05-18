@@ -681,7 +681,7 @@ section { position: relative; padding: 7rem 3rem; }
 /* ========== INTRO / ARTIST ========== */
 
 .intro { --section-accent: var(--accent-intro); background: linear-gradient(180deg, var(--black) 0%, var(--void) 100%); }
-.intro-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border); }
+.intro-stat-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border); max-width: 480px; margin-left: auto; margin-right: auto; }
 .section-body--wide { max-width: 100%; }
 .intro-stat { text-align: center; }
 .intro-stat .stat-value { font-size: 2.2rem; font-weight: 200; color: var(--white); letter-spacing: -.02em; }

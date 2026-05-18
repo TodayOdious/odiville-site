@@ -59,9 +59,10 @@
   </button>
   <ul class="nav-links" id="nav-links">
     <li><a data-page="home"     tabindex="0" onclick="navigateTo('home');closeNav()">Home</a></li>
-    <li><a data-page="artist"   tabindex="0" onclick="navigateTo('artist');closeNav()">The Artist</a></li>
+    <li><a data-page="artist"   tabindex="0" onclick="navigateTo('artist');closeNav()">About</a></li>
     <li><a data-page="projects" tabindex="0" onclick="navigateTo('projects');closeNav()">Projects</a></li>
-    <li><a data-page="whispers" tabindex="0" onclick="navigateTo('whispers');closeNav()">Whispers</a></li>
+    <li><a data-page="village"  tabindex="0" onclick="navigateTo('village');closeNav()">Village</a></li>
+    <!-- <li><a data-page="whispers" tabindex="0" onclick="navigateTo('whispers');closeNav()">Whispers</a></li> -->
     <li><a data-page="archive"  tabindex="0" onclick="navigateTo('archive');closeNav()">Archive</a></li>
     <li><a data-page="market"   tabindex="0" onclick="navigateTo('market');closeNav()">Map</a></li>
     <li><a href="https://x.com/todayodious" target="_blank" rel="noopener" class="nav-x" aria-label="X (Twitter)"><svg width="12.5" height="12.5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li>
@@ -172,7 +173,6 @@
     <div class="section-inner" style="position:relative;z-index:2;">
       <h2 class="cta-heading reveal-pulse">Descend <em>Further</em></h2>
       <div class="cta-buttons reveal reveal-delay-1">
-        <a href="https://echoes.odiville.com" class="btn btn-primary" target="_blank">Read the Book <span class="btn-arrow">&rarr;</span></a>
         <a href="https://www.x.com/todayodious" class="btn btn-ghost" target="_blank">Follow on X <span class="btn-arrow">&rarr;</span></a>
       </div>
     </div>
@@ -396,14 +396,14 @@
     <div class="hero-glow"></div>
     <div class="particles" id="particles-artist"></div>
     <div class="sub-hero-content">
-      <p class="sub-hero-eyebrow">The World of Odious</p>
+      <p class="sub-hero-eyebrow">Beneath the Surface</p>
       <h1 class="sub-hero-title">The <em>Artist</em></h1>
     </div>
   </div>
 
   <section class="intro" id="about">
     <div class="section-inner">
-      <div class="section-label reveal-breathe">The Artist</div>
+      <div class="section-label reveal-breathe">About</div>
       <h2 class="section-heading reveal-drift"><span class="line">I found art in the</span><span class="line">same year I <em>lost myself</em></span></h2>
       <div class="section-body section-body--wide reveal reveal-delay-2">
         <p>I'm Odious, a British artist who first minted on Ethereum in 2020. My work explores unsettling atmospheres and restrained psychological tension rooted in the unknown, expressed through shifting visual styles and recurring motifs.</p>
@@ -419,10 +419,6 @@
         <div class="intro-stat">
           <div class="stat-value">3,000+</div>
           <div class="stat-label">Wallets Reached</div>
-        </div>
-        <div class="intro-stat">
-          <div class="stat-value">1M+</div>
-          <div class="stat-label">Supporting Artists</div>
         </div>
       </div>
     </div>
@@ -489,10 +485,6 @@
       <p class="sub-hero-eyebrow" style="color:var(--accent-duu);">The Interactive Book of Odiville</p>
       <h1 class="sub-hero-title"><em>Decisions, Upsets</em><br>and Unknowns</h1>
       <p class="sub-hero-subtitle">A ten chapter interactive narrative and art collecting journey. Over 50 artworks to discover and collect.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="https://echoes.odiville.com" class="btn btn-primary btn-sm" target="_blank">Read the Book <span class="btn-arrow">&rarr;</span></a>
-        <a class="btn btn-primary btn-sm" style="cursor:pointer;" onclick="navigateTo('duu-timeline')">Explore Timeline <span class="btn-arrow">&rarr;</span></a>
-      </div>
     </div>
   </div>
 
@@ -1561,6 +1553,14 @@
     <div id="pressEntries" style="display:none;"></div>
   </section>
 
+</div>
+
+
+<!-- ========= PAGE: VILLAGE =========== -->
+<div id="page-village" class="page">
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;">
+    <p style="color:var(--white-dim);letter-spacing:.05em;font-style:italic;">The Residents are gathering.</p>
+  </div>
 </div>
 
 
